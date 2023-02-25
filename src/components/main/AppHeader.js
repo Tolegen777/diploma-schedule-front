@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {Colors} from "../../const/const";
 import {AccountMenu} from "./AccountMenu";
-import {QuestionOutlined} from "@ant-design/icons";
+import {ScheduleOutlined} from "@ant-design/icons";
 const { Header } = Layout;
 
 const LayoutHeader = styled(Header)`
@@ -42,8 +42,8 @@ export const AppHeader = () => (
             <Col className="logo" flex="100px">
                 <Link to="/">
                     {/*<img src={logo} alt="logo" />*/}
-                    Logogoi
-                    <QuestionOutlined />
+                    Schedule-
+                    <ScheduleOutlined/>
                 </Link>
             </Col>
             <Col flex="auto">

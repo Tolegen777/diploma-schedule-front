@@ -2,7 +2,7 @@ import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import {QuestionOutlined} from "@ant-design/icons";
+import {MessageOutlined, ProfileOutlined} from "@ant-design/icons";
 
 
 const HeaderMenu = styled(Menu)`
@@ -23,12 +23,12 @@ const items: MenuProps['items'] = [
         label: 'Уведомления',
         key: 'notifications',
         // icon: <HeaderMenuIcon src={notifications} />,
-        icon: <QuestionOutlined />,
+        icon: <MessageOutlined />,
     },
     {
         label: 'Профиль',
         key: 'profile',
-        icon: <QuestionOutlined />,
+        icon: <ProfileOutlined />,
         children: [
             {
                 type: 'group',

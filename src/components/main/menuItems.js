@@ -1,5 +1,5 @@
 import React from 'react';
-import {QuestionOutlined} from "@ant-design/icons";
+import {ScheduleOutlined, SmileOutlined, CalendarOutlined, BookOutlined} from "@ant-design/icons";
 
 export const initialMenuItems = [
     {
@@ -9,25 +9,25 @@ export const initialMenuItems = [
             {
                 label: 'Расписание',
                 key: '1',
-                icon: <QuestionOutlined />,
+                icon: <ScheduleOutlined />,
                 link: '/schedule',
             },
             {
-                label: '/Преподаватель',
+                label: 'Преподаватель',
                 key: '2',
-                icon: <QuestionOutlined />,
+                icon: <SmileOutlined />,
                 link: '/teachers',
             },
             {
-                label: '/Кабинеты',
+                label: 'Кабинеты',
                 key: '3',
-                icon: <QuestionOutlined />,
+                icon: <CalendarOutlined />,
                 link: '/rooms',
             },
             {
                 label: 'Предметы',
                 key: '4',
-                icon: <QuestionOutlined />,
+                icon: <BookOutlined />,
                 link: '/subjects',
             },
         ],
