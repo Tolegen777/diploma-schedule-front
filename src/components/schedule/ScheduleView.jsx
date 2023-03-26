@@ -1,13 +1,28 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import { ScheduleComponent, ViewsDirective, ViewDirective, Week, Inject } from '@syncfusion/ej2-react-schedule';
+import {
+    Day,
+    Inject,
+    Month,
+    ScheduleComponent,
+    TimelineViews,
+    ViewDirective,
+    ViewsDirective,
+    Week
+} from "@syncfusion/ej2-react-schedule";
 
-const StyledScheduleComponent = styled(ScheduleComponent)`
-  .e-popup-content {
-    background-color: #fff;
-    color: #000;
-  }
-`;
+import { L10n } from '@syncfusion/ej2-base';
+
+L10n.load({
+    'en-US': {
+        'schedule': {
+            'saveButton': 'Add',
+            'cancelButton': 'Close',
+            'deleteButton': 'Remove',
+            'newEvent': 'Add Event',
+        },
+    }
+});
+
 
 
 
@@ -47,20 +62,14 @@ const ScheduleView = () => {
         IsAllDay: false
     }];
 
-    const eventRendered = (args) => {
-        const element = args.element;
-        element.querySelector('.e-subject-wrap').textContent = 'Заголовок';
-        element.querySelector('.e-date-time').textContent = '';
-        element.querySelector('.e-more-indicator').style.display = 'none';
-    };
 
     return (
-        <StyledScheduleComponent currentView='Week' selectedDate={new Date(2023, 2, 27)} eventSettings={{ dataSource: data }} eventRendered={eventRendered}>
+        <ScheduleComponent width='100%' height='500px' selectedDate={new Date(2018, 1, 15)} eventSettings={{ dataSource: data }}>
             <ViewsDirective>
-                <ViewDirective option='Week' />
+                <ViewDirective option='Week'/>
             </ViewsDirective>
-            <Inject services={[Week]} />
-        </StyledScheduleComponent>
+            <Inject services={[Day, Week, TimelineViews, Month]}/>
+        </ScheduleComponent>
     );
 
     };
