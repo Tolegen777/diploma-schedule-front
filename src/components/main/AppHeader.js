@@ -42,8 +42,8 @@ export const AppHeader = () => (
             <Col className="logo" flex="100px">
                 <Link to="/">
                     {/*<img src={logo} alt="logo" />*/}
-                    Schedule-
-                    <ScheduleOutlined/>
+                    Schedule
+                    {/*<ScheduleOutlined/>*/}
                 </Link>
             </Col>
             <Col flex="auto">

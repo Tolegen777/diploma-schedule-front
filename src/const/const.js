@@ -12,3 +12,27 @@ export const Colors = {
     White: '#FFFFFF',
     LightGray: '#F9F9FA',
 }
+
+export const TitleSize = {
+    h1: '32px',
+    h2: '24px',
+    h3: '20px',
+    h4: '14px',
+}
+
+export const TextSize = {
+    p12: '12px',
+    p14: '14px',
+    p22: '22px',
+}
+
+export const ButtonSizes = {
+    Large: 'large',
+    Medium: 'medium',
+    Small: 'small',
+}
+
+export const TextWeightType = {
+    bold: 'bold',
+    normal: 'normal',
+}

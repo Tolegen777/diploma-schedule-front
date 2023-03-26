@@ -20,12 +20,6 @@ const HeaderMenu = styled(Menu)`
 
 const items: MenuProps['items'] = [
     {
-        label: 'Уведомления',
-        key: 'notifications',
-        // icon: <HeaderMenuIcon src={notifications} />,
-        icon: <MessageOutlined />,
-    },
-    {
         label: 'Профиль',
         key: 'profile',
         icon: <ProfileOutlined />,

@@ -30,6 +30,12 @@ export const initialMenuItems = [
                 icon: <BookOutlined />,
                 link: '/subjects',
             },
+            {
+                label: 'Администраторы',
+                key: '5',
+                icon: <SmileOutlined />,
+                link: '/admins',
+            },
         ],
     },
 ];

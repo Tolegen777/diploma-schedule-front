@@ -1,4 +1,8 @@
-import Schedule from "../components/schedule/Schedule";
+import Schedule from "../pages/Schedule";
+import Teacher from "../pages/Teacher";
+import Room from "../pages/Room";
+import Subject from "../pages/Subject";
+import Admin from "../pages/Admin";
 
 export const routesList = [
     {
@@ -11,15 +15,19 @@ export const routesList = [
     },
     {
         path: '/teachers',
-        element: <>teachers</>,
+        element: <Teacher />,
     },
     {
         path: '/rooms',
-        element: <>rooms</>,
+        element: <Room />,
     },
     {
         path: '/subjects',
-        element: <>subjects</>,
+        element: <Subject />,
+    },
+    {
+        path: '/admins',
+        element: <Admin />,
     },
 
 ];
