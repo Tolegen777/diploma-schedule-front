@@ -25,10 +25,6 @@ export const SubjectsCreateUpdateForm = (
     }) => {
     const [ form ] = Form.useForm();
 
-    // const isLdap = Form.useWatch('is_ldap_auth', form);
-
-    // debugger
-
     const formFields = [
         {
             name: 'name',
