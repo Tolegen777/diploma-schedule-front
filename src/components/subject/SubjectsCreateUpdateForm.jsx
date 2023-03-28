@@ -17,8 +17,6 @@ import {formatDateWithTime} from "../../utils/formatDateWithTime";
 
 export const SubjectsCreateUpdateForm = (
     {
-        isLoadingRoles,
-        rolesList,
         formType,
         initialFields,
         onSubmit,
@@ -28,6 +26,8 @@ export const SubjectsCreateUpdateForm = (
     const [ form ] = Form.useForm();
 
     // const isLdap = Form.useWatch('is_ldap_auth', form);
+
+    // debugger
 
     const formFields = [
         {
@@ -85,7 +85,7 @@ export const SubjectsCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {formType === 'update' && editEntity && (
+                {formType === 'view' && editEntity && (
                     <>
                         <FormInfoDescription title="Информация о создании">
                             <FormInfoDescriptionItem label="Создал (ФИО)">

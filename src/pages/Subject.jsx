@@ -28,8 +28,7 @@ const Subject = () => {
     }, [])
 
     const onOpenCreateUpdateModal = (formType, value?) => {
-
-        if (formType === 'update' && value) {
+        if ((formType === 'update' || formType === 'view') && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(subjectInitialValues, value))
             setEditEntity(value)
         }
@@ -59,7 +58,10 @@ const Subject = () => {
     return (
         <>
             <DrawerContainer
-                title={ formType === 'create' ? 'Создание прпедмета' : 'Редактирование кабинета' }
+                title={
+                  (formType === 'create' && 'Создание предмета') ||
+                  (formType === 'view' ? 'Просмотр предмета' : 'Редактирование предмета')
+                }
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >

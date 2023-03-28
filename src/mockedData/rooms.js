@@ -110,27 +110,23 @@ export const roomDetails =  {
 
 export const roomInitialValues = [
     {
-        name: 'first_name',
+        name: 'number',
         value: ''
     },
     {
-        name: 'last_name',
+        name: 'type',
         value: ''
     },
     {
-        name: 'middle_name',
+        name: 'state',
         value: ''
     },
     {
-        name: 'position',
+        name: 'created_date',
         value: ''
     },
     {
-        name: 'phone_number',
-        value: ''
-    },
-    {
-        name: 'email',
+        name: 'updated_date',
         value: ''
     },
 ];

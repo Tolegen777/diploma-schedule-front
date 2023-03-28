@@ -3,7 +3,7 @@ import TeacherDetails from "../components/teacher/TeacherDetails";
 import {teacherDetails, teacherInitialValues} from "../mockedData/teachers";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
-import {UsersCreateUpdateForm} from "../components/teacher/UsersCreateUpdateForm";
+import {TeachersCreateUpdateForm} from "../components/teacher/TeachersCreateUpdateForm";
 
 const Teacher = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -29,7 +29,7 @@ const Teacher = () => {
 
     const onOpenCreateUpdateModal = (formType, value?) => {
 
-        if (formType === 'update' && value) {
+        if ((formType === 'update' || formType === 'view') && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(teacherInitialValues, value))
             setEditEntity(value)
         }
@@ -59,11 +59,14 @@ const Teacher = () => {
     return (
         <>
             <DrawerContainer
-                title={ formType === 'create' ? 'Создание преподавателя' : 'Редактирование преподавателя' }
+              title={
+                (formType === 'create' && 'Создание преподавателя') ||
+                (formType === 'view' ? 'Просмотр преподавателя' : 'Редактирование преподавателя')
+              }
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >
-                <UsersCreateUpdateForm
+                <TeachersCreateUpdateForm
                     formType={formType}
                     initialFields={createUpdateFormInitialFields}
                     onSubmit={onSubmitCreateUpdateModal}

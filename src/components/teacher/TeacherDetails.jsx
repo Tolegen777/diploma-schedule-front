@@ -6,12 +6,13 @@ import {ParagraphText} from "../../shared/ParagraphText";
 import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
 import {SwitchButton} from "../../shared/SwitchButton";
-import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
-import filterIcon from './../../assets/icons/filterIcon.svg';
-import refreshIcon from './../../assets/icons/refreshIcon.svg';
+import viewIcon from './../../assets/icons/viewIcon.svg';
+import deleteIcon from './../../assets/icons/deleteIcon.svg';
+import { formatDateWithTime } from '../../utils/formatDateWithTime'
+
 
 const TeacherDetails = (
     {
@@ -28,19 +29,6 @@ const TeacherDetails = (
     console.log(data, 'Data')
     const columns = [
         {
-            title: 'Идентификатор',
-            dataIndex: 'id',
-            sorter: {
-                compare: (a, b) => a.id - b.id,
-                multiple: 3,
-            },
-            render: id => (
-                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
-                    {id}
-                </ParagraphText>
-            ),
-        },
-        {
             title: 'Преподаватель',
             sorter: {
                 compare: (a, b) => a.first_name.length - b.first_name.length,
@@ -50,10 +38,25 @@ const TeacherDetails = (
                 {user.first_name} {user.last_name} {user.middle_name}
             </ParagraphText>
         },
+      {
+        title: 'Почта',
+        dataIndex: 'email',
+      },
         {
-            title: 'Контакты',
-            dataIndex: 'phone_number',
+            title: 'Позиция',
+            dataIndex: 'position',
         },
+      {
+        title: 'дата создания',
+        dataIndex: 'created_date',
+        render: date => formatDateWithTime(date),
+      },
+      {
+        title: 'Дата обновления',
+        dataIndex: 'updated_date',
+        render: date => formatDateWithTime(date),
+        defaultSortOrder: 'ascend'
+      },
         {
             title: 'ВКЛ/ВЫКЛ',
             render: (entity) => <TableActionsWrapper>
@@ -64,7 +67,17 @@ const TeacherDetails = (
                         state: entity.state === 'active' ? 'inactive' : 'active'
                     })}
                 />
-                <ActionButton image={editIcon} callBack={() => onOpenCreateUpdateModal('update', entity)} />
+                <ActionButton
+                  image={editIcon}
+                  callBack={() => onOpenCreateUpdateModal('update', entity)} />
+              <ActionButton
+                image={viewIcon}
+                callBack={() => onOpenCreateUpdateModal('view', entity)}
+              />
+              <ActionButton
+                image={deleteIcon}
+                callBack={() => alert('Удаляет преподавателя по id!')}
+              />
             </TableActionsWrapper>,
             width: 100,
             align: 'center',

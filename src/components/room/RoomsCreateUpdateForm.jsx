@@ -1,24 +1,17 @@
-import React from 'react';
-import { Card, Form, Radio } from 'antd';
-import { Link } from 'react-router-dom';
-import {FormInput, FormInputMasked, FormInputPassword} from "../../shared/FormInput";
-import {emailRules, stringRules} from "../../utils/regExpRules";
-import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
-import {SpaceContainer} from "../../shared/SpaceContainer";
-import {ParagraphText} from "../../shared/ParagraphText";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {Loader} from "../../shared/Loader";
-import {CustomRadio} from "../../shared/CustomRadio";
-import {FormInfoDescription, FormInfoDescriptionItem} from "../../shared/FormInfoDescription";
-import {CustomButton} from "../../shared/CustomButton";
-import {FormItem} from "../../shared/FormItem";
-import {Colors, TextWeightType} from "../../const/const";
-import {formatDateWithTime} from "../../utils/formatDateWithTime";
+import React from 'react'
+import { Form } from 'antd'
+import { Link } from 'react-router-dom'
+import { FormInput } from '../../shared/FormInput'
+import { FormButtonWrapper, FormContainer } from '../../shared/FormContainer'
+import { SpaceContainer } from '../../shared/SpaceContainer'
+import { FormInfoDescription, FormInfoDescriptionItem } from '../../shared/FormInfoDescription'
+import { CustomButton } from '../../shared/CustomButton'
+import { FormItem } from '../../shared/FormItem'
+import { Colors } from '../../const/const'
+import { formatDateWithTime } from '../../utils/formatDateWithTime'
 
 export const RoomsCreateUpdateForm = (
     {
-        isLoadingRoles,
-        rolesList,
         formType,
         initialFields,
         onSubmit,
@@ -26,6 +19,7 @@ export const RoomsCreateUpdateForm = (
         editEntity
     }) => {
     const [ form ] = Form.useForm();
+
 
     // const isLdap = Form.useWatch('is_ldap_auth', form);
 
@@ -53,12 +47,6 @@ export const RoomsCreateUpdateForm = (
                ],
             label: 'Имя'
         },
-
-        {
-            name: 'state',
-            element: <FormInput placeholder="Введите cостояние" />,
-            label: 'Отчество'
-        },
     ]
 
     return (
@@ -69,6 +57,7 @@ export const RoomsCreateUpdateForm = (
                     form={form}
                     layout="vertical"
                     onFinish={(data) => onSubmit(data, formType)}
+                    disabled={formType === 'view'}
                 >
                     <SpaceContainer size="large" direction="vertical">
 
@@ -86,7 +75,7 @@ export const RoomsCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {formType === 'update' && editEntity && (
+                {formType === 'view' && editEntity && (
                     <>
                         <FormInfoDescription title="Информация о создании">
                             <FormInfoDescriptionItem label="Создал (ФИО)">
@@ -105,6 +94,8 @@ export const RoomsCreateUpdateForm = (
                                 {editEntity && formatDateWithTime(editEntity.updated_date)}
                             </FormInfoDescriptionItem>
                         </FormInfoDescription>
+                        Амир здесь ты должен мне дать все занятые и свободные дни со временами когда они заняты или свободны!
+                        Я их потом буду здесь отображать
                     </>
                 )}
             </SpaceContainer>

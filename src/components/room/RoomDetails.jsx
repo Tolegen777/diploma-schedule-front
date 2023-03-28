@@ -12,6 +12,8 @@ import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
 import filterIcon from './../../assets/icons/filterIcon.svg';
 import refreshIcon from './../../assets/icons/refreshIcon.svg';
+import viewIcon from '../../assets/icons/viewIcon.svg'
+import deleteIcon from '../../assets/icons/deleteIcon.svg'
 
 const RoomDetails = (
     {
@@ -64,6 +66,14 @@ const RoomDetails = (
                     })}
                 />
                 <ActionButton image={editIcon} callBack={() => onOpenCreateUpdateModal('update', entity)} />
+              <ActionButton
+                image={viewIcon}
+                callBack={() => onOpenCreateUpdateModal('view', entity)}
+              />
+              <ActionButton
+                image={deleteIcon}
+                callBack={() => alert('Удаляет преподавателя по id!')}
+              />
             </TableActionsWrapper>,
             width: 100,
             align: 'center',
