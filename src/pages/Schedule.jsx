@@ -5,7 +5,7 @@ import ScheduleTest from "../components/schedule/ScheduleTest";
 const Schedule = () => {
     return (
         <div>
-            <ScheduleView/>
+            <ScheduleTest/>
         </div>
     );
 };
