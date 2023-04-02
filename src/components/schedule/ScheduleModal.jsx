@@ -101,7 +101,7 @@ const ScheduleModal = ({open, setOpen, onSubmit}) => {
             >
                 <SpaceContainer>
                     <Form
-                        fields={initialFields}
+                        // fields={initialFields}
                         form={form}
                         layout="vertical"
                         onFinish={(data) => onSubmit(data, 'create')}
