@@ -27,7 +27,7 @@ const Admin = () => {
         setEditEntity(null)
     }, [])
 
-    const onOpenCreateUpdateModal = (formType, value?) => {
+    const onOpenCreateUpdateModal = (formType, value) => {
 
         if (formType === 'update' && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(adminInitialValues, value))
@@ -51,7 +51,7 @@ const Admin = () => {
         onClose()
     }
 
-    const onSelectRow = useCallback((rowIndex: number) => {
+    const onSelectRow = useCallback((rowIndex) => {
         setSelectedRow([rowIndex])
     }, [])
 
