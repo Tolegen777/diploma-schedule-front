@@ -28,19 +28,6 @@ const AdminDetails = (
     console.log(data, 'Data')
     const columns = [
         {
-            title: 'Идентификатор',
-            dataIndex: 'id',
-            sorter: {
-                compare: (a, b) => a.id - b.id,
-                multiple: 3,
-            },
-            render: id => (
-                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
-                    {id}
-                </ParagraphText>
-            ),
-        },
-        {
             title: 'Преподаватель',
             sorter: {
                 compare: (a, b) => a.first_name.length - b.first_name.length,
@@ -53,6 +40,10 @@ const AdminDetails = (
         {
             title: 'Контакты',
             dataIndex: 'phone_number',
+        },
+        {
+            title: 'Почта',
+            dataIndex: 'email',
         },
         {
             title: 'ВКЛ/ВЫКЛ',
