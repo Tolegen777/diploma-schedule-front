@@ -17,8 +17,6 @@ import {formatDateWithTime} from "../../utils/formatDateWithTime";
 
 export const AdminsCreateUpdateForm = (
     {
-        isLoadingRoles,
-        rolesList,
         formType,
         initialFields,
         onSubmit,
@@ -87,15 +85,6 @@ export const AdminsCreateUpdateForm = (
         {
             name: 'phone_number',
             element: <FormInputMasked mask="+0 000 000 00 00" placeholder="Введите номер телефона" />,
-            rules: [{
-                required: formType === 'create',
-                message: 'Обязательное поле!'
-            }],
-            label: 'Номер телефона'
-        },
-        {
-            name: 'position',
-            element: <FormInput placeholder="Введите позицию" />,
             rules: [{
                 required: formType === 'create',
                 message: 'Обязательное поле!'
