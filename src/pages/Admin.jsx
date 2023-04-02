@@ -81,6 +81,7 @@ const Admin = () => {
                 onSelectRowCount={setSelectedRowCount}
                 onSelectCurrentPage={setCurrentPage}
                 onOpenCreateUpdateModal={onOpenCreateUpdateModal}
+
             />
         </>
     );
