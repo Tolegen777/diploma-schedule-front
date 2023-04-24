@@ -1,42 +1,75 @@
 import React from 'react';
-import { Card, Form, Radio } from 'antd';
-import { Link } from 'react-router-dom';
-import {FormInput, FormInputMasked, FormInputPassword} from "../../shared/FormInput";
-import {emailRules, stringRules} from "../../utils/regExpRules";
+import {Form} from 'antd';
+import {FormInput, FormInputNumber} from "../../shared/FormInput";
 import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
 import {SpaceContainer} from "../../shared/SpaceContainer";
-import {ParagraphText} from "../../shared/ParagraphText";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {Loader} from "../../shared/Loader";
-import {CustomRadio} from "../../shared/CustomRadio";
-import {FormInfoDescription, FormInfoDescriptionItem} from "../../shared/FormInfoDescription";
 import {CustomButton} from "../../shared/CustomButton";
 import {FormItem} from "../../shared/FormItem";
-import {Colors, TextWeightType} from "../../const/const";
-import {formatDateWithTime} from "../../utils/formatDateWithTime";
+import {Colors} from "../../const/const";
+import {FormSelect} from "../../shared/FormSelect";
+import {useOnScrollEnd} from "../../hooks/useOnScrollEnd";
 
-export const AdminsCreateUpdateForm = (
+export const GroupsCreateUpdateForm = (
     {
         formType,
         initialFields,
         onSubmit,
         onClose,
-        editEntity
+        editEntity,
+        data,
+        setSelectListPage
     }) => {
     const [ form ] = Form.useForm();
 
+    const { options, onScrollEnd } = useOnScrollEnd(
+        {
+            data: data,
+            setSelectListPage: setSelectListPage,
+            label:'title',
+            value: 'id'
+        })
+
     const formFields = [
         {
-            name: 'name',
-            element: <FormInput placeholder="Введите название" />,
+            name: 'title',
+            element: <FormInput placeholder="Введите название группы" />,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'Название университета'
+            label: 'Название группы'
         },
+        {
+            name: 'course',
+            element: <FormInputNumber placeholder="Введите номер курса" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Название группы'
+        },
+        {
+            name: 'educationalProgramId',
+            element: <FormSelect
+                placeholder="Выберите образовательную программу"
+                options={options}
+                // loading={isSelectLoading}
+                // onPopupScroll={onScrollEnd}
+                showSearch
+                allowClear
+            />,
+            label: 'Образовательная программа',
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                }],
+        },
+
     ]
 
     return (
@@ -52,7 +85,7 @@ export const AdminsCreateUpdateForm = (
 
                         { formFields.map(field =>
                             <FormItem
-                                label={field.label}
+                                // label={field.label}
                                 rules={field.rules}
                                 key={field.name}
                                 name={field.name}

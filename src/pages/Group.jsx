@@ -1,22 +1,23 @@
 import React, {useCallback, useState} from 'react';
-import TeacherDetails from "../components/teacher/TeacherDetails";
-import {teacherDetails, teacherInitialValues} from "../mockedData/teachers";
+import GroupDetails from "../components/group/GroupDetails";
+import {groupInitialValues} from "../mockedData/group";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
-import {TeachersCreateUpdateForm} from "../components/teacher/TeachersCreateUpdateForm";
-import {useMutation, useQuery} from "react-query";
-import {universityApi} from "../api/universityApi";
+import {GroupsCreateUpdateForm} from "../components/group/GroupsCreateUpdateForm";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {defaultResponseTableData} from "../const/defaultResponseData";
-import {teacherApi} from "../api/teacherApi";
+import {groupApi} from "../api/groupApi";
+import {educationalProgramsApi} from "../api/educationalProgramsApi";
 
-const Teacher = () => {
+const Group = () => {
     const [selectedRow, setSelectedRow] = useState([])
     // set row counts for pagination
     const [selectedRowCount, setSelectedRowCount] = useState(20)
     const [currentPage, setCurrentPage] = useState(1)
+    const [educationalProgramsCurrentPage, setEducationalProgramsCurrentPage] = useState(1)
     const [createUpdateModalOpen, setCreateUpdateModalOpen] = useState(false)
     // set empty fields for create modal or with data for update modal
-    const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(teacherInitialValues)
+    const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(groupInitialValues)
 
     const [formType, setFormType] = useState(null)
 
@@ -24,30 +25,47 @@ const Teacher = () => {
 
     const [filterParams, setFilterParams] = useState('');
 
-    const { mutate: onCreate, isSuccess: isCreated } = useMutation(teacherApi.createApi);
+    const queryClient = useQueryClient()
 
-    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(teacherApi.updateApi);
+    const {mutate: onCreate, isSuccess: isCreated} = useMutation(groupApi.createApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('educationalPrograms');
+        }
+    });
 
-    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(teacherApi.removeApi);
+    const {mutate: onUpdate, isSuccess: isUpdated} = useMutation(groupApi.updateApi);
+
+    const {mutate: onRemove, isSuccess: isDeleted} = useMutation(groupApi.removeApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('educationalPrograms');
+        }
+    });
 
     // api
-    const { isLoading, data } = useQuery(['teacher', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
-        teacherApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    const {
+        isLoading,
+        data
+    } = useQuery(['group', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
+        groupApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    );
+
+    const {data: educationalProgramsData} = useQuery(['educationalPrograms', educationalProgramsCurrentPage], () =>
+        educationalProgramsApi.getAlLApi(currentPage)
     );
 
     // Callbacks
 
     const onClose = useCallback(() => {
         setCreateUpdateModalOpen(false)
-        setCreateUpdateFormInitialFields(teacherInitialValues)
+        setCreateUpdateFormInitialFields(groupInitialValues)
         setSelectedRow([])
         setEditEntity(null)
     }, [])
 
-    const onOpenCreateUpdateModal = (formType, value?) => {
+    const onOpenCreateUpdateModal = (formType, value) => {
 
-        if ((formType === 'update' || formType === 'view') && value) {
-            setCreateUpdateFormInitialFields(changeFormFieldsData(teacherInitialValues, value))
+        if (formType === 'update' && value) {
+            setCreateUpdateFormInitialFields(changeFormFieldsData(groupInitialValues, value))
             setEditEntity(value)
         }
 
@@ -68,7 +86,7 @@ const Teacher = () => {
         onClose()
     }
 
-    const onSelectRow = useCallback((rowIndex: number) => {
+    const onSelectRow = useCallback((rowIndex) => {
         setSelectedRow([rowIndex])
     }, [])
 
@@ -80,23 +98,22 @@ const Teacher = () => {
     return (
         <>
             <DrawerContainer
-              title={
-                (formType === 'create' && 'Создание преподавателя') ||
-                (formType === 'view' ? 'Просмотр преподавателя' : 'Редактирование преподавателя')
-              }
+                title={formType === 'create' ? 'Создание группы' : 'Редактирование группы'}
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >
-                <TeachersCreateUpdateForm
+                <GroupsCreateUpdateForm
                     formType={formType}
                     initialFields={createUpdateFormInitialFields}
                     onSubmit={onSubmitCreateUpdateModal}
                     onClose={onClose}
                     editEntity={editEntity}
+                    data={educationalProgramsData}
+                    setSelectListPage={setEducationalProgramsCurrentPage}
 
                 />
             </DrawerContainer>
-            <TeacherDetails
+            <GroupDetails
                 isLoading={isLoading}
                 data={data ?? defaultResponseTableData}
                 onChangeUserActive={onHandleRemove}
@@ -106,9 +123,10 @@ const Teacher = () => {
                 onSelectRowCount={setSelectedRowCount}
                 onSelectCurrentPage={setCurrentPage}
                 onOpenCreateUpdateModal={onOpenCreateUpdateModal}
+
             />
         </>
     );
 };
 
-export default Teacher;
+export default Group;

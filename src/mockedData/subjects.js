@@ -142,19 +142,7 @@ export const subjectDetails =  {
 
 export const subjectInitialValues = [
     {
-        name: 'name',
-        value: ''
-    },
-    {
-        name: 'course',
-        value: ''
-    },
-    {
-        name: 'type',
-        value: ''
-    },
-    {
-        name: 'type_name',
+        name: 'title',
         value: ''
     },
 ];

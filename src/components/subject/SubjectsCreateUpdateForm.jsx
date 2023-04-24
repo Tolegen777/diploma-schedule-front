@@ -27,7 +27,7 @@ export const SubjectsCreateUpdateForm = (
 
     const formFields = [
         {
-            name: 'name',
+            name: 'title',
             element: <FormInput placeholder="Введите название" />,
             rules: [{
                 required: true,
@@ -35,25 +35,24 @@ export const SubjectsCreateUpdateForm = (
             }],
             label: 'Отчество'
         },
-        {
-            name: 'type',
-            element: <FormInput placeholder="Введите тип" />,
-            rules: [{
-                required: true,
-                message: 'Обязательное поле!',
-            }],
-            label: 'Отчество'
-        },
-        {
-            name: 'course',
-            element: <FormInput placeholder="Введите курс" />,
-            rules: [{
-                required: true,
-                message: 'Обязательное поле!',
-            }],
-            label: 'Отчество'
-        },
-
+        // {
+        //     name: 'type',
+        //     element: <FormInput placeholder="Введите тип" />,
+        //     rules: [{
+        //         required: true,
+        //         message: 'Обязательное поле!',
+        //     }],
+        //     label: 'Отчество'
+        // },
+        // {
+        //     name: 'course',
+        //     element: <FormInput placeholder="Введите курс" />,
+        //     rules: [{
+        //         required: true,
+        //         message: 'Обязательное поле!',
+        //     }],
+        //     label: 'Отчество'
+        // },
     ]
 
     return (
@@ -81,27 +80,27 @@ export const SubjectsCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {formType === 'view' && editEntity && (
-                    <>
-                        <FormInfoDescription title="Информация о создании">
-                            <FormInfoDescriptionItem label="Создал (ФИО)">
-                                <Link to="/">{editEntity && editEntity.created_by}</Link>
-                            </FormInfoDescriptionItem>
-                            <FormInfoDescriptionItem label="Дата создания">
-                                {editEntity && formatDateWithTime(editEntity.created_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
+                {/*{formType === 'view' && editEntity && (*/}
+                {/*    <>*/}
+                {/*        <FormInfoDescription title="Информация о создании">*/}
+                {/*            <FormInfoDescriptionItem label="Создал (ФИО)">*/}
+                {/*                <Link to="/">{editEntity && editEntity.created_by}</Link>*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*            <FormInfoDescriptionItem label="Дата создания">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.created_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
 
-                        <FormInfoDescription title="Информация о редактировании">
-                            <FormInfoDescriptionItem label="Редактировал (ФИО)">
-                                <Link to="/">{editEntity && editEntity.updated_by}</Link>
-                            </FormInfoDescriptionItem>
-                            <FormInfoDescriptionItem label="Дата редактирования">
-                                {editEntity && formatDateWithTime(editEntity.updated_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
-                    </>
-                )}
+                {/*        <FormInfoDescription title="Информация о редактировании">*/}
+                {/*            <FormInfoDescriptionItem label="Редактировал (ФИО)">*/}
+                {/*                <Link to="/">{editEntity && editEntity.updated_by}</Link>*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*            <FormInfoDescriptionItem label="Дата редактирования">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.updated_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
+                {/*    </>*/}
+                {/*)}*/}
             </SpaceContainer>
 
             <FormButtonWrapper>

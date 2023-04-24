@@ -97,9 +97,17 @@ export const adminDetails =  {
     total_pages: 1,
 }
 
-export const adminInitialValues = [
+export const educationalProgramsInitialValues = [
     {
-        name: 'name',
+        name: 'title',
+        value: ''
+    },
+    {
+        name: 'elective',
+        value: false
+    },
+    {
+        name: 'universityId',
         value: ''
     },
 ];

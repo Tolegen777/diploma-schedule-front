@@ -1,3 +1,5 @@
+import {groupApi} from "../api/groupApi";
+
 export const adminDetails =  {
     content: [
         {
@@ -97,9 +99,17 @@ export const adminDetails =  {
     total_pages: 1,
 }
 
-export const adminInitialValues = [
+export const groupInitialValues = [
     {
-        name: 'name',
+        name: 'title',
+        value: ''
+    },
+    {
+        name: 'course',
+        value: ''
+    },
+    {
+        name: 'educationalProgramId',
         value: ''
     },
 ];

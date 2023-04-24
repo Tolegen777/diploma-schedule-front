@@ -15,7 +15,7 @@ import {FormItem} from "../../shared/FormItem";
 import {Colors, TextWeightType} from "../../const/const";
 import {formatDateWithTime} from "../../utils/formatDateWithTime";
 
-export const AdminsCreateUpdateForm = (
+export const EducationalProgramsCreateUpdateForm = (
     {
         formType,
         initialFields,
@@ -27,7 +27,7 @@ export const AdminsCreateUpdateForm = (
 
     const formFields = [
         {
-            name: 'name',
+            name: 'title',
             element: <FormInput placeholder="Введите название" />,
             rules: [
                 {
@@ -35,8 +35,20 @@ export const AdminsCreateUpdateForm = (
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'Название университета'
+            label: 'Название образовательной программы'
         },
+        <FormItem
+            key="elective"
+            name="elective"
+            valuePropName="checked"
+            label={<ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                Электив
+            </ParagraphText>}
+            label_align='left'
+            labelCol={{ span: 12 }}
+        >
+            <SwitchButton />
+        </FormItem>
     ]
 
     return (

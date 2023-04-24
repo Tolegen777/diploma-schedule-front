@@ -12,12 +12,11 @@ import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
 import filterIcon from './../../assets/icons/filterIcon.svg';
 import refreshIcon from './../../assets/icons/refreshIcon.svg';
-import viewIcon from '../../assets/icons/viewIcon.svg'
-import deleteIcon from '../../assets/icons/deleteIcon.svg'
+import deleteIcon from "../../assets/icons/deleteIcon.svg";
+import viewIcon from "../../assets/icons/viewIcon.svg";
 
-const SubjectDetails = (
+const GroupDetails = (
     {
-        isLoading,
         data,
         onChangeUserActive,
         selectedRow,
@@ -26,8 +25,10 @@ const SubjectDetails = (
         onSelectRowCount,
         onSelectCurrentPage,
         onOpenCreateUpdateModal,
+        isLoading
     }
 ) => {
+
     const columns = [
         {
             title: 'Идентификатор',
@@ -44,7 +45,20 @@ const SubjectDetails = (
         },
         {
             title: 'Название',
-            dataIndex: 'name',
+            dataIndex: 'title',
+        },
+        {
+            title: 'Электив',
+            dataIndex: 'elective',
+            render: id => (
+                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                    {id} курс
+                </ParagraphText>
+            ),
+        },
+        {
+            title: 'Идентификатор образовательной программы',
+            dataIndex: 'educationalProgramId',
         },
         {
             title: 'Действия',
@@ -70,7 +84,7 @@ const SubjectDetails = (
         <>
             <PageMenu>
                 <PageMenuColumn>
-                    <CategoryTitle>Управление предметами</CategoryTitle>
+                    <CategoryTitle>Управление группами</CategoryTitle>
                 </PageMenuColumn>
                 {/*<PageMenuColumn>*/}
                 {/*    <CustomButtonWithIcon*/}
@@ -95,7 +109,7 @@ const SubjectDetails = (
                         color={Colors.Blue}
                         onClick={() => onOpenCreateUpdateModal('create')}
                     >
-                        Создать предмет
+                        Создать группу
                     </CustomButton>
                 </PageMenuColumn>
             </PageMenu>
@@ -114,4 +128,4 @@ const SubjectDetails = (
     );
 };
 
-export default SubjectDetails;
+export default GroupDetails;

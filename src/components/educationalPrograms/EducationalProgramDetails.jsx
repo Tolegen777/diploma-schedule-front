@@ -5,17 +5,13 @@ import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
 import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
-import filterIcon from './../../assets/icons/filterIcon.svg';
-import refreshIcon from './../../assets/icons/refreshIcon.svg';
-import viewIcon from '../../assets/icons/viewIcon.svg'
-import deleteIcon from '../../assets/icons/deleteIcon.svg'
+import deleteIcon from "../../assets/icons/deleteIcon.svg";
+import viewIcon from "../../assets/icons/viewIcon.svg";
 
-const SubjectDetails = (
+const EducationalProgramDetails = (
     {
         isLoading,
         data,
@@ -28,6 +24,12 @@ const SubjectDetails = (
         onOpenCreateUpdateModal,
     }
 ) => {
+
+    // "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //     "title": "string",
+    //     "elective": true,
+    //     "universityId": "3fa85f64-5717-4562-b3fc-2c963f66afa6
+
     const columns = [
         {
             title: 'Идентификатор',
@@ -44,7 +46,20 @@ const SubjectDetails = (
         },
         {
             title: 'Название',
-            dataIndex: 'name',
+            dataIndex: 'title',
+        },
+        {
+            title: 'Идентификатор университета',
+            dataIndex: 'universityId',
+        },
+        {
+            title: 'Электив',
+            dataIndex: 'elective',
+            render: id => (
+                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                    {id ? 'Да' : 'Нет'}
+                </ParagraphText>
+            ),
         },
         {
             title: 'Действия',
@@ -70,7 +85,7 @@ const SubjectDetails = (
         <>
             <PageMenu>
                 <PageMenuColumn>
-                    <CategoryTitle>Управление предметами</CategoryTitle>
+                    <CategoryTitle>Управление образовательными группами</CategoryTitle>
                 </PageMenuColumn>
                 {/*<PageMenuColumn>*/}
                 {/*    <CustomButtonWithIcon*/}
@@ -95,7 +110,7 @@ const SubjectDetails = (
                         color={Colors.Blue}
                         onClick={() => onOpenCreateUpdateModal('create')}
                     >
-                        Создать предмет
+                        Создать образовательную группу
                     </CustomButton>
                 </PageMenuColumn>
             </PageMenu>
@@ -114,4 +129,4 @@ const SubjectDetails = (
     );
 };
 
-export default SubjectDetails;
+export default EducationalProgramDetails;

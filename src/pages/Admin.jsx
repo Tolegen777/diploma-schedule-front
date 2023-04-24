@@ -4,6 +4,9 @@ import {adminDetails, adminInitialValues} from "../mockedData/admins";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {AdminsCreateUpdateForm} from "../components/admin/AdminsCreateUpdateForm";
+import {useMutation, useQuery} from "react-query";
+import {universityApi} from "../api/universityApi";
+import {defaultResponseTableData} from "../const/defaultResponseData";
 
 const Admin = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -17,6 +20,19 @@ const Admin = () => {
     const [formType, setFormType] = useState(null)
 
     const [editEntity, setEditEntity] = useState(null);
+
+    const [filterParams, setFilterParams] = useState('');
+
+    const { mutate: onCreate, isSuccess: isCreated } = useMutation(universityApi.createApi);
+
+    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(universityApi.updateApi);
+
+    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(universityApi.removeApi);
+
+    // api
+    const { isLoading, data } = useQuery(['university', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
+        universityApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    );
 
     // Callbacks
 
@@ -42,11 +58,11 @@ const Admin = () => {
 
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
-            // onCreateUser(formData as IUserType)
+            onCreate({...formData, userId: '123123'})
         }
 
         if (type === 'update') {
-            // onUpdateUser(formData as IUpdateUserType)
+            onUpdate({...formData, userId: '123123', id: editEntity.id})
         }
         onClose()
     }
@@ -55,11 +71,15 @@ const Admin = () => {
         setSelectedRow([rowIndex])
     }, [])
 
+    const onHandleRemove = (id) => {
+        onRemove(id)
+    }
+
 
     return (
         <>
             <DrawerContainer
-                title={ formType === 'create' ? 'Создание админа' : 'Редактирование админа' }
+                title={ formType === 'create' ? 'Создание университета' : 'Редактирование университета' }
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >
@@ -73,8 +93,9 @@ const Admin = () => {
                 />
             </DrawerContainer>
             <AdminDetails
-                data={adminDetails}
-                onChangeUserActive={() => {}}
+                isLoading={isLoading}
+                data={data ?? defaultResponseTableData}
+                onChangeUserActive={onHandleRemove}
                 selectedRow={selectedRow}
                 onSelectRow={onSelectRow}
                 selectedRowCount={selectedRowCount}
