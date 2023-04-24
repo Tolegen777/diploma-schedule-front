@@ -1,4 +1,3 @@
-// eslint-disable-next-line prettier/prettier
 import {Form} from 'antd';
 import {useMutation} from 'react-query';
 
@@ -20,13 +19,18 @@ export const LoginPage = () => {
   const [form] = Form.useForm();
   const { dispatch } = useStateContext();
 
-  const { mutate: onLogin, isLoading } = useMutation('signIn', authApi.signInUser, {
-    onSuccess: (data) => {
-      // tokenService.updateLocalTokenData(data.access_token, 'access_token')
-      // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
-      dispatch({ type: 'SET_AUTH_STATUS', payload: true })
-    },
-  })
+  // const { mutate: onLogin, isLoading } = useMutation('signIn', authApi.signInUser, {
+  //   onSuccess: (data) => {
+  //     // tokenService.updateLocalTokenData(data.access_token, 'access_token')
+  //     // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
+  //     dispatch({ type: 'SET_AUTH_STATUS', payload: true })
+  //   },
+  // })
+    let isLoading = false
+
+    const onLogin = () => {
+        dispatch({ type: 'SET_AUTH_STATUS', payload: true })
+    }
 
 
   return (

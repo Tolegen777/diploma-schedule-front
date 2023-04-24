@@ -1,12 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import EducationalProgramsDetails from "../components/educationalPrograms/educationalProgramsDetails";
-import {adminDetails, educationalProgramsInitialValues} from "../mockedData/educationalPrograms";
+import {educationalProgramsInitialValues} from "../mockedData/educationalPrograms";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
-import {EducationalProgramsCreateUpdateForm} from "../components/educationalPrograms/EducationalProgramsCreateUpdateForm";
 import {useMutation, useQuery} from "react-query";
 import {educationalProgramsApi} from "../api/educationalProgramsApi";
-import {defaultResponseTableData} from "../const/defaultResponseData";
+import {
+    EducationalProgramsCreateUpdateForm
+} from "../components/educationalPrograms/EducationalProgramsCreateUpdateForm";
 
 const EducationalPrograms = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -94,18 +94,18 @@ const EducationalPrograms = () => {
 
                 />
             </DrawerContainer>
-            <EducationalProgramsDetails
-                isLoading={isLoading}
-                data={data ?? defaultResponseTableData}
-                onChangeUserActive={onHandleRemove}
-                selectedRow={selectedRow}
-                onSelectRow={onSelectRow}
-                selectedRowCount={selectedRowCount}
-                onSelectRowCount={setSelectedRowCount}
-                onSelectCurrentPage={setCurrentPage}
-                onOpenCreateUpdateModal={onOpenCreateUpdateModal}
+            {/*<EducationalProgramDetails*/}
+            {/*    isLoading={isLoading}*/}
+            {/*    data={data ?? defaultResponseTableData}*/}
+            {/*    onChangeUserActive={onHandleRemove}*/}
+            {/*    selectedRow={selectedRow}*/}
+            {/*    onSelectRow={onSelectRow}*/}
+            {/*    selectedRowCount={selectedRowCount}*/}
+            {/*    onSelectRowCount={setSelectedRowCount}*/}
+            {/*    onSelectCurrentPage={setCurrentPage}*/}
+            {/*    onOpenCreateUpdateModal={onOpenCreateUpdateModal}*/}
 
-            />
+            {/*/>*/}
         </>
     );
 };

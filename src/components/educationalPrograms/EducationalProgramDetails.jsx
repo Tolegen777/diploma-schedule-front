@@ -5,17 +5,13 @@ import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
 import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
-import filterIcon from './../../assets/icons/filterIcon.svg';
-import refreshIcon from './../../assets/icons/refreshIcon.svg';
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
 import viewIcon from "../../assets/icons/viewIcon.svg";
 
-const EducationalProgramsDetails = (
+const EducationalProgramDetails = (
     {
         isLoading,
         data,
@@ -133,4 +129,4 @@ const EducationalProgramsDetails = (
     );
 };
 
-export default EducationalProgramsDetails;
+export default EducationalProgramDetails;
