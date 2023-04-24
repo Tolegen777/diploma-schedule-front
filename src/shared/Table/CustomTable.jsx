@@ -90,7 +90,6 @@ export const CustomTable = ({
                                 onSelectRowCount,
                                 onSelectCurrentPage
                             }) => {
-    console.log(dataSource.content, 'DATAS')
 
     return (
         <TableWrapper>
@@ -107,12 +106,13 @@ export const CustomTable = ({
             <AntdCustomTable
                 loading={isLoading}
                 columns={columns}
-                dataSource={dataSource.content}
+                // dataSource={dataSource.content}
+                dataSource={dataSource}
                 pagination={{
                     pageSize: selectedRowCount,
                     defaultCurrent: 1,
-                    total: dataSource.total_elements,
-                    current: dataSource.number,
+                    total: dataSource.total_elements ?? 0,
+                    current: dataSource.number ?? 1,
                     pageSizeOptions: [],
                     showSizeChanger: false,
                     onChange: onSelectCurrentPage

@@ -4,6 +4,10 @@ import {subjectDetails, subjectInitialValues} from "../mockedData/subjects";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {SubjectsCreateUpdateForm} from "../components/subject/SubjectsCreateUpdateForm";
+import {useMutation, useQuery} from "react-query";
+import {teacherApi} from "../api/teacherApi";
+import {defaultResponseTableData} from "../const/defaultResponseData";
+import {subjectApi} from "../api/subjectApi";
 
 const Subject = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -17,6 +21,19 @@ const Subject = () => {
     const [formType, setFormType] = useState(null)
 
     const [editEntity, setEditEntity] = useState(null);
+    const [filterParams, setFilterParams] = useState('');
+
+    const { mutate: onCreate, isSuccess: isCreated } = useMutation(subjectApi.createApi);
+
+    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(subjectApi.updateApi);
+
+    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(subjectApi.removeApi);
+
+    // api
+    const { isLoading, data } = useQuery(['subject', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
+        subjectApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    );
+
 
     // Callbacks
 
@@ -41,11 +58,11 @@ const Subject = () => {
 
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
-            // onCreateUser(formData as IUserType)
+            onCreate({...formData})
         }
 
         if (type === 'update') {
-            // onUpdateUser(formData as IUpdateUserType)
+            onUpdate({...formData, id: editEntity.id})
         }
         onClose()
     }
@@ -75,7 +92,8 @@ const Subject = () => {
                 />
             </DrawerContainer>
             <SubjectDetails
-                data={subjectDetails}
+                isLoading={isLoading}
+                data={data ?? defaultResponseTableData}
                 onChangeUserActive={() => {}}
                 selectedRow={selectedRow}
                 onSelectRow={onSelectRow}

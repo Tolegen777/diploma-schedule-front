@@ -4,6 +4,10 @@ import {teacherDetails, teacherInitialValues} from "../mockedData/teachers";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {TeachersCreateUpdateForm} from "../components/teacher/TeachersCreateUpdateForm";
+import {useMutation, useQuery} from "react-query";
+import {universityApi} from "../api/universityApi";
+import {defaultResponseTableData} from "../const/defaultResponseData";
+import {teacherApi} from "../api/teacherApi";
 
 const Teacher = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -17,6 +21,19 @@ const Teacher = () => {
     const [formType, setFormType] = useState(null)
 
     const [editEntity, setEditEntity] = useState(null);
+
+    const [filterParams, setFilterParams] = useState('');
+
+    const { mutate: onCreate, isSuccess: isCreated } = useMutation(teacherApi.createApi);
+
+    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(teacherApi.updateApi);
+
+    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(teacherApi.removeApi);
+
+    // api
+    const { isLoading, data } = useQuery(['teacher', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
+        teacherApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    );
 
     // Callbacks
 
@@ -42,11 +59,11 @@ const Teacher = () => {
 
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
-            // onCreateUser(formData as IUserType)
+            onCreate({...formData})
         }
 
         if (type === 'update') {
-            // onUpdateUser(formData as IUpdateUserType)
+            onUpdate({...formData, id: editEntity.id})
         }
         onClose()
     }
@@ -54,6 +71,10 @@ const Teacher = () => {
     const onSelectRow = useCallback((rowIndex: number) => {
         setSelectedRow([rowIndex])
     }, [])
+
+    const onHandleRemove = (id) => {
+        onRemove(id)
+    }
 
 
     return (
@@ -76,8 +97,9 @@ const Teacher = () => {
                 />
             </DrawerContainer>
             <TeacherDetails
-                data={teacherDetails}
-                onChangeUserActive={() => {}}
+                isLoading={isLoading}
+                data={data ?? defaultResponseTableData}
+                onChangeUserActive={onHandleRemove}
                 selectedRow={selectedRow}
                 onSelectRow={onSelectRow}
                 selectedRowCount={selectedRowCount}

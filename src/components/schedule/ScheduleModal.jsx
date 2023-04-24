@@ -5,7 +5,14 @@ import {emailRules} from "../../utils/regExpRules";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {FormItem} from "../../shared/FormItem";
 
-const ScheduleModal = ({open, setOpen, onSubmit}) => {
+const ScheduleModal = ({
+                           open,
+                           onSubmit,
+                           initialFields,
+                           formType,
+                           editEntity,
+                           onClose
+}) => {
 
     const [ form ] = Form.useForm();
 
@@ -13,14 +20,14 @@ const ScheduleModal = ({open, setOpen, onSubmit}) => {
     const handleOk = () => {
         setConfirmLoading(true);
         setTimeout(() => {
-            setOpen(false);
+            onClose();
             setConfirmLoading(false);
         }, 2000);
     };
 
     const handleCancel = () => {
         console.log('Clicked cancel button');
-        setOpen(false);
+        onClose();
     };
 
     const formFields = [
@@ -101,7 +108,7 @@ const ScheduleModal = ({open, setOpen, onSubmit}) => {
             >
                 <SpaceContainer>
                     <Form
-                        // fields={initialFields}
+                        fields={initialFields}
                         form={form}
                         layout="vertical"
                         onFinish={(data) => onSubmit(data, 'create')}

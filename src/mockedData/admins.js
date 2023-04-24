@@ -99,23 +99,7 @@ export const adminDetails =  {
 
 export const adminInitialValues = [
     {
-        name: 'first_name',
-        value: ''
-    },
-    {
-        name: 'last_name',
-        value: ''
-    },
-    {
-        name: 'middle_name',
-        value: ''
-    },
-    {
-        name: 'phone_number',
-        value: ''
-    },
-    {
-        name: 'email',
+        name: 'name',
         value: ''
     },
 ];

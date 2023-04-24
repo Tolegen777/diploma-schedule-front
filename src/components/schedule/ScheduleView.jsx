@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
 import Dayjs from 'dayjs';
 import {times} from 'lodash';
 import {Tooltip} from "antd";
 import {Colors} from "../../const/const";
 import ScheduleModal from "./ScheduleModal";
+import {teacherInitialValues} from "../../mockedData/teachers";
+import {scheduleInitialValues} from "../../mockedData/schedule";
+import {changeFormFieldsData} from "../../utils/changeFormFieldsData";
 
 
 const scheduleTime = [
@@ -216,14 +219,14 @@ const StyledEventCell = styled(StyledCell)`
 `;
 
 const StyledCard = styled.div`
-background: ${Colors.Blue};
+  background: ${Colors.Blue};
   border-radius: 8px;
   box-sizing: border-box;
   color: ${Colors.White};
   font-size: 14px;
   line-height: 1.5714285714285714;
   list-style: none;
-  font-family: Museo Sans Cyrl,sans-serif;
+  font-family: Museo Sans Cyrl, sans-serif;
   border: 1px solid #ccc;
   grid-row: 2;
   grid-column: 6;
@@ -233,15 +236,26 @@ background: ${Colors.Blue};
 `
 
 const StyledTitle = styled.div`
- font-weight: bold;
+  font-weight: bold;
 `
 
 const StyledContent = styled.div`
-    
+
 `
 
 
-const ScheduleContent = ({subject, teacher, subjectType, timeFrom, timeTo, subjectFormat, subjectTypeTitle, group, teacherPosition, roomNumber}) => {
+const ScheduleContent = ({
+                             subject,
+                             teacher,
+                             subjectType,
+                             timeFrom,
+                             timeTo,
+                             subjectFormat,
+                             subjectTypeTitle,
+                             group,
+                             teacherPosition,
+                             roomNumber
+                         }) => {
     return <StyledCard>
         <Tooltip title={`${timeFrom}-${timeTo}`}>
             <div>{group}</div>
@@ -259,12 +273,37 @@ const ScheduleView = () => {
     const [selectedDate, setSelectedDate] = useState(Dayjs());
     const [schedule, setSchedule] = useState(scheduleTime)
     const [open, setOpen] = useState(false)
+    const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(scheduleInitialValues)
+    const [editEntity, setEditEntity] = useState(null);
+    const [formType, setFormType] = useState(null)
 
-    const handleModalOpen = () => {
-        setOpen(true)
-    }
-    const handleCreateSchedule = (formData) => {
-        console.log(formData)
+    const onClose = useCallback(() => {
+        setOpen(false)
+        setCreateUpdateFormInitialFields(teacherInitialValues)
+        setEditEntity(null)
+    }, [])
+
+    const onOpenModal = (formType, value?) => {
+
+        if ((formType === 'update' || formType === 'view') && value) {
+            setCreateUpdateFormInitialFields(changeFormFieldsData(teacherInitialValues, value))
+            setEditEntity(value)
+        }
+
+        setFormType(formType)
+        setOpen(true);
+
+    };
+
+    const onSubmitCreateUpdateModal = (formData, type) => {
+        if (type === 'create') {
+            // onCreateUser(formData as IUserType)
+        }
+
+        if (type === 'update') {
+            // onUpdateUser(formData as IUpdateUserType)
+        }
+        onClose()
     }
 
     const renderHeaderCells = () => {
@@ -315,7 +354,7 @@ const ScheduleView = () => {
                         row={j + 2}
                         column={column}
                         isCurrentTime={isCurrentTime}
-                        onClick={handleModalOpen}>
+                        onClick={onOpenModal}>
                         {/* Render your event data here */}
                         {schedule.map((item) => {
                             // console.log(item.day, 'i')
@@ -347,7 +386,14 @@ const ScheduleView = () => {
 
     return (
         <StyledCalendar>
-            <ScheduleModal open={open} setOpen={setOpen} onSubmit={handleCreateSchedule}/>
+            <ScheduleModal
+                open={open}
+                onSubmit={onSubmitCreateUpdateModal}
+                initialFields={createUpdateFormInitialFields}
+                formType={formType}
+                editEntity={editEntity}
+                onClose={onClose}
+            />
             {renderHeaderCells()}
             {renderTimeCells()}
             {renderWeekCells()}

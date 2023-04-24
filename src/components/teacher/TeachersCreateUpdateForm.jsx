@@ -27,57 +27,15 @@ export const TeachersCreateUpdateForm = (
 
     const formFields = [
         {
-            name: 'email',
-            element: <FormInput type="email" placeholder="Введите почту" autoComplete="new-email" />,
+            name: 'name',
+            element: <FormInput placeholder="Введите ФИО преподавателя" />,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
-                {
-                    message: 'Неверный адрес!',
-                    pattern: emailRules,
-                }],
-            label: 'Почта'
-        },
-        {
-            name: 'first_name',
-            element: <FormInput placeholder="Введите имя" />,
-            rules: [
-                {
-                    required: true,
-                    message: 'Обязальное поле!'
-                },
-                ],
-            label: 'Имя'
-        },
-        {
-            name: 'last_name',
-            element: <FormInput placeholder="Введите фамилию" />,
-            rules: [
-                {
-                    required: true,
-                    message: 'Обязальное поле!'
-                },
-                ],
-            label: 'Фамилия'
-        },
-        {
-            name: 'middle_name',
-            element: <FormInput placeholder="Введите отчество" />,
-            rules: [{
-                required: false,
-            }],
-            label: 'Отчество'
-        },
-        {
-            name: 'position',
-            element: <FormInput placeholder="Введите позицию" />,
-            rules: [{
-                required: formType === 'create',
-                message: 'Обязательное поле!'
-            }],
-            label: 'Номер телефона'
+            ],
+            label: 'ФИО преподавателя'
         },
     ]
 
@@ -107,21 +65,21 @@ export const TeachersCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {formType === 'view' && editEntity && (
-                    <>
-                        <FormInfoDescription title="Информация о создании">
-                            <FormInfoDescriptionItem label="Дата создания">
-                                {editEntity && formatDateWithTime(editEntity.created_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
+                {/*{formType === 'view' && editEntity && (*/}
+                {/*    <>*/}
+                {/*        <FormInfoDescription title="Информация о создании">*/}
+                {/*            <FormInfoDescriptionItem label="Дата создания">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.created_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
 
-                        <FormInfoDescription title="Информация о редактировании">
-                            <FormInfoDescriptionItem label="Дата редактирования">
-                                {editEntity && formatDateWithTime(editEntity.updated_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
-                    </>
-                )}
+                {/*        <FormInfoDescription title="Информация о редактировании">*/}
+                {/*            <FormInfoDescriptionItem label="Дата редактирования">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.updated_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
+                {/*    </>*/}
+                {/*)}*/}
             </SpaceContainer>
 
             {formType !== 'view' && <FormButtonWrapper>

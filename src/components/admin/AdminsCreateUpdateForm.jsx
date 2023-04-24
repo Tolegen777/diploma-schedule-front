@@ -25,71 +25,17 @@ export const AdminsCreateUpdateForm = (
     }) => {
     const [ form ] = Form.useForm();
 
-    // const isLdap = Form.useWatch('is_ldap_auth', form);
-
     const formFields = [
         {
-            name: 'email',
-            element: <FormInput type="email" placeholder="Введите почту" autoComplete="new-email" />,
+            name: 'name',
+            element: <FormInput placeholder="Введите название" />,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
-                {
-                    message: 'Неверный адрес!',
-                    pattern: emailRules,
-                }],
-            label: 'Почта'
-        },
-        {
-            name: 'first_name',
-            element: <FormInput placeholder="Введите имя" />,
-            rules: [
-                {
-                    required: true,
-                    message: 'Обязальное поле!'
-                },
-                // {
-                //     message: 'Только кириллица или латиница, без пробелов!',
-                //     pattern: stringRules,
-                // }
             ],
-            label: 'Имя'
-        },
-        {
-            name: 'last_name',
-            element: <FormInput placeholder="Введите фамилию" />,
-            rules: [
-                {
-                    required: true,
-                    message: 'Обязальное поле!'
-                },
-                // {
-                //     message: 'Только кириллица или латиница, без пробелов!',
-                //     pattern: stringRules,
-                // }
-            ],
-            label: 'Фамилия'
-        },
-        {
-            name: 'middle_name',
-            element: <FormInput placeholder="Введите отчество" />,
-            rules: [{
-                required: false,
-                // message: 'Только кириллица или латиница, без пробелов!',
-                // pattern: stringRules,
-            }],
-            label: 'Отчество'
-        },
-        {
-            name: 'phone_number',
-            element: <FormInputMasked mask="+0 000 000 00 00" placeholder="Введите номер телефона" />,
-            rules: [{
-                required: formType === 'create',
-                message: 'Обязательное поле!'
-            }],
-            label: 'Номер телефона'
+            label: 'Название университета'
         },
     ]
 
@@ -118,27 +64,27 @@ export const AdminsCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {formType === 'update' && editEntity && (
-                    <>
-                        <FormInfoDescription title="Информация о создании">
-                            <FormInfoDescriptionItem label="Создал (ФИО)">
-                                <Link to="/">{editEntity && editEntity.created_by}</Link>
-                            </FormInfoDescriptionItem>
-                            <FormInfoDescriptionItem label="Дата создания">
-                                {editEntity && formatDateWithTime(editEntity.created_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
+                {/*{formType === 'update' && editEntity && (*/}
+                {/*    <>*/}
+                {/*        <FormInfoDescription title="Информация о создании">*/}
+                {/*            <FormInfoDescriptionItem label="Создал (ФИО)">*/}
+                {/*                <Link to="/">{editEntity && editEntity.created_by}</Link>*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*            <FormInfoDescriptionItem label="Дата создания">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.created_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
 
-                        <FormInfoDescription title="Информация о редактировании">
-                            <FormInfoDescriptionItem label="Редактировал (ФИО)">
-                                <Link to="/">{editEntity && editEntity.updated_by}</Link>
-                            </FormInfoDescriptionItem>
-                            <FormInfoDescriptionItem label="Дата редактирования">
-                                {editEntity && formatDateWithTime(editEntity.updated_date)}
-                            </FormInfoDescriptionItem>
-                        </FormInfoDescription>
-                    </>
-                )}
+                {/*        <FormInfoDescription title="Информация о редактировании">*/}
+                {/*            <FormInfoDescriptionItem label="Редактировал (ФИО)">*/}
+                {/*                <Link to="/">{editEntity && editEntity.updated_by}</Link>*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*            <FormInfoDescriptionItem label="Дата редактирования">*/}
+                {/*                {editEntity && formatDateWithTime(editEntity.updated_date)}*/}
+                {/*            </FormInfoDescriptionItem>*/}
+                {/*        </FormInfoDescription>*/}
+                {/*    </>*/}
+                {/*)}*/}
             </SpaceContainer>
 
             <FormButtonWrapper>

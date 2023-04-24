@@ -11,11 +11,12 @@ import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
 import viewIcon from './../../assets/icons/viewIcon.svg';
 import deleteIcon from './../../assets/icons/deleteIcon.svg';
-import { formatDateWithTime } from '../../utils/formatDateWithTime'
+import {formatDateWithTime} from '../../utils/formatDateWithTime'
 
 
 const TeacherDetails = (
     {
+        isLoading,
         data,
         onChangeUserActive,
         selectedRow,
@@ -26,58 +27,39 @@ const TeacherDetails = (
         onOpenCreateUpdateModal,
     }
 ) => {
-    console.log(data, 'Data')
+
     const columns = [
         {
-            title: 'Преподаватель',
+            title: 'Идентификатор',
+            dataIndex: 'id',
             sorter: {
-                compare: (a, b) => a.first_name.length - b.first_name.length,
+                compare: (a, b) => a.id - b.id,
                 multiple: 3,
             },
-            render: (user) => <ParagraphText>
-                {user.first_name} {user.last_name} {user.middle_name}
-            </ParagraphText>
+            render: id => (
+                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                    {id}
+                </ParagraphText>
+            ),
         },
-      {
-        title: 'Почта',
-        dataIndex: 'email',
-      },
         {
-            title: 'Позиция',
-            dataIndex: 'position',
+            title: 'ФИО преподавателя',
+            dataIndex: 'name',
         },
-      {
-        title: 'дата создания',
-        dataIndex: 'created_date',
-        render: date => formatDateWithTime(date),
-      },
-      {
-        title: 'Дата обновления',
-        dataIndex: 'updated_date',
-        render: date => formatDateWithTime(date),
-        defaultSortOrder: 'ascend'
-      },
         {
-            title: 'ВКЛ/ВЫКЛ',
+            title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                <SwitchButton
-                    defaultChecked={entity.state === 'active'}
-                    onChange={() => onChangeUserActive({
-                        email: entity.email,
-                        state: entity.state === 'active' ? 'inactive' : 'active'
-                    })}
+                <ActionButton
+                    image={editIcon}
+                    callBack={() => onOpenCreateUpdateModal('update', entity)}/>
+                <ActionButton
+                    image={viewIcon}
+                    callBack={() => onOpenCreateUpdateModal('view', entity)}
                 />
                 <ActionButton
-                  image={editIcon}
-                  callBack={() => onOpenCreateUpdateModal('update', entity)} />
-              <ActionButton
-                image={viewIcon}
-                callBack={() => onOpenCreateUpdateModal('view', entity)}
-              />
-              <ActionButton
-                image={deleteIcon}
-                callBack={() => alert('Удаляет преподавателя по id!')}
-              />
+                    image={deleteIcon}
+                    callBack={() => onChangeUserActive(entity.id)}
+                />
             </TableActionsWrapper>,
             width: 100,
             align: 'center',
@@ -119,7 +101,7 @@ const TeacherDetails = (
             </PageMenu>
 
             <CustomTable
-                isLoading={false}
+                isLoading={isLoading}
                 columns={columns}
                 dataSource={data}
                 selectedRow={selectedRow}

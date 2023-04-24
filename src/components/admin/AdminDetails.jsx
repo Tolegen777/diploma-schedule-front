@@ -12,6 +12,8 @@ import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
 import filterIcon from './../../assets/icons/filterIcon.svg';
 import refreshIcon from './../../assets/icons/refreshIcon.svg';
+import deleteIcon from "../../assets/icons/deleteIcon.svg";
+import viewIcon from "../../assets/icons/viewIcon.svg";
 
 const AdminDetails = (
     {
@@ -23,39 +25,45 @@ const AdminDetails = (
         onSelectRowCount,
         onSelectCurrentPage,
         onOpenCreateUpdateModal,
+        isLoading
     }
 ) => {
-    console.log(data, 'Data')
     const columns = [
         {
-            title: 'Преподаватель',
+            title: 'Идентификатор',
+            dataIndex: 'id',
             sorter: {
-                compare: (a, b) => a.first_name.length - b.first_name.length,
+                compare: (a, b) => a.id - b.id,
                 multiple: 3,
             },
-            render: (user) => <ParagraphText>
-                {user.first_name} {user.last_name} {user.middle_name}
-            </ParagraphText>
+            render: id => (
+                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                    {id}
+                </ParagraphText>
+            ),
         },
         {
-            title: 'Контакты',
-            dataIndex: 'phone_number',
+            title: 'Идентификатор пользователя',
+            dataIndex: 'userId',
         },
         {
-            title: 'Почта',
-            dataIndex: 'email',
+            title: 'Название',
+            dataIndex: 'name',
         },
         {
-            title: 'ВКЛ/ВЫКЛ',
+            title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                <SwitchButton
-                    defaultChecked={entity.state === 'active'}
-                    onChange={() => onChangeUserActive({
-                        email: entity.email,
-                        state: entity.state === 'active' ? 'inactive' : 'active'
-                    })}
+                <ActionButton
+                    image={editIcon}
+                    callBack={() => onOpenCreateUpdateModal('update', entity)}/>
+                <ActionButton
+                    image={viewIcon}
+                    callBack={() => onOpenCreateUpdateModal('view', entity)}
                 />
-                <ActionButton image={editIcon} callBack={() => onOpenCreateUpdateModal('update', entity)} />
+                <ActionButton
+                    image={deleteIcon}
+                    callBack={() => onChangeUserActive(entity.id)}
+                />
             </TableActionsWrapper>,
             width: 100,
             align: 'center',
@@ -66,7 +74,7 @@ const AdminDetails = (
         <>
             <PageMenu>
                 <PageMenuColumn>
-                    <CategoryTitle>Управление админами</CategoryTitle>
+                    <CategoryTitle>Управление университетами</CategoryTitle>
                 </PageMenuColumn>
                 {/*<PageMenuColumn>*/}
                 {/*    <CustomButtonWithIcon*/}
@@ -91,13 +99,13 @@ const AdminDetails = (
                         color={Colors.Blue}
                         onClick={() => onOpenCreateUpdateModal('create')}
                     >
-                        Создать админа
+                        Создать университет
                     </CustomButton>
                 </PageMenuColumn>
             </PageMenu>
 
             <CustomTable
-                isLoading={false}
+                isLoading={isLoading}
                 columns={columns}
                 dataSource={data}
                 selectedRow={selectedRow}

@@ -1,5 +1,3 @@
-// eslint-disable-next-line prettier/prettier
-import type { IAuthResponse } from '../types/authTypes';
 
 export const tokenService = {
   getLocalAccessToken: () => {
@@ -8,6 +6,6 @@ export const tokenService = {
   },
 
   updateLocalTokenData: (token) => {
-    localStorage.setItem('UNIVERSITY', JSON.stringify(token));
+    localStorage.setItem('UNIVERSITY', token);
   },
 };

@@ -17,6 +17,7 @@ import deleteIcon from '../../assets/icons/deleteIcon.svg'
 
 const SubjectDetails = (
     {
+        isLoading,
         data,
         onChangeUserActive,
         selectedRow,
@@ -27,53 +28,38 @@ const SubjectDetails = (
         onOpenCreateUpdateModal,
     }
 ) => {
-    console.log(data, 'Data')
     const columns = [
-        // {
-        //     title: 'Идентификатор',
-        //     dataIndex: 'id',
-        //     sorter: {
-        //         compare: (a, b) => a.id - b.id,
-        //         multiple: 3,
-        //     },
-        //     render: id => (
-        //         <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
-        //             {id}
-        //         </ParagraphText>
-        //     ),
-        // },
-
+        {
+            title: 'Идентификатор',
+            dataIndex: 'id',
+            sorter: {
+                compare: (a, b) => a.id - b.id,
+                multiple: 3,
+            },
+            render: id => (
+                <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                    {id}
+                </ParagraphText>
+            ),
+        },
         {
             title: 'Название',
             dataIndex: 'name',
         },
         {
-            title: 'Тип',
-            dataIndex: 'type',
-        },
-        {
-            title: 'Курс',
-            dataIndex: 'course',
-        },
-        {
-            title: 'ВКЛ/ВЫКЛ',
+            title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                <SwitchButton
-                    defaultChecked={entity.state === 'active'}
-                    onChange={() => onChangeUserActive({
-                        email: entity.email,
-                        state: entity.state === 'active' ? 'inactive' : 'active'
-                    })}
+                <ActionButton
+                    image={editIcon}
+                    callBack={() => onOpenCreateUpdateModal('update', entity)}/>
+                <ActionButton
+                    image={viewIcon}
+                    callBack={() => onOpenCreateUpdateModal('view', entity)}
                 />
-                <ActionButton image={editIcon} callBack={() => onOpenCreateUpdateModal('update', entity)} />
-              <ActionButton
-                image={viewIcon}
-                callBack={() => onOpenCreateUpdateModal('view', entity)}
-              />
-              <ActionButton
-                image={deleteIcon}
-                callBack={() => alert('Удаляет преподавателя по id!')}
-              />
+                <ActionButton
+                    image={deleteIcon}
+                    callBack={() => onChangeUserActive(entity.id)}
+                />
             </TableActionsWrapper>,
             width: 100,
             align: 'center',
@@ -115,7 +101,7 @@ const SubjectDetails = (
             </PageMenu>
 
             <CustomTable
-                isLoading={false}
+                isLoading={isLoading}
                 columns={columns}
                 dataSource={data}
                 selectedRow={selectedRow}

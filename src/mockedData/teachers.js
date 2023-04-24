@@ -201,23 +201,7 @@ export const teacherDetails =  {
 
 export const teacherInitialValues = [
     {
-        name: 'first_name',
-        value: ''
-    },
-    {
-        name: 'last_name',
-        value: ''
-    },
-    {
-        name: 'middle_name',
-        value: ''
-    },
-    {
-        name: 'position',
-        value: ''
-    },
-    {
-        name: 'email',
+        name: 'name',
         value: ''
     },
 ];
