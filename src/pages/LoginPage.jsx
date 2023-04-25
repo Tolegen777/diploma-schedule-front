@@ -41,20 +41,18 @@ export const LoginPage = () => {
 
       <FormContainer size="small">
 
-       <SpaceContainer size="small">
 
          <Title color={Colors.Grey90} size='32px'>
            Платформа для управления расписаниями
          </Title>
 
-         <SpaceContainer />
-
          <Form
              form={form}
              layout="vertical"
              onFinish={onLogin}
+             style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}
          >
-             <SpaceContainer align="baseline" size="large" direction="vertical">
+
                  <FormItem
                      name="user_id"
                      rules={[
@@ -68,41 +66,42 @@ export const LoginPage = () => {
                        },
                      ]}
                      label="Почта"
+                     style={{marginBottom: "20px"}}
                  >
                    <FormInput
                        color={Colors.Grey90}
                        placeholder="Введите почту"
                        type="email"
+                       style={{minWidth: "250px"}}
                    />
                  </FormItem>
                  <FormItem
                      name="password"
                      rules={[{ required: true, message: 'Обязательное поле!' }]}
                      label="Пароль"
+                     style={{marginBottom: "20px"}}
                  >
                    <FormInputPassword
                        color={Colors.Grey90}
                        placeholder="Введите пароль"
+                       style={{minWidth: "250px"}}
                    />
                  </FormItem>
-              </SpaceContainer>
-            <SpaceContainer>
-             <FormItem wrapperCol={{ offset: 7 }}>
+
+             <FormItem>
                <CustomButton
                    button_size={ButtonSizes.Large}
                    color={Colors.Blue}
                    htmlType="submit"
                    onClick={form.submit}
                    disabled={isLoading}
+                   style={{minWidth: "250px"}}
                >
                  Войти
                </CustomButton>
              </FormItem>
 
-           </SpaceContainer>
-
          </Form>
-       </SpaceContainer>
 
       </FormContainer>
 

@@ -14,12 +14,13 @@ import {convertReverseDateTimeToTime, convertTimeToDateTime} from "../../utils/c
 import {subjectApi} from "../../api/subjectApi";
 import {teacherApi} from "../../api/teacherApi";
 import {groupApi} from "../../api/groupApi";
+import {dayParser} from "../../utils/dayParser";
 
 
 const scheduleTime = [
     {
         id: 1,
-        day: 'Fr',
+        day: 'Пт',
         dayId: 5,
         timeFrom: '08:00',
         timeTo: '09:00',
@@ -360,7 +361,7 @@ const ScheduleView = () => {
             const date = startOfWeek.add(i, 'day');
             headerCells.push(
                 <StyledHeaderCell key={i} row={1} column={i + 1}>
-                    {date.format('ddd D/M')}
+                    {dayParser(date.format('ddd D/M'))}
                 </StyledHeaderCell>
             );
         }
