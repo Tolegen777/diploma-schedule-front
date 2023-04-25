@@ -7,6 +7,8 @@ import {educationalProgramsApi} from "../api/educationalProgramsApi";
 import {
     EducationalProgramsCreateUpdateForm
 } from "../components/educationalPrograms/EducationalProgramsCreateUpdateForm";
+import {defaultResponseTableData} from "../const/defaultResponseData";
+import EducationalProgramDetails from "../components/educationalPrograms/EducationalProgramDetails";
 
 const EducationalPrograms = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -59,12 +61,12 @@ const EducationalPrograms = () => {
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
             // FIXME ужно передавать айди текущего универа
-            onCreate({...formData, universityId: 'MUIT'})
+            onCreate({...formData, universityId: '01dec142-5382-491b-82ac-5fe08c8bb109'})
         }
 
         if (type === 'update') {
             // FIXME ужно передавать айди текущего универа
-            onUpdate({...formData, id: editEntity.id, universityId: 'MUIT'})
+            onUpdate({...formData, id: editEntity.id, universityId: '01dec142-5382-491b-82ac-5fe08c8bb109'})
         }
         onClose()
     }
@@ -94,18 +96,18 @@ const EducationalPrograms = () => {
 
                 />
             </DrawerContainer>
-            {/*<EducationalProgramDetails*/}
-            {/*    isLoading={isLoading}*/}
-            {/*    data={data ?? defaultResponseTableData}*/}
-            {/*    onChangeUserActive={onHandleRemove}*/}
-            {/*    selectedRow={selectedRow}*/}
-            {/*    onSelectRow={onSelectRow}*/}
-            {/*    selectedRowCount={selectedRowCount}*/}
-            {/*    onSelectRowCount={setSelectedRowCount}*/}
-            {/*    onSelectCurrentPage={setCurrentPage}*/}
-            {/*    onOpenCreateUpdateModal={onOpenCreateUpdateModal}*/}
+            <EducationalProgramDetails
+                isLoading={isLoading}
+                data={data ?? defaultResponseTableData}
+                onChangeUserActive={onHandleRemove}
+                selectedRow={selectedRow}
+                onSelectRow={onSelectRow}
+                selectedRowCount={selectedRowCount}
+                onSelectRowCount={setSelectedRowCount}
+                onSelectCurrentPage={setCurrentPage}
+                onOpenCreateUpdateModal={onOpenCreateUpdateModal}
 
-            {/*/>*/}
+            />
         </>
     );
 };

@@ -43,7 +43,7 @@ export const initialMenuItems = [
                 link: '/educational-programs',
             },
             {
-                label: 'Администраторы',
+                label: 'Университеты',
                 key: '7',
                 icon: <SmileOutlined />,
                 link: '/admins',

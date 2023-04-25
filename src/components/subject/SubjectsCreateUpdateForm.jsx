@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Form, Radio } from 'antd';
 import { Link } from 'react-router-dom';
-import {FormInput, FormInputMasked, FormInputPassword} from "../../shared/FormInput";
+import {FormInput, FormInputMasked, FormInputNumber, FormInputPassword} from "../../shared/FormInput";
 import {emailRules, stringRules} from "../../utils/regExpRules";
 import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
 import {SpaceContainer} from "../../shared/SpaceContainer";
@@ -33,26 +33,36 @@ export const SubjectsCreateUpdateForm = (
                 required: true,
                 message: 'Обязательное поле!',
             }],
-            label: 'Отчество'
+            label: 'Название'
         },
-        // {
-        //     name: 'type',
-        //     element: <FormInput placeholder="Введите тип" />,
-        //     rules: [{
-        //         required: true,
-        //         message: 'Обязательное поле!',
-        //     }],
-        //     label: 'Отчество'
-        // },
-        // {
-        //     name: 'course',
-        //     element: <FormInput placeholder="Введите курс" />,
-        //     rules: [{
-        //         required: true,
-        //         message: 'Обязательное поле!',
-        //     }],
-        //     label: 'Отчество'
-        // },
+        {
+            name: 'code',
+            element: <FormInput placeholder="Введите код" />,
+            rules: [{
+                required: true,
+                message: 'Обязательное поле!',
+            }],
+            label: 'Код'
+        },
+        {
+            name: 'description',
+            element: <FormInput placeholder="Введите описание" />,
+            rules: [{
+                required: true,
+                message: 'Обязательное поле!',
+            }],
+            label: 'Описание'
+        },
+        {
+            name: 'credits',
+            element: <FormInputNumber placeholder="Введите кредит" />,
+            rules: [{
+                required: true,
+                message: 'Обязательное поле!',
+            }],
+            label: 'Кредит'
+        },
+
     ]
 
     return (

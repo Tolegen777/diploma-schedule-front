@@ -1,26 +1,35 @@
 export const scheduleInitialValues = [
     {
-        name: 'subject',
+        name: 'subjectId',
         value: ''
     },
     {
-        name: 'subjectFormat',
+        name: 'teacherId',
         value: ''
     },
     {
-        name: 'subjectType',
+        name: 'groups',
+        value: []
+    },
+    {
+        name: 'room',
         value: ''
     },
     {
-        name: 'subjectTypeTitle',
+        name: 'sessionType',
         value: ''
     },
     {
-        name: 'teacher',
+        name: 'week',
         value: ''
     },
     {
-        name: 'teacherPosition',
+        name: 'startTime',
         value: ''
     },
+    {
+        name: 'endTime',
+        value: ''
+    },
+
 ];

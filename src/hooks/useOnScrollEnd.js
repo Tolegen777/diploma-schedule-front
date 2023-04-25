@@ -7,8 +7,8 @@ export const useOnScrollEnd = ({ data, setSelectListPage, value, label, shouldRe
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
-    if (data?.number) {
-      setOptions([...options, ...selectOptionsParser(data.content, label, value)]);
+    if (data) {
+      setOptions([...options, ...selectOptionsParser(data, label, value)]);
 
       if (shouldReturnAllData) {
         setAllData([...allData, ...data.content])

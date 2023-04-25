@@ -43,8 +43,32 @@ const TeacherDetails = (
             ),
         },
         {
-            title: 'ФИО преподавателя',
-            dataIndex: 'name',
+            title: 'Имя',
+            dataIndex: 'firstName',
+        },
+        {
+            title: 'Отчество',
+            dataIndex: 'middleName',
+        },
+        {
+            title: 'Фамилия',
+            dataIndex: 'lastName',
+        },
+        {
+            title: 'Квалификация',
+            dataIndex: 'qualification',
+        },
+        {
+            title: 'Почта',
+            dataIndex: 'email',
+        },
+        {
+            title: 'Телефон',
+            dataIndex: 'phoneNumber',
+        },
+        {
+            title: 'Департамент',
+            dataIndex: 'department',
         },
         {
             title: 'Действия',

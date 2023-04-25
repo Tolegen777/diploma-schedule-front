@@ -44,7 +44,19 @@ const SubjectDetails = (
         },
         {
             title: 'Название',
-            dataIndex: 'name',
+            dataIndex: 'title',
+        },
+        {
+            title: 'Код',
+            dataIndex: 'code',
+        },
+        {
+            title: 'Описание',
+            dataIndex: 'description',
+        },
+        {
+            title: 'Кредиты',
+            dataIndex: 'credits',
         },
         {
             title: 'Действия',

@@ -8,6 +8,12 @@ import ScheduleModal from "./ScheduleModal";
 import {teacherInitialValues} from "../../mockedData/teachers";
 import {scheduleInitialValues} from "../../mockedData/schedule";
 import {changeFormFieldsData} from "../../utils/changeFormFieldsData";
+import {useMutation, useQuery} from "react-query";
+import {scheduleApi} from "../../api/scheduleApi";
+import {convertReverseDateTimeToTime, convertTimeToDateTime} from "../../utils/convertTimeToDateTime";
+import {subjectApi} from "../../api/subjectApi";
+import {teacherApi} from "../../api/teacherApi";
+import {groupApi} from "../../api/groupApi";
 
 
 const scheduleTime = [
@@ -243,6 +249,9 @@ const StyledContent = styled.div`
 
 `
 
+const weeks = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']
+const constTimes = ['8:10', '9:10', '10:10', '11:10', '12:10', '13:10', '14:10', '15:10', '16:10', '17:10', '18:10', '19:10', '20:10', '21:10']
+
 
 const ScheduleContent = ({
                              subject,
@@ -250,19 +259,24 @@ const ScheduleContent = ({
                              subjectType,
                              timeFrom,
                              timeTo,
-                             subjectFormat,
-                             subjectTypeTitle,
+                             sessionType,
+                             // subjectTypeTitle,
                              group,
-                             teacherPosition,
-                             roomNumber
+                             // teacherPosition,
+                             roomNumber,
+    teachers,
+    subjects,
+    groups
                          }) => {
+
     return <StyledCard>
         <Tooltip title={`${timeFrom}-${timeTo}`}>
-            <div>{group}</div>
-            <StyledTitle>{`${subjectTypeTitle} - ${subject}`}</StyledTitle>
-            <StyledContent>{`${teacher}, ${teacherPosition}`}</StyledContent>
-            <div>{subjectFormat}</div>
-            <div>{subjectType}</div>
+            <div>{`${groups?.find(item => item.id === group)?.title ?? ''}`}</div>
+            <StyledTitle>{`${subjects?.find(item => item.id === subject)?.title}`}</StyledTitle>
+            <StyledContent>
+                {`${teachers?.find(item => item.id === teacher).firstName} ${teachers?.find(item => item.id === teacher).middleName} ${teachers?.find(item => item.id === teacher).lastName}`}
+            </StyledContent>
+            <div>{sessionType}</div>
             <div>Кабинет: {roomNumber}</div>
         </Tooltip>
     </StyledCard>
@@ -277,16 +291,40 @@ const ScheduleView = () => {
     const [editEntity, setEditEntity] = useState(null);
     const [formType, setFormType] = useState(null)
 
+    const [filterParams, setFilterParams] = useState('');
+
+    const { mutate: onCreate, isSuccess: isCreated } = useMutation(scheduleApi.createApi);
+
+    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(scheduleApi.updateApi);
+
+    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(scheduleApi.removeApi);
+
+    // api
+    const { isLoading, data } = useQuery(['schedule', isCreated, isUpdated, isDeleted, filterParams], () =>
+        scheduleApi.getAlLApi(filterParams)
+    );
+
+    const { data: subjects } = useQuery(['subject'], () =>
+        subjectApi.getAlLApi()
+    );
+
+    const { data: teachers } = useQuery(['teacher'], () =>
+        teacherApi.getAlLApi()
+    );
+
+    const { data: groups } = useQuery(['group'], () =>
+        groupApi.getAlLApi()
+    );
+
     const onClose = useCallback(() => {
         setOpen(false)
-        setCreateUpdateFormInitialFields(teacherInitialValues)
+        setCreateUpdateFormInitialFields(scheduleInitialValues)
         setEditEntity(null)
     }, [])
 
     const onOpenModal = (formType, value?) => {
-
-        if ((formType === 'update' || formType === 'view') && value) {
-            setCreateUpdateFormInitialFields(changeFormFieldsData(teacherInitialValues, value))
+        if ((formType === 'update' || formType === 'view' || 'create') && value) {
+            setCreateUpdateFormInitialFields(changeFormFieldsData(scheduleInitialValues, value))
             setEditEntity(value)
         }
 
@@ -296,12 +334,20 @@ const ScheduleView = () => {
     };
 
     const onSubmitCreateUpdateModal = (formData, type) => {
+        //FIXME
         if (type === 'create') {
-            // onCreateUser(formData as IUserType)
+            onCreate({
+                ...formData,
+            groups: ['3f24b194-6378-46f8-85e6-138a20e1d041'],
+            })
         }
 
         if (type === 'update') {
-            // onUpdateUser(formData as IUpdateUserType)
+            onUpdate({
+                ...formData,
+                groups: ['3f24b194-6378-46f8-85e6-138a20e1d041'],
+                id: editEntity.id,
+            })
         }
         onClose()
     }
@@ -340,12 +386,13 @@ const ScheduleView = () => {
     const renderWeekCells = () => {
         const startOfWeek = selectedDate.startOf('week');
         const weekCells = [];
-        // console.log(weekCells, 'week')
 
         for (let i = 0; i < 7; i++) {
             const date = startOfWeek.add(i, 'day');
             const isCurrentTime = date.isSame(Dayjs(), 'day');
             const column = i + 2;
+
+            console.log(weekCells)
 
             times(14, (j) => {
                 weekCells.push(
@@ -354,24 +401,33 @@ const ScheduleView = () => {
                         row={j + 2}
                         column={column}
                         isCurrentTime={isCurrentTime}
-                        onClick={onOpenModal}>
+                        onClick={() => onOpenModal('create', {
+                            week: weeks[i],
+                            startTime: convertTimeToDateTime(constTimes[j]),
+                            endTime: convertTimeToDateTime(constTimes[j+1]),
+                            groups: 'test'
+                        })}
+                        >
                         {/* Render your event data here */}
-                        {schedule.map((item) => {
-                            // console.log(item.day, 'i')
-                            console.log(i, 'i')
-                            console.log(j, 'J')
-                            if (item.dayId === i && item.timeId === j) {
+                        {data?.map((item) => {
+                            console.log(item.week, '/' , weeks[i], '/' , convertReverseDateTimeToTime(item.endTime), '/' , constTimes[j], '/' , 'KKK')
+                            if (item.week === weeks[i] && convertReverseDateTimeToTime(item.startTime) === constTimes[j]) {
                                 return <ScheduleContent
-                                    teacher={item.teacher}
-                                    timeFrom={item.timeFrom}
-                                    timeTo={item.timeTo}
-                                    subject={item.subject}
-                                    group={item.group}
-                                    subjectFormat={item.subjectFormat}
-                                    subjectType={item.subjectType}
-                                    subjectTypeTitle={item.subjectTypeTitle}
-                                    roomNumber={item.roomNumber}
-                                    teacherPosition={item.teacherPosition}
+                                    teacher={item?.teacherId}
+                                    timeFrom={item?.startTime}
+                                    timeTo={item?.endTime}
+                                    subject={item?.subjectId}
+                                    sessionType={item?.sessionType}
+                                    group={item?.groups.join('')}
+                                    onClick={() => onOpenModal('update', {...item, })}
+                                    teachers={teachers}
+                                    subjects={subjects}
+                                    groups={groups}
+                                    // subjectFormat={item.subjectFormat}
+                                    // subjectType={item.subjectType}
+                                    // subjectTypeTitle={item.subjectTypeTitle}
+                                    roomNumber={item.room}
+                                    // teacherPosition={item.teacherPosition}
                                 />;
                             }
                             return ''
@@ -393,6 +449,8 @@ const ScheduleView = () => {
                 formType={formType}
                 editEntity={editEntity}
                 onClose={onClose}
+                subjects={subjects}
+                teachers={teachers}
             />
             {renderHeaderCells()}
             {renderTimeCells()}

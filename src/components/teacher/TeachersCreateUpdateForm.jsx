@@ -27,15 +27,81 @@ export const TeachersCreateUpdateForm = (
 
     const formFields = [
         {
-            name: 'name',
-            element: <FormInput placeholder="Введите ФИО преподавателя" />,
+            name: 'firstName',
+            element: <FormInput placeholder="Введите имя" />,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'ФИО преподавателя'
+            label: 'Имя'
+        },
+        {
+            name: 'middleName',
+            element: <FormInput placeholder="Отчество" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Отчество'
+        },
+        {
+            name: 'lastName',
+            element: <FormInput placeholder="Введите фамилию" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Фамилия'
+        },
+        {
+            name: 'qualification',
+            element: <FormInput placeholder="Введите квалификацию" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Квалификация'
+        },
+        {
+            name: 'email',
+            element: <FormInput placeholder="Введите почту" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'почта'
+        },
+        {
+            name: 'phoneNumber',
+            element: <FormInput placeholder="Введите номер телефона" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Номер телефона'
+        },
+        {
+            name: 'department',
+            element: <FormInput placeholder="Введите департамент" />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Департамент'
         },
     ]
 

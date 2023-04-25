@@ -37,18 +37,7 @@ export const EducationalProgramsCreateUpdateForm = (
             ],
             label: 'Название образовательной программы'
         },
-        <FormItem
-            key="elective"
-            name="elective"
-            valuePropName="checked"
-            label={<ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
-                Электив
-            </ParagraphText>}
-            label_align='left'
-            labelCol={{ span: 12 }}
-        >
-            <SwitchButton />
-        </FormItem>
+
     ]
 
     return (
@@ -73,6 +62,18 @@ export const EducationalProgramsCreateUpdateForm = (
                                 {field.element}
                             </FormItem>
                         ) }
+                        <FormItem
+                            key="elective"
+                            name="elective"
+                            valuePropName="checked"
+                            label={<ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
+                                Электив
+                            </ParagraphText>}
+                            label_align='left'
+                            labelCol={{ span: 12 }}
+                        >
+                            <SwitchButton />
+                        </FormItem>
                     </SpaceContainer>
                 </Form>
 

@@ -4,6 +4,11 @@ import {FormInput} from "../../shared/FormInput";
 import {emailRules} from "../../utils/regExpRules";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {FormItem} from "../../shared/FormItem";
+import {FormSelect} from "../../shared/FormSelect";
+import {selectOptionsParser} from "../../utils/selectOptionsParser";
+import {useQuery} from "react-query";
+import {subjectApi} from "../../api/subjectApi";
+import {teacherApi} from "../../api/teacherApi";
 
 const ScheduleModal = ({
                            open,
@@ -11,18 +16,18 @@ const ScheduleModal = ({
                            initialFields,
                            formType,
                            editEntity,
-                           onClose
-}) => {
+                           onClose,
+                           subjects,
+                           teachers
+                       }) => {
 
-    const [ form ] = Form.useForm();
+    const [form] = Form.useForm();
 
     const [confirmLoading, setConfirmLoading] = useState(false);
+
     const handleOk = () => {
-        setConfirmLoading(true);
-        setTimeout(() => {
-            onClose();
-            setConfirmLoading(false);
-        }, 2000);
+        form.submit()
+        onClose()
     };
 
     const handleCancel = () => {
@@ -32,66 +37,84 @@ const ScheduleModal = ({
 
     const formFields = [
         {
-            name: 'subject',
-            element: <FormInput placeholder="Введите название предмета" />,
+            name: 'subjectId',
+            element: <FormSelect
+                placeholder="Выберите предмет"
+                options={selectOptionsParser(subjects, 'title', 'id')}
+                showSearch
+                allowClear
+            />,
+            label: 'Предмет',
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
-                },
-                {
-                    message: 'Неверный адрес!',
-                    pattern: emailRules,
                 }],
-            label: 'Почта'
         },
         {
-            name: 'subjectFormat',
-            element: <FormInput placeholder="Введите тип предмета" />,
+            name: 'teacherId',
+            element: <FormSelect
+                placeholder="Выберите преподавателя"
+                options={selectOptionsParser(teachers, 'title', 'id')}
+                showSearch
+                allowClear
+            />,
+            label: 'Преподаватель',
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                }],
+        },
+        {
+            name: 'room',
+            element: <FormInput placeholder="Введите номер кабинета"/>,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'Имя'
+            label: 'Кабинет'
         },
         {
-            name: 'subjectType',
-            element: <FormInput placeholder="Введите тип специальности" />,
+            name: 'sessionType',
+            element: <FormInput placeholder="Введите формат урока"/>,
             rules: [
                 {
                     required: true,
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'Фамилия'
+            label: 'Формат урока'
         },
         {
-            name: 'subjectTypeTitle',
-            element: <FormInput placeholder="Введите название специальности" />,
-            rules: [{
-                required: false,
-            }],
-            label: 'Отчество'
+            name: 'week',
+            element: <FormInput disabled/>,
+            label: 'День недели'
         },
         {
-            name: 'teacher',
-            element: <FormInput placeholder="Введите преподаватея" />,
-            rules: [{
-                // required: formType === 'create',
-                message: 'Обязательное поле!'
-            }],
-            label: 'Номер телефона'
+            name: 'groups',
+            element: <FormInput disabled/>,
+            label: 'Группа'
         },
         {
-            name: 'teacherPosition',
-            element: <FormInput placeholder="Введите позицию преподавателя" />,
+            name: 'startTime',
+            element: <FormInput placeholder="Выберите дату начала" disabled/>,
             rules: [{
                 // required: formType === 'create',
                 message: 'Обязательное поле!'
             }],
-            label: 'Номер телефона'
+            label: 'Дата начала'
+        },
+        {
+            name: 'endTime',
+            element: <FormInput placeholder="Выберите дату конца" disabled/>,
+            rules: [{
+                // required: formType === 'create',
+                message: 'Обязательное поле!'
+            }],
+            label: 'Дата конца'
         },
     ]
 
@@ -116,7 +139,7 @@ const ScheduleModal = ({
                     >
                         <SpaceContainer size="large" direction="vertical">
 
-                            { formFields.map(field =>
+                            {formFields.map(field =>
                                 <FormItem
                                     // label={field.label}
                                     rules={field.rules}
@@ -126,7 +149,7 @@ const ScheduleModal = ({
                                 >
                                     {field.element}
                                 </FormItem>
-                            ) }
+                            )}
                         </SpaceContainer>
                     </Form>
                 </SpaceContainer>

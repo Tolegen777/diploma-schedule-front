@@ -1,9 +1,9 @@
 import { axiosInstance } from './index';
 
 export const scheduleApi = {
-  getAlLApi: async (page = 1, size = 100, filter = '') => {
+  getAlLApi: async (filter = '') => {
     const response = await axiosInstance.get(
-      `schedules?pageCurrent=${page}&pageSize=${size}&pageTotal=0&${filter}`
+      `schedules?pageCurrent=${1}&pageSize=${100}&pageTotal=0&${filter}`
     );
     return response.data;
   },

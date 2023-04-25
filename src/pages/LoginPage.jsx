@@ -14,6 +14,7 @@ import {Title} from "../shared/Title";
 import {FormItem} from "../shared/FormItem";
 import {FormInput, FormInputPassword} from "../shared/FormInput";
 import {CustomButton} from "../shared/CustomButton";
+import {tokenService} from "../services/tokenService";
 
 export const LoginPage = () => {
   const [form] = Form.useForm();
@@ -30,6 +31,7 @@ export const LoginPage = () => {
 
     const onLogin = () => {
         dispatch({ type: 'SET_AUTH_STATUS', payload: true })
+        // tokenService.updateLocalTokenData('tokentoken')
     }
 
 

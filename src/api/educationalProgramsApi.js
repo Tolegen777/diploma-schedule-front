@@ -9,22 +9,22 @@ export const educationalProgramsApi = {
   },
 
   createApi: async (data) => {
-    const response = await axiosInstance.post('programs', data);
+    const response = await axiosInstance.post('educational-programs', data);
     return response.data;
   },
 
   updateApi: async ({ id, ...data }) => {
-    const response = await axiosInstance.put(`programs/${id}`, data);
+    const response = await axiosInstance.put(`educational-programs/${id}`, data);
     return response.data;
   },
 
   removeApi: async (id) => {
-    const response = await axiosInstance.delete(`programs/${id}`);
+    const response = await axiosInstance.delete(`educational-programs/${id}`);
     return response.data;
   },
 
   getByIdApi: async (id) => {
-    const response = await axiosInstance.get(`programs/${id}`);
+    const response = await axiosInstance.get(`educational-programs/${id}`);
     return response.data;
   },
 };
