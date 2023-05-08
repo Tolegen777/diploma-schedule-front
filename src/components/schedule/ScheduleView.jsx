@@ -284,15 +284,13 @@ const ScheduleContent = ({
 
 }
 
-const ScheduleView = () => {
+const ScheduleView = ({filterParams}) => {
     const [selectedDate, setSelectedDate] = useState(Dayjs());
     const [schedule, setSchedule] = useState(scheduleTime)
     const [open, setOpen] = useState(false)
     const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(scheduleInitialValues)
     const [editEntity, setEditEntity] = useState(null);
     const [formType, setFormType] = useState(null)
-
-    const [filterParams, setFilterParams] = useState('');
 
     const { mutate: onCreate, isSuccess: isCreated } = useMutation(scheduleApi.createApi);
 
@@ -393,8 +391,6 @@ const ScheduleView = () => {
             const isCurrentTime = date.isSame(Dayjs(), 'day');
             const column = i + 2;
 
-            console.log(weekCells)
-
             times(14, (j) => {
                 weekCells.push(
                     <StyledEventCell
@@ -411,7 +407,6 @@ const ScheduleView = () => {
                         >
                         {/* Render your event data here */}
                         {data?.map((item) => {
-                            console.log(item.week, '/' , weeks[i], '/' , convertReverseDateTimeToTime(item.endTime), '/' , constTimes[j], '/' , 'KKK')
                             if (item.week === weeks[i] && convertReverseDateTimeToTime(item.startTime) === constTimes[j]) {
                                 return <ScheduleContent
                                     teacher={item?.teacherId}

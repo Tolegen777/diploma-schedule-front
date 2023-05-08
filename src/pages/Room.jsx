@@ -4,7 +4,6 @@ import {roomDetails, roomInitialValues} from "../mockedData/rooms";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {RoomsCreateUpdateForm} from "../components/room/RoomsCreateUpdateForm";
-import { teacherInitialValues } from '../mockedData/teachers'
 
 const Room = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -54,8 +53,6 @@ const Room = () => {
     const onSelectRow = useCallback((rowIndex: number) => {
         setSelectedRow([rowIndex])
     }, [])
-
-    debugger
 
     return (
         <>

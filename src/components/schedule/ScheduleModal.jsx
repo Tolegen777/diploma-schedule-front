@@ -31,7 +31,6 @@ const ScheduleModal = ({
     };
 
     const handleCancel = () => {
-        console.log('Clicked cancel button');
         onClose();
     };
 

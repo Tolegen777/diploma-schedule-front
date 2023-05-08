@@ -27,7 +27,6 @@ const RoomDetails = (
         onOpenCreateUpdateModal,
     }
 ) => {
-    console.log(data, 'Data')
     const columns = [
         {
             title: 'Идентификатор',

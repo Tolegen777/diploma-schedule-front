@@ -84,3 +84,38 @@ FormToggleCampaignSelect.defaultProps = {
     background: Colors.GreyLight,
     selector_color: Colors.Blue,
 }
+
+export const FormSearchSelect = styled(Select)`
+  .ant-select-selector {
+    height: 40px !important;
+    min-width: 300px;
+    border-radius: 8px !important;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    background-color: ${props => props.background || 'unset'};
+    .ant-select-selection-item-content {
+      color: ${Colors.White};
+    }
+    
+   .ant-select-selection-placeholder {
+      font-size: 14px;
+   }
+  }
+  
+  .ant-select-selection-overflow-item .ant-select-selection-item {
+    border-radius: 16px;
+    color: ${Colors.White};
+    background-color: ${Colors.Blue};
+  }
+  
+  .ant-select-arrow {
+    display: ${props => props.arrow_none === 'active' ? 'block' : 'none'};
+    color: ${props => props.selector_color ? props.selector_color : 'rgba(0, 0, 0, 0.25)'};
+  }
+  
+  &.ant-select-lg .ant-select-selector .ant-select-selection-search-input {
+    height: 100% !important;
+  }
+  
+`;

@@ -8,6 +8,7 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import {defaultResponseTableData} from "../const/defaultResponseData";
 import {groupApi} from "../api/groupApi";
 import {educationalProgramsApi} from "../api/educationalProgramsApi";
+import {GroupsFilterForm} from "../components/group/GroupsFilterForm";
 
 const Group = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -24,6 +25,8 @@ const Group = () => {
     const [editEntity, setEditEntity] = useState(null);
 
     const [filterParams, setFilterParams] = useState('');
+
+    const [filterModalOpen, setFilterModalOpen] = useState(false);
 
     const queryClient = useQueryClient()
 
@@ -60,6 +63,7 @@ const Group = () => {
         setCreateUpdateFormInitialFields(groupInitialValues)
         setSelectedRow([])
         setEditEntity(null)
+        setFilterModalOpen(false)
     }, [])
 
     const onOpenCreateUpdateModal = (formType, value) => {
@@ -94,9 +98,25 @@ const Group = () => {
         onRemove(id)
     }
 
+    const onSubmitFilterModal = (formData: Record<string, string>) => {
+        Object.keys(formData).forEach(key => {
+            if (formData[key] === undefined) {
+                // eslint-disable-next-line no-param-reassign
+                delete formData[key];
+            }
+        });
+
+        setFilterParams(new URLSearchParams(formData).toString());
+        onClose();
+    };
+
 
     return (
         <>
+            <DrawerContainer title="Фильтр" onClose={onClose} open={filterModalOpen}>
+                <GroupsFilterForm onSubmit={onSubmitFilterModal} onClose={onClose} />
+            </DrawerContainer>
+
             <DrawerContainer
                 title={formType === 'create' ? 'Создание группы' : 'Редактирование группы'}
                 onClose={onClose}
@@ -123,6 +143,7 @@ const Group = () => {
                 onSelectRowCount={setSelectedRowCount}
                 onSelectCurrentPage={setCurrentPage}
                 onOpenCreateUpdateModal={onOpenCreateUpdateModal}
+                onOpenFilterModal={setFilterModalOpen}
 
             />
         </>

@@ -3,7 +3,7 @@ import {CustomTable} from "../../shared/Table/CustomTable";
 import {PageMenu, PageMenuColumn} from "../../shared/PageMenu";
 import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
-import {Colors, TextWeightType} from "../../const/const";
+import {ButtonSizes, Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
 import {SwitchButton} from "../../shared/SwitchButton";
 import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
@@ -19,6 +19,7 @@ const GroupDetails = (
     {
         data,
         onChangeUserActive,
+        onOpenFilterModal,
         selectedRow,
         onSelectRow,
         selectedRowCount,
@@ -97,13 +98,16 @@ const GroupDetails = (
                 {/*</PageMenuColumn>*/}
 
                 <PageMenuColumn to_right="auto">
-                    {/*<CustomButtonWithIcon*/}
-                    {/*    position_from="center"*/}
-                    {/*    icon={filterIcon}*/}
-                    {/*    callBack={onOpenRolesSettingsModal}*/}
-                    {/*>*/}
-                    {/*    Настройка ролей*/}
-                    {/*</CustomButtonWithIcon>*/}
+
+                    <CustomButtonWithIcon
+                        button_size={ButtonSizes.Medium}
+                        position_from="center"
+                        callBack={() => onOpenFilterModal(true)}
+                        icon={filterIcon}
+                    >
+                        Фильтр
+                    </CustomButtonWithIcon>
+
                     <CustomButton
                         position_from="center"
                         color={Colors.Blue}
