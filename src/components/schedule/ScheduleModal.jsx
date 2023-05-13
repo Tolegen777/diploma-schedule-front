@@ -1,14 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Form, Modal} from "antd";
 import {FormInput} from "../../shared/FormInput";
-import {emailRules} from "../../utils/regExpRules";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {FormItem} from "../../shared/FormItem";
 import {FormSelect} from "../../shared/FormSelect";
 import {selectOptionsParser} from "../../utils/selectOptionsParser";
-import {useQuery} from "react-query";
-import {subjectApi} from "../../api/subjectApi";
-import {teacherApi} from "../../api/teacherApi";
 
 const ScheduleModal = ({
                            open,
@@ -18,17 +14,18 @@ const ScheduleModal = ({
                            editEntity,
                            onClose,
                            subjects,
-                           teachers
+                           teachers,
+                           groups,
+                           confirmLoading
                        }) => {
 
     const [form] = Form.useForm();
-
-    const [confirmLoading, setConfirmLoading] = useState(false);
 
     const handleOk = () => {
         form.submit()
         onClose()
     };
+    console.log(editEntity, 'EDIT')
 
     const handleCancel = () => {
         onClose();
@@ -42,6 +39,7 @@ const ScheduleModal = ({
                 options={selectOptionsParser(subjects, 'title', 'id')}
                 showSearch
                 allowClear
+                style={{ textAlign: 'left' }}
             />,
             label: 'Предмет',
             rules: [
@@ -54,9 +52,10 @@ const ScheduleModal = ({
             name: 'teacherId',
             element: <FormSelect
                 placeholder="Выберите преподавателя"
-                options={selectOptionsParser(teachers, 'title', 'id')}
+                options={selectOptionsParser(teachers, 'email', 'id')}
                 showSearch
                 allowClear
+                style={{ textAlign: 'left' }}
             />,
             label: 'Преподаватель',
             rules: [
@@ -87,33 +86,39 @@ const ScheduleModal = ({
             ],
             label: 'Формат урока'
         },
-        {
-            name: 'week',
-            element: <FormInput disabled/>,
-            label: 'День недели'
-        },
+        // {
+        //     name: 'week',
+        //     element: <FormInput />,
+        //     label: 'День недели'
+        // },
         {
             name: 'groups',
-            element: <FormInput disabled/>,
+            element: <FormSelect
+                placeholder="Выберите преподавателя"
+                options={selectOptionsParser(groups, 'title', 'id')}
+                showSearch
+                allowClear
+                style={{ textAlign: 'left' }}
+            />,
             label: 'Группа'
         },
         {
-            name: 'startTime',
-            element: <FormInput placeholder="Выберите дату начала" disabled/>,
+            name: 'startTime2',
+            element: <FormInput disabled/>,
             rules: [{
                 // required: formType === 'create',
                 message: 'Обязательное поле!'
             }],
-            label: 'Дата начала'
+            label: 'Время начала урока'
         },
         {
-            name: 'endTime',
-            element: <FormInput placeholder="Выберите дату конца" disabled/>,
+            name: 'endTime2',
+            element: <FormInput disabled/>,
             rules: [{
                 // required: formType === 'create',
                 message: 'Обязательное поле!'
             }],
-            label: 'Дата конца'
+            label: 'Время конца урока'
         },
     ]
 
@@ -125,7 +130,7 @@ const ScheduleModal = ({
                 onOk={handleOk}
                 confirmLoading={confirmLoading}
                 onCancel={handleCancel}
-                okText={"OK"}
+                okText={"Oк"}
                 cancelText={"Отмена"}
             >
                 <SpaceContainer>
@@ -140,7 +145,7 @@ const ScheduleModal = ({
 
                             {formFields.map(field =>
                                 <FormItem
-                                    // label={field.label}
+                                    label={field.label}
                                     rules={field.rules}
                                     key={field.name}
                                     name={field.name}
@@ -149,6 +154,9 @@ const ScheduleModal = ({
                                     {field.element}
                                 </FormItem>
                             )}
+                            <FormItem name="week" hidden/>
+                            <FormItem name="startTime" hidden/>
+                            <FormItem name="endTime" hidden/>
                         </SpaceContainer>
                     </Form>
                 </SpaceContainer>

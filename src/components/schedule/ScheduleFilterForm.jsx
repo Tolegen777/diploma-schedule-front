@@ -10,7 +10,7 @@ import {CustomButton} from "../../shared/CustomButton";
 import {FormInput} from "../../shared/FormInput";
 import {useQuery} from "react-query";
 import {teacherApi} from "../../api/teacherApi";
-import {useState} from "react";
+import React, {useState} from "react";
 import {groupApi} from "../../api/groupApi";
 import {subjectApi} from "../../api/subjectApi";
 import {educationalProgramsApi} from "../../api/educationalProgramsApi";
@@ -25,10 +25,6 @@ const options = [
     {
         label: 'Предмет',
         value: 'SUBJECT'
-    },
-    {
-        label: 'Университет',
-        value: 'UNIVERSITY'
     },
     {
         label: 'Образовательная программа',
@@ -100,20 +96,25 @@ export const ScheduleFilterForm = ({ onSubmit }) => {
                             options={optionValues[searchType]}
                         />
                     </FormItem>
-                    <Button
-                        onClick={form.submit}
-                        button_size={ButtonSizes.Medium}
-                        style={{height: "40px",
-                            background: "#0052CC",
-                            color: "#fff",
-                            fontWeight: 600,
-                            borderRadius: "8px"
-                    }}
-                        color={Colors.Blue}
-                        position_from="unset"
-                    >
-                        Поиск
-                    </Button>
+                        <CustomButton
+                            onClick={form.submit}
+                            color={Colors.Blue}
+                            position_from="unset"
+                        >
+                            Поиск
+                        </CustomButton>
+                        <CustomButton
+                            color={Colors.Grey25}
+                            text_color={Colors.Grey90}
+                            position_from="unset"
+                            onClick={() => {
+                                form.setFieldValue('searchId')
+                                form.setFieldValue('searchType')
+                            }}
+                        >
+                            Сбросить
+                        </CustomButton>
+
                 </SpaceContainer>
             </Form>
         </>

@@ -89,10 +89,12 @@ export const FormSearchSelect = styled(Select)`
   .ant-select-selector {
     height: 40px !important;
     min-width: 300px;
+    color: #4FC1E9;
     border-radius: 8px !important;
     display: flex;
     align-items: center;
     font-size: 14px;
+    
     background-color: ${props => props.background || 'unset'};
     .ant-select-selection-item-content {
       color: ${Colors.White};
@@ -100,7 +102,16 @@ export const FormSearchSelect = styled(Select)`
     
    .ant-select-selection-placeholder {
       font-size: 14px;
+     //color: #4FC1E9;
+     opacity: 0.8;
+     
    }
+    :hover {
+      border: 1px solid #4FC1E9 !important;
+    }
+    :active {
+      border: 1px solid #4FC1E9 !important;
+    }
   }
   
   .ant-select-selection-overflow-item .ant-select-selection-item {

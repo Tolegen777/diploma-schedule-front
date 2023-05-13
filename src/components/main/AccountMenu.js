@@ -3,6 +3,7 @@ import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {MessageOutlined, ProfileOutlined} from "@ant-design/icons";
+import {resetService} from "../../services/resetService";
 
 
 const HeaderMenu = styled(Menu)`
@@ -34,6 +35,11 @@ const items: MenuProps['items'] = [
                     },
                 ],
             },
+            {
+                type: 'group',
+                label: localStorage.getItem('UNIVERSITY_LINK') ?? 'https://schedule-platform.vercel.app/',
+                children: [],
+            },
         ],
     },
 ];
@@ -49,9 +55,11 @@ export const AccountMenu = () => {
             // stateContext.dispatch({ type: 'SET_AUTH_STATUS', payload: false })
             // tokenService.updateLocalTokenData('', 'access_token')
             // tokenService.updateLocalTokenData('', 'refresh_token')
-            navigate('/');
+            resetService()
         }
     };
 
-    return <HeaderMenu onClick={onClick} mode="horizontal" items={items} />;
+    return <>
+        <HeaderMenu onClick={onClick} mode="horizontal" items={items} />
+    </>;
 };

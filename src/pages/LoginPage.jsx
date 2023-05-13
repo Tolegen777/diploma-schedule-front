@@ -15,96 +15,98 @@ import {FormItem} from "../shared/FormItem";
 import {FormInput, FormInputPassword} from "../shared/FormInput";
 import {CustomButton} from "../shared/CustomButton";
 import {tokenService} from "../services/tokenService";
+import {customNotification} from "../utils/customNotification";
 
 export const LoginPage = () => {
-  const [form] = Form.useForm();
-  const { dispatch } = useStateContext();
+    const [form] = Form.useForm();
+    const {dispatch} = useStateContext();
 
-  // const { mutate: onLogin, isLoading } = useMutation('signIn', authApi.signInUser, {
-  //   onSuccess: (data) => {
-  //     // tokenService.updateLocalTokenData(data.access_token, 'access_token')
-  //     // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
-  //     dispatch({ type: 'SET_AUTH_STATUS', payload: true })
-  //   },
-  // })
-    let isLoading = false
-
-    const onLogin = () => {
-        dispatch({ type: 'SET_AUTH_STATUS', payload: true })
-        // tokenService.updateLocalTokenData('tokentoken')
-    }
-
-
-  return (
-    <PublicLayout>
-      <PreviewCard image={previewPromo} />
-
-      <FormContainer size="small">
+    const {mutate: onLogin, isLoading} = useMutation('signIn', authApi.signInUser, {
+        onSuccess: (data) => {
+            tokenService.updateLocalTokenData(data.token)
+            // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
+            dispatch({type: 'SET_AUTH_STATUS', payload: true})
+        },
+        onError: (error) => {
+            if (error.response && error?.response.status === 401)
+                customNotification({
+                    type: 'error',
+                    message: error?.response?.data.message ?? 'Ошибка при авторизаций'
+                })
+        }
+    })
 
 
-         <Title color={Colors.Grey90} size='32px'>
-           Платформа для управления расписаниями
-         </Title>
+    return (
+        <PublicLayout>
+            <PreviewCard image={previewPromo}/>
 
-         <Form
-             form={form}
-             layout="vertical"
-             onFinish={onLogin}
-             style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}
-         >
+            <FormContainer size="small">
 
-                 <FormItem
-                     name="user_id"
-                     rules={[
-                       {
-                         required: true,
-                         message: 'Обязательное поле!',
-                       },
-                       {
-                         message: 'Неверный адрес!',
-                         pattern: emailRules,
-                       },
-                     ]}
-                     label="Почта"
-                     style={{marginBottom: "20px"}}
-                 >
-                   <FormInput
-                       color={Colors.Grey90}
-                       placeholder="Введите почту"
-                       type="email"
-                       style={{minWidth: "250px"}}
-                   />
-                 </FormItem>
-                 <FormItem
-                     name="password"
-                     rules={[{ required: true, message: 'Обязательное поле!' }]}
-                     label="Пароль"
-                     style={{marginBottom: "20px"}}
-                 >
-                   <FormInputPassword
-                       color={Colors.Grey90}
-                       placeholder="Введите пароль"
-                       style={{minWidth: "250px"}}
-                   />
-                 </FormItem>
 
-             <FormItem>
-               <CustomButton
-                   button_size={ButtonSizes.Large}
-                   color={Colors.Blue}
-                   htmlType="submit"
-                   onClick={form.submit}
-                   disabled={isLoading}
-                   style={{minWidth: "250px"}}
-               >
-                 Войти
-               </CustomButton>
-             </FormItem>
+                <Title color={Colors.Grey90} size='32px'>
+                    Платформа для управления расписаниями
+                </Title>
 
-         </Form>
+                <Form
+                    form={form}
+                    layout="vertical"
+                    onFinish={onLogin}
+                    style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}
+                >
 
-      </FormContainer>
+                    <FormItem
+                        name="email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Обязательное поле!',
+                            },
+                            // {
+                            //     message: 'Неверный адрес!',
+                            //     pattern: emailRules,
+                            // },
+                        ]}
+                        label="Почта"
+                        style={{marginBottom: "20px"}}
+                    >
+                        <FormInput
+                            color={Colors.Grey90}
+                            placeholder="Введите почту"
+                            type="email"
+                            style={{minWidth: "250px"}}
+                        />
+                    </FormItem>
+                    <FormItem
+                        name="password"
+                        rules={[{required: true, message: 'Обязательное поле!'}]}
+                        label="Пароль"
+                        style={{marginBottom: "20px"}}
+                    >
+                        <FormInputPassword
+                            color={Colors.Grey90}
+                            placeholder="Введите пароль"
+                            style={{minWidth: "250px"}}
+                        />
+                    </FormItem>
 
-    </PublicLayout>
-  );
+                    <FormItem>
+                        <CustomButton
+                            button_size={ButtonSizes.Large}
+                            color={Colors.Blue}
+                            htmlType="submit"
+                            onClick={form.submit}
+                            disabled={isLoading}
+                            style={{minWidth: "250px"}}
+                        >
+                            Войти
+                        </CustomButton>
+                    </FormItem>
+
+                </Form>
+
+            </FormContainer>
+
+        </PublicLayout>
+    );
 };

@@ -1,11 +1,11 @@
 export const scheduleInitialValues = [
     {
         name: 'subjectId',
-        value: ''
+        value: null
     },
     {
         name: 'teacherId',
-        value: ''
+        value: null
     },
     {
         name: 'groups',
@@ -29,6 +29,14 @@ export const scheduleInitialValues = [
     },
     {
         name: 'endTime',
+        value: ''
+    },
+    {
+        name: 'startTime2',
+        value: ''
+    },
+    {
+        name: 'endTime2',
         value: ''
     },
 
