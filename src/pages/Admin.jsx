@@ -7,6 +7,7 @@ import {AdminsCreateUpdateForm} from "../components/admin/AdminsCreateUpdateForm
 import {useMutation, useQuery} from "react-query";
 import {universityApi} from "../api/universityApi";
 import {defaultResponseTableData} from "../const/defaultResponseData";
+import {userService} from "../services/userService";
 
 const Admin = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -57,12 +58,13 @@ const Admin = () => {
 
 
     const onSubmitCreateUpdateModal = (formData, type) => {
+        const userId = userService.getUser().id
         if (type === 'create') {
-            onCreate({...formData, userId: '123123'})
+            onCreate({...formData, userId: userId})
         }
 
         if (type === 'update') {
-            onUpdate({...formData, userId: '123123', id: editEntity.id})
+            onUpdate({...formData, userId: userId, id: editEntity.id})
         }
         onClose()
     }

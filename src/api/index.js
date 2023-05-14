@@ -31,8 +31,8 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   ( response ) =>
     response, async ( error ) => {
-
-    if (error.response.data) {
+      console.log(error, 'RESponse')
+    if (error.response) {
       const errorMessage = error.response.data.message
       customNotification({
         type: 'error',

@@ -127,9 +127,18 @@ const ScheduleView = ({filterParams}) => {
 
         const {startTime2, endTime2, ...payload} = formData
 
+        let newGroup = []
+
+        if (Array.isArray(payload.groups)) {
+            newGroup = payload.groups
+        } else {
+            newGroup = [payload.groups]
+        }
+
         if (type === 'create') {
             onCreate({
                 ...payload,
+                groups: newGroup
             })
         }
 

@@ -16,24 +16,27 @@ import {FormInput, FormInputPassword} from "../shared/FormInput";
 import {CustomButton} from "../shared/CustomButton";
 import {tokenService} from "../services/tokenService";
 import {customNotification} from "../utils/customNotification";
+import {userService} from "../services/userService";
 
 export const LoginPage = () => {
     const [form] = Form.useForm();
     const {dispatch} = useStateContext();
 
+    const {mutate: onAuthMe} = useMutation('authMe', authApi.authMe, {
+        onSuccess: (data) => {
+            userService.updateUser(data)
+            // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
+            // dispatch({type: 'SET_AUTH_STATUS', payload: true})
+        },
+    })
+
     const {mutate: onLogin, isLoading} = useMutation('signIn', authApi.signInUser, {
         onSuccess: (data) => {
             tokenService.updateLocalTokenData(data.token)
+            onAuthMe()
             // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
             dispatch({type: 'SET_AUTH_STATUS', payload: true})
         },
-        onError: (error) => {
-            if (error.response && error?.response.status === 401)
-                customNotification({
-                    type: 'error',
-                    message: error?.response?.data.message ?? 'Ошибка при авторизаций'
-                })
-        }
     })
 
 
