@@ -68,7 +68,7 @@ const Group = () => {
 
     const onOpenCreateUpdateModal = (formType, value) => {
 
-        if (formType === 'update' && value) {
+        if (formType !== 'create' && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(groupInitialValues, value))
             setEditEntity(value)
         }
@@ -118,7 +118,10 @@ const Group = () => {
             </DrawerContainer>
 
             <DrawerContainer
-                title={formType === 'create' ? 'Создание группы' : 'Редактирование группы'}
+                title={
+                    (formType === 'create' && 'Создание группы') ||
+                    (formType === 'view' ? 'Просмотр группы' : 'Редактирование группы')
+                }
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >

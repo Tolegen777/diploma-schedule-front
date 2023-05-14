@@ -5,4 +5,8 @@ export const authApi = {
     const response = await axiosInstance.post('auth/login', user);
     return response.data
   },
+  authMe: async () => {
+    const response = await axiosInstance.get('auth/me');
+    return response.data
+  },
 };

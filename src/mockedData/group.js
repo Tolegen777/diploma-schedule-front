@@ -110,6 +110,6 @@ export const groupInitialValues = [
     },
     {
         name: 'educationalProgramId',
-        value: ''
+        value: null
     },
 ];

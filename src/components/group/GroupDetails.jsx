@@ -50,7 +50,7 @@ const GroupDetails = (
         },
         {
             title: 'Электив',
-            dataIndex: 'elective',
+            dataIndex: 'course',
             render: id => (
                 <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
                     {id} курс

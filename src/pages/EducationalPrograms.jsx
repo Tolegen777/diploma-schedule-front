@@ -9,6 +9,7 @@ import {
 } from "../components/educationalPrograms/EducationalProgramsCreateUpdateForm";
 import {defaultResponseTableData} from "../const/defaultResponseData";
 import EducationalProgramDetails from "../components/educationalPrograms/EducationalProgramDetails";
+import {userService} from "../services/userService";
 
 const EducationalPrograms = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -47,7 +48,7 @@ const EducationalPrograms = () => {
 
     const onOpenCreateUpdateModal = (formType, value) => {
 
-        if (formType === 'update' && value) {
+        if (formType !== 'create' && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(educationalProgramsInitialValues, value))
             setEditEntity(value)
         }
@@ -59,14 +60,15 @@ const EducationalPrograms = () => {
 
 
     const onSubmitCreateUpdateModal = (formData, type) => {
+        const universityId = userService.getUser().universityId
         if (type === 'create') {
             // FIXME ужно передавать айди текущего универа
-            onCreate({...formData, universityId: '01dec142-5382-491b-82ac-5fe08c8bb109'})
+            onCreate({...formData, universityId: universityId})
         }
 
         if (type === 'update') {
             // FIXME ужно передавать айди текущего универа
-            onUpdate({...formData, id: editEntity.id, universityId: '01dec142-5382-491b-82ac-5fe08c8bb109'})
+            onUpdate({...formData, id: editEntity.id, universityId: universityId})
         }
         onClose()
     }
@@ -83,7 +85,10 @@ const EducationalPrograms = () => {
     return (
         <>
             <DrawerContainer
-                title={ formType === 'create' ? 'Создание образовательной программы' : 'Редактирование образовательной программы' }
+                title={
+                    (formType === 'create' && 'Создание образовательной программы') ||
+                    (formType === 'view' ? 'Просмотр образовательной программы' : 'Редактирование образовательной программы')
+                }
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >

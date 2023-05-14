@@ -61,6 +61,7 @@ export const GroupsCreateUpdateForm = (
                 // onPopupScroll={onScrollEnd}
                 showSearch
                 allowClear
+                style={{ textAlign: 'left' }}
             />,
             label: 'Образовательная программа',
             rules: [
@@ -80,6 +81,7 @@ export const GroupsCreateUpdateForm = (
                     form={form}
                     layout="vertical"
                     onFinish={(data) => onSubmit(data, formType)}
+                    disabled={formType === 'view'}
                 >
                     <SpaceContainer size="large" direction="vertical">
 

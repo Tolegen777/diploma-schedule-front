@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {MessageOutlined, ProfileOutlined} from "@ant-design/icons";
 import {resetService} from "../../services/resetService";
+import {userService} from "../../services/userService";
 
 
 const HeaderMenu = styled(Menu)`
@@ -37,7 +38,7 @@ const items: MenuProps['items'] = [
             },
             {
                 type: 'group',
-                label: localStorage.getItem('UNIVERSITY_LINK') ?? 'https://schedule-platform.vercel.app/',
+                label: `https://schedule-app-three.vercel.app/university:${userService.getUser().universityCode}`,
                 children: [],
             },
         ],

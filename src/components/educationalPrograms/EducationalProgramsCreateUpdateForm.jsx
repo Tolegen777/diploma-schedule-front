@@ -48,6 +48,7 @@ export const EducationalProgramsCreateUpdateForm = (
                     form={form}
                     layout="vertical"
                     onFinish={(data) => onSubmit(data, formType)}
+                    disabled={formType === 'view'}
                 >
                     <SpaceContainer size="large" direction="vertical">
 

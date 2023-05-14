@@ -8,6 +8,7 @@ import {useMutation, useQuery} from "react-query";
 import {universityApi} from "../api/universityApi";
 import {defaultResponseTableData} from "../const/defaultResponseData";
 import {teacherApi} from "../api/teacherApi";
+import {userService} from "../services/userService";
 
 const Teacher = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -58,12 +59,15 @@ const Teacher = () => {
 
 
     const onSubmitCreateUpdateModal = (formData, type) => {
+        const universityId = userService.getUser().universityId
         if (type === 'create') {
-            onCreate({...formData})
+            // FIXME ужно передавать айди текущего универа
+            onCreate({...formData, universityId: universityId})
         }
 
         if (type === 'update') {
-            onUpdate({...formData, id: editEntity.id})
+            // FIXME ужно передавать айди текущего универа
+            onUpdate({...formData, id: editEntity.id, universityId: universityId})
         }
         onClose()
     }
