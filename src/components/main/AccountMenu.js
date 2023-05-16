@@ -38,7 +38,7 @@ const items: MenuProps['items'] = [
             },
             {
                 type: 'group',
-                label: `https://schedule-app-three.vercel.app/university:${userService.getUser().universityCode}`,
+                label: `https://schedule-app-three.vercel.app/university:${userService.getUser()?.universityCode ?? ''}`,
                 children: [],
             },
         ],
