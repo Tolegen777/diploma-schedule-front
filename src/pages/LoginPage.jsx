@@ -17,6 +17,7 @@ import {CustomButton} from "../shared/CustomButton";
 import {tokenService} from "../services/tokenService";
 import {customNotification} from "../utils/customNotification";
 import {userService} from "../services/userService";
+import {Loader} from "../shared/Loader";
 
 export const LoginPage = () => {
     const [form] = Form.useForm();
@@ -104,6 +105,7 @@ export const LoginPage = () => {
                         >
                             Войти
                         </CustomButton>
+                        {isLoading && <Loader/>}
                     </FormItem>
 
                 </Form>
