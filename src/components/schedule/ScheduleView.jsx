@@ -15,7 +15,6 @@ import {groupApi} from "../../api/groupApi";
 import {dayParser, defaultDays, defaultDaysFull} from "../../utils/dayParser";
 import ScheduleCard from "./ScheduleCard";
 import {formatDateWithTime} from "../../utils/formatDateWithTime";
-import CustomLoader from "../../shared/CustomLoader/CustomLoader";
 
 
 const StyledCalendar = styled.div`
@@ -235,7 +234,7 @@ const ScheduleView = ({filterParams}) => {
 
     // if (isLoading) return <CustomLoader />
 
-    return <CustomLoader />
+    // return <CustomLoader />
 
     return (
         <StyledCalendar>

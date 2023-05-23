@@ -42,12 +42,12 @@ export const initialMenuItems = [
                 icon: <BookOutlined />,
                 link: '/educational-programs',
             },
-            // {
-            //     label: 'Университеты',
-            //     key: '7',
-            //     icon: <SmileOutlined />,
-            //     link: '/admins',
-            // },
+            {
+                label: 'Университеты',
+                key: '7',
+                icon: <SmileOutlined />,
+                link: '/admins',
+            },
         ],
     },
 ];
