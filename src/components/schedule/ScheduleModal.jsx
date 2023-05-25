@@ -15,6 +15,7 @@ const ScheduleModal = ({
                            onClose,
                            subjects,
                            teachers,
+                           rooms,
                            groups,
                            confirmLoading
                        }) => {
@@ -65,8 +66,14 @@ const ScheduleModal = ({
                 }],
         },
         {
-            name: 'room',
-            element: <FormInput placeholder="Введите номер кабинета"/>,
+            name: 'roomId',
+            element: <FormSelect
+                placeholder="Выберите кабинет"
+                options={selectOptionsParser(rooms, 'name', 'id')}
+                showSearch
+                allowClear
+                style={{ textAlign: 'left' }}
+            />,
             rules: [
                 {
                     required: true,

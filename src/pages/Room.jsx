@@ -1,9 +1,18 @@
 import React, {useCallback, useState} from 'react';
-import RoomDetails from "../components/room/RoomDetails";
-import {roomDetails, roomInitialValues} from "../mockedData/rooms";
+import GroupDetails from "../components/group/GroupDetails";
+import {groupInitialValues} from "../mockedData/group";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
+import {GroupsCreateUpdateForm} from "../components/group/GroupsCreateUpdateForm";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {defaultResponseTableData} from "../const/defaultResponseData";
+import {groupApi} from "../api/groupApi";
+import {educationalProgramsApi} from "../api/educationalProgramsApi";
+import {GroupsFilterForm} from "../components/group/GroupsFilterForm";
+import {roomInitialValues} from "../mockedData/rooms";
+import {roomApi} from "../api/roomApi";
 import {RoomsCreateUpdateForm} from "../components/room/RoomsCreateUpdateForm";
+import RoomDetails from "../components/room/RoomDetails";
 
 const Room = () => {
     const [selectedRow, setSelectedRow] = useState([])
@@ -18,6 +27,38 @@ const Room = () => {
 
     const [editEntity, setEditEntity] = useState(null);
 
+    const [filterParams, setFilterParams] = useState('');
+
+    const [filterModalOpen, setFilterModalOpen] = useState(false);
+
+    const queryClient = useQueryClient()
+
+    const {mutate: onCreate, isSuccess: isCreated} = useMutation(roomApi.createApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('rooms');
+        }
+    });
+
+    const {mutate: onUpdate, isSuccess: isUpdated} = useMutation(roomApi.updateApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('rooms');
+        }
+    });
+
+    const {mutate: onRemove, isSuccess: isDeleted} = useMutation(roomApi.removeApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('rooms');
+        }
+    });
+
+    // api
+    const {
+        isLoading,
+        data
+    } = useQuery(['rooms'], () =>
+        roomApi.getAlLApi()
+    );
+
     // Callbacks
 
     const onClose = useCallback(() => {
@@ -25,10 +66,12 @@ const Room = () => {
         setCreateUpdateFormInitialFields(roomInitialValues)
         setSelectedRow([])
         setEditEntity(null)
+        setFilterModalOpen(false)
     }, [])
 
-    const onOpenCreateUpdateModal = (formType, value?) => {
-        if ((formType === 'update' || formType === 'view') && value) {
+    const onOpenCreateUpdateModal = (formType, value) => {
+
+        if (formType !== 'create' && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(roomInitialValues, value))
             setEditEntity(value)
         }
@@ -41,25 +84,46 @@ const Room = () => {
 
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
-            // onCreateUser(formData as IUserType)
+            onCreate({...formData})
         }
 
         if (type === 'update') {
-            // onUpdateUser(formData as IUpdateUserType)
+            onUpdate({...formData, id: editEntity.id})
         }
         onClose()
     }
 
-    const onSelectRow = useCallback((rowIndex: number) => {
+    const onSelectRow = useCallback((rowIndex) => {
         setSelectedRow([rowIndex])
     }, [])
 
+    const onHandleRemove = (id) => {
+        onRemove(id)
+    }
+
+    const onSubmitFilterModal = (formData: Record<string, string>) => {
+        Object.keys(formData).forEach(key => {
+            if (formData[key] === undefined) {
+                // eslint-disable-next-line no-param-reassign
+                delete formData[key];
+            }
+        });
+
+        setFilterParams(new URLSearchParams(formData).toString());
+        onClose();
+    };
+
+
     return (
         <>
+            {/*<DrawerContainer title="Фильтр" onClose={onClose} open={filterModalOpen}>*/}
+            {/*    <GroupsFilterForm onSubmit={onSubmitFilterModal} onClose={onClose} />*/}
+            {/*</DrawerContainer>*/}
+
             <DrawerContainer
                 title={
-                  (formType === 'create' && 'Создание кабинета') ||
-                  (formType === 'view' ? 'Просмотр кабинета' : 'Редактирование кабинета')
+                    (formType === 'create' && 'Создание кабинета') ||
+                    (formType === 'view' ? 'Просмотр кабинета' : 'Редактирование кабинета')
                 }
                 onClose={onClose}
                 open={createUpdateModalOpen}
@@ -74,14 +138,17 @@ const Room = () => {
                 />
             </DrawerContainer>
             <RoomDetails
-                data={roomDetails}
-                onChangeUserActive={() => {}}
+                isLoading={isLoading}
+                data={data ?? defaultResponseTableData}
+                onChangeUserActive={onHandleRemove}
                 selectedRow={selectedRow}
                 onSelectRow={onSelectRow}
                 selectedRowCount={selectedRowCount}
                 onSelectRowCount={setSelectedRowCount}
                 onSelectCurrentPage={setCurrentPage}
                 onOpenCreateUpdateModal={onOpenCreateUpdateModal}
+                onOpenFilterModal={setFilterModalOpen}
+
             />
         </>
     );

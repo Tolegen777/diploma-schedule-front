@@ -15,6 +15,7 @@ import {groupApi} from "../../api/groupApi";
 import {dayParser, defaultDays, defaultDaysFull} from "../../utils/dayParser";
 import ScheduleCard from "./ScheduleCard";
 import {formatDateWithTime} from "../../utils/formatDateWithTime";
+import {roomApi} from "../../api/roomApi";
 
 
 const StyledCalendar = styled.div`
@@ -93,6 +94,10 @@ const ScheduleView = ({filterParams}) => {
 
     const { data: groups } = useQuery(['group'], () =>
         groupApi.getAlLApi()
+    );
+
+    const { data: rooms } = useQuery(['rooms'], () =>
+        roomApi.getAlLApi()
     );
 
     const searchId = filterParams.split('searchId=')[1];
@@ -247,6 +252,7 @@ const ScheduleView = ({filterParams}) => {
                 onClose={onClose}
                 subjects={subjects}
                 teachers={teachers}
+                rooms={rooms}
                 groups={groups}
                 confirmLoading={createLoading}
             />

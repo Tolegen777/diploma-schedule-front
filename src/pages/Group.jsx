@@ -36,7 +36,11 @@ const Group = () => {
         }
     });
 
-    const {mutate: onUpdate, isSuccess: isUpdated} = useMutation(groupApi.updateApi);
+    const {mutate: onUpdate, isSuccess: isUpdated} = useMutation(groupApi.updateApi, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('educationalPrograms');
+        }
+    });
 
     const {mutate: onRemove, isSuccess: isDeleted} = useMutation(groupApi.removeApi, {
         onSuccess: () => {

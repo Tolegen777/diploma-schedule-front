@@ -20,10 +20,6 @@ export const routesList = [
         path: '/teachers',
         element: <Teacher />,
     },
-    // {
-    //     path: '/rooms',
-    //     element: <Room />,
-    // },
     {
         path: '/subjects',
         element: <Subject />,
@@ -39,6 +35,10 @@ export const routesList = [
     {
         path: '/admins',
         element: <Admin />,
+    },
+    {
+        path: '/rooms',
+        element: <Room />,
     },
 
 

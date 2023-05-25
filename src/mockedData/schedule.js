@@ -12,8 +12,8 @@ export const scheduleInitialValues = [
         value: []
     },
     {
-        name: 'room',
-        value: ''
+        name: 'roomId',
+        value: null
     },
     {
         name: 'sessionType',

@@ -18,12 +18,6 @@ export const initialMenuItems = [
                 icon: <SmileOutlined />,
                 link: '/teachers',
             },
-            // {
-            //     label: 'Кабинеты',
-            //     key: '3',
-            //     icon: <CalendarOutlined />,
-            //     link: '/rooms',
-            // },
             {
                 label: 'Предметы',
                 key: '4',
@@ -43,8 +37,14 @@ export const initialMenuItems = [
                 link: '/educational-programs',
             },
             {
-                label: 'Университеты',
+                label: 'Кабинеты',
                 key: '7',
+                icon: <BookOutlined />,
+                link: '/rooms',
+            },
+            {
+                label: 'Университеты',
+                key: '8',
                 icon: <SmileOutlined />,
                 link: '/admins',
             },
