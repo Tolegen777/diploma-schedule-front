@@ -12,6 +12,7 @@ import EducationalProgramDetails from "../components/educationalPrograms/Educati
 import {userService} from "../services/userService";
 
 const EducationalPrograms = () => {
+    const universityId = userService.getUser().universityId
     const [selectedRow, setSelectedRow] = useState([])
     // set row counts for pagination
     const [selectedRowCount, setSelectedRowCount] = useState(20)
@@ -60,7 +61,7 @@ const EducationalPrograms = () => {
 
 
     const onSubmitCreateUpdateModal = (formData, type) => {
-        const universityId = userService.getUser().universityId
+
         if (type === 'create') {
             // FIXME ужно передавать айди текущего универа
             onCreate({...formData, universityId: universityId})

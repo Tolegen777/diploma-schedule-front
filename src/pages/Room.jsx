@@ -13,8 +13,12 @@ import {roomInitialValues} from "../mockedData/rooms";
 import {roomApi} from "../api/roomApi";
 import {RoomsCreateUpdateForm} from "../components/room/RoomsCreateUpdateForm";
 import RoomDetails from "../components/room/RoomDetails";
+import {userService} from "../services/userService";
 
 const Room = () => {
+
+    const universityId = userService.getUser().universityId
+
     const [selectedRow, setSelectedRow] = useState([])
     // set row counts for pagination
     const [selectedRowCount, setSelectedRowCount] = useState(20)
@@ -84,11 +88,11 @@ const Room = () => {
 
     const onSubmitCreateUpdateModal = (formData, type) => {
         if (type === 'create') {
-            onCreate({...formData})
+            onCreate({...formData, universityId: universityId})
         }
 
         if (type === 'update') {
-            onUpdate({...formData, id: editEntity.id})
+            onUpdate({...formData, id: editEntity.id, universityId: universityId})
         }
         onClose()
     }
