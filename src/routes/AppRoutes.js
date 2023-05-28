@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-
-import { useMutation } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 import { useStateContext } from '../contexts';
 import { LoginPage } from '../pages/LoginPage';
 import { tokenService } from '../services/tokenService';
-import { routesList } from './routesList';
+import {routesList, routesSuperAdminList} from './routesList';
 import {ClientLayout} from "../components/main/ClientLayout";
 
 export const AppRoutes = () => {
@@ -32,7 +30,11 @@ export const AppRoutes = () => {
     return (
         <ClientLayout>
             <Routes>
-                {routesList.map(route => (
+                {state?.user?.email !== 'superadmin@gmail.com' && routesList.map(route => (
+                    <Route key={route.path} path={route.path} element={route.element} />
+                ))}
+
+                {state?.user?.email === 'superadmin@gmail.com' && routesSuperAdminList.map(route => (
                     <Route key={route.path} path={route.path} element={route.element} />
                 ))}
             </Routes>

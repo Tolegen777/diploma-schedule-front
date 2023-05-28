@@ -1,15 +1,15 @@
-import React, {useCallback, useState} from 'react';
-import AdminDetails from "../components/admin/AdminDetails";
+import React, {useCallback, useEffect, useState} from 'react';
+import UniversityDetails from "../components/university/UniversityDetails";
 import {adminDetails, adminInitialValues} from "../mockedData/admins";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
-import {AdminsCreateUpdateForm} from "../components/admin/AdminsCreateUpdateForm";
+import {UniversitiessCreateUpdateForm} from "../components/university/UniversitiessCreateUpdateForm";
 import {useMutation, useQuery} from "react-query";
 import {universityApi} from "../api/universityApi";
 import {defaultResponseTableData} from "../const/defaultResponseData";
-import {userService} from "../services/userService";
+import {customNotification} from "../utils/customNotification";
 
-const Admin = () => {
+const University = () => {
     const [selectedRow, setSelectedRow] = useState([])
     // set row counts for pagination
     const [selectedRowCount, setSelectedRowCount] = useState(20)
@@ -22,17 +22,27 @@ const Admin = () => {
 
     const [editEntity, setEditEntity] = useState(null);
 
-    const [filterParams, setFilterParams] = useState('');
+    const [status, setStatus] = useState('')
 
-    const { mutate: onCreate, isSuccess: isCreated } = useMutation(universityApi.createApi);
+    const universityCreatedStatus = localStorage.getItem('UNIVERSITY_CREATE')
 
-    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(universityApi.updateApi);
+    const { mutate: onCreateAdmin } = useMutation(universityApi.createAdminApi, {
+        onError: (error) => {
+            customNotification({type: "error", message: "Ошибка при созданий!"})
+        }
+    });
 
-    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(universityApi.removeApi);
+    useEffect(() => {
+        if (universityCreatedStatus === 'SUCCESS') {
+            setStatus(universityCreatedStatus)
+        }
+    }, [universityCreatedStatus])
+
+    const { mutate: onRemove, isSuccess: isDeleted, isLoading: deleteLoading } = useMutation(universityApi.removeApi);
 
     // api
-    const { isLoading, data } = useQuery(['university', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
-        universityApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    const { isLoading, data } = useQuery(['university', currentPage, selectedRowCount, isDeleted, status, universityCreatedStatus], () =>
+        universityApi.getAlLApi(currentPage, selectedRowCount)
     );
 
     // Callbacks
@@ -53,19 +63,16 @@ const Admin = () => {
 
         setFormType(formType)
         setCreateUpdateModalOpen(true);
+        localStorage.setItem('UNIVERSITY_CREATE', '')
 
     };
 
-
     const onSubmitCreateUpdateModal = (formData, type) => {
-        const userId = userService.getUser().id
+
         if (type === 'create') {
-            onCreate({...formData, userId: userId})
+            onCreateAdmin(formData)
         }
 
-        if (type === 'update') {
-            onUpdate({...formData, userId: userId, id: editEntity.id})
-        }
         onClose()
     }
 
@@ -77,7 +84,6 @@ const Admin = () => {
         onRemove(id)
     }
 
-
     return (
         <>
             <DrawerContainer
@@ -85,7 +91,7 @@ const Admin = () => {
                 onClose={onClose}
                 open={createUpdateModalOpen}
             >
-                <AdminsCreateUpdateForm
+                <UniversitiessCreateUpdateForm
                     formType={formType}
                     initialFields={createUpdateFormInitialFields}
                     onSubmit={onSubmitCreateUpdateModal}
@@ -94,8 +100,8 @@ const Admin = () => {
 
                 />
             </DrawerContainer>
-            <AdminDetails
-                isLoading={isLoading}
+            <UniversityDetails
+                isLoading={isLoading || deleteLoading}
                 data={data ?? defaultResponseTableData}
                 onChangeUserActive={onHandleRemove}
                 selectedRow={selectedRow}
@@ -110,4 +116,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default University;

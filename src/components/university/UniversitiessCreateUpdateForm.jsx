@@ -1,21 +1,13 @@
 import React from 'react';
-import { Card, Form, Radio } from 'antd';
-import { Link } from 'react-router-dom';
-import {FormInput, FormInputMasked, FormInputPassword} from "../../shared/FormInput";
-import {emailRules, stringRules} from "../../utils/regExpRules";
+import {Form} from 'antd';
+import {FormInput, FormInputPassword} from "../../shared/FormInput";
 import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
 import {SpaceContainer} from "../../shared/SpaceContainer";
-import {ParagraphText} from "../../shared/ParagraphText";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {Loader} from "../../shared/Loader";
-import {CustomRadio} from "../../shared/CustomRadio";
-import {FormInfoDescription, FormInfoDescriptionItem} from "../../shared/FormInfoDescription";
 import {CustomButton} from "../../shared/CustomButton";
 import {FormItem} from "../../shared/FormItem";
-import {Colors, TextWeightType} from "../../const/const";
-import {formatDateWithTime} from "../../utils/formatDateWithTime";
+import {Colors} from "../../const/const";
 
-export const AdminsCreateUpdateForm = (
+export const UniversitiessCreateUpdateForm = (
     {
         formType,
         initialFields,
@@ -23,12 +15,26 @@ export const AdminsCreateUpdateForm = (
         onClose,
         editEntity
     }) => {
-    const [ form ] = Form.useForm();
+    const [form] = Form.useForm();
 
     const formFields = [
+        formType === 'create' ? {
+            name: 'email',
+            element: <FormInput
+                placeholder="Введите код для входа"
+                autoComplete="new-email"
+            />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Код для входа'
+        } : null,
         {
             name: 'name',
-            element: <FormInput placeholder="Введите название" />,
+            element: <FormInput placeholder="Введите название"/>,
             rules: [
                 {
                     required: true,
@@ -37,6 +43,31 @@ export const AdminsCreateUpdateForm = (
             ],
             label: 'Название университета'
         },
+        {
+            name: 'code',
+            element: <FormInput placeholder="Введите код университета"/>,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Код университета'
+        },
+        formType === 'create' ? {
+            name: 'password',
+            element: <FormInputPassword
+                placeholder="Введите пароль"
+                autoComplete="new-password"
+            />,
+            rules: [
+                {
+                    required: true,
+                    message: 'Обязальное поле!'
+                },
+            ],
+            label: 'Пароль'
+        } : null,
     ]
 
     return (
@@ -50,7 +81,7 @@ export const AdminsCreateUpdateForm = (
                 >
                     <SpaceContainer size="large" direction="vertical">
 
-                        { formFields.map(field =>
+                        {formFields.filter(item => item !== null).map(field =>
                             <FormItem
                                 label={field.label}
                                 rules={field.rules}
@@ -60,7 +91,7 @@ export const AdminsCreateUpdateForm = (
                             >
                                 {field.element}
                             </FormItem>
-                        ) }
+                        )}
                     </SpaceContainer>
                 </Form>
 
@@ -100,7 +131,6 @@ export const AdminsCreateUpdateForm = (
                     onClick={form.submit}
                     color={Colors.Blue}
                     position_from="unset"
-                    // disabled={formType === 'create' ? !state.permissions.isCreate : !state.permissions.isUpdate}
                 >
                     {formType === 'create' ? 'Создать' : 'Применить'}
                 </CustomButton>

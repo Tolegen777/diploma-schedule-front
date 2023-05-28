@@ -6,19 +6,19 @@ import {FormItem} from "../../shared/FormItem";
 import {FormSelect} from "../../shared/FormSelect";
 import {selectOptionsParser} from "../../utils/selectOptionsParser";
 
-const ScheduleModal = ({
-                           open,
-                           onSubmit,
-                           initialFields,
-                           formType,
-                           editEntity,
-                           onClose,
-                           subjects,
-                           teachers,
-                           rooms,
-                           groups,
-                           confirmLoading
-                       }) => {
+const ScheduleModal = React.memo(({
+                                      open,
+                                      onSubmit,
+                                      initialFields,
+                                      formType,
+                                      editEntity,
+                                      onClose,
+                                      subjects,
+                                      teachers,
+                                      rooms,
+                                      groups,
+                                      confirmLoading
+                                  }) => {
 
     const [form] = Form.useForm();
 
@@ -40,7 +40,7 @@ const ScheduleModal = ({
                 options={selectOptionsParser(subjects, 'title', 'id')}
                 showSearch
                 allowClear
-                style={{ textAlign: 'left' }}
+                style={{textAlign: 'left'}}
             />,
             label: 'Предмет',
             rules: [
@@ -56,7 +56,7 @@ const ScheduleModal = ({
                 options={selectOptionsParser(teachers, 'email', 'id')}
                 showSearch
                 allowClear
-                style={{ textAlign: 'left' }}
+                style={{textAlign: 'left'}}
             />,
             label: 'Преподаватель',
             rules: [
@@ -72,7 +72,7 @@ const ScheduleModal = ({
                 options={selectOptionsParser(rooms, 'name', 'id')}
                 showSearch
                 allowClear
-                style={{ textAlign: 'left' }}
+                style={{textAlign: 'left'}}
             />,
             rules: [
                 {
@@ -105,7 +105,7 @@ const ScheduleModal = ({
                 options={selectOptionsParser(groups, 'title', 'id')}
                 showSearch
                 allowClear
-                style={{ textAlign: 'left' }}
+                style={{textAlign: 'left'}}
             />,
             label: 'Группа'
         },
@@ -170,6 +170,6 @@ const ScheduleModal = ({
             </Modal>
         </>
     );
-};
+});
 
 export default ScheduleModal;

@@ -1,11 +1,10 @@
 import React, {useCallback, useState} from 'react';
 import TeacherDetails from "../components/teacher/TeacherDetails";
-import {teacherDetails, teacherInitialValues} from "../mockedData/teachers";
+import {teacherInitialValues} from "../mockedData/teachers";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {TeachersCreateUpdateForm} from "../components/teacher/TeachersCreateUpdateForm";
 import {useMutation, useQuery} from "react-query";
-import {universityApi} from "../api/universityApi";
 import {defaultResponseTableData} from "../const/defaultResponseData";
 import {teacherApi} from "../api/teacherApi";
 import {userService} from "../services/userService";

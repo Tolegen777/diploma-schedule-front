@@ -42,11 +42,20 @@ export const initialMenuItems = [
                 icon: <BookOutlined />,
                 link: '/rooms',
             },
+        ],
+    },
+];
+
+export const initialSuperAdminMenuItems = [
+    {
+        key: 'superadmin',
+        label: 'Управление',
+        children: [
             {
                 label: 'Университеты',
-                key: '8',
+                key: '1',
                 icon: <SmileOutlined />,
-                link: '/admins',
+                link: '/universities',
             },
         ],
     },

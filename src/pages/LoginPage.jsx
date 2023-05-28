@@ -26,6 +26,7 @@ export const LoginPage = () => {
     const {mutate: onAuthMe} = useMutation('authMe', authApi.authMe, {
         onSuccess: (data) => {
             userService.updateUser(data)
+            dispatch({type: 'SET_USER_DATA', payload: data})
             // tokenService.updateLocalTokenData(data.refresh_token, 'refresh_token')
             // dispatch({type: 'SET_AUTH_STATUS', payload: true})
         },

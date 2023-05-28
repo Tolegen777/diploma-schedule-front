@@ -20,7 +20,7 @@ const Schedule = () => {
         <>
             <ScheduleFilterForm onSubmit={(val) => onSubmitFilterModal(val)
             }/>
-            <ScheduleView filterParams = {filterParams} />
+            <ScheduleView filterParams={filterParams}/>
         </>
     );
 };

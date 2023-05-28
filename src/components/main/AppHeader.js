@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Colors} from "../../const/const";
 import {AccountMenu} from "./AccountMenu";
 import {ScheduleOutlined} from "@ant-design/icons";
+import ScheduleLogo from "../../shared/ScheduleLogo/ScheduleLogo";
 const { Header } = Layout;
 
 const LayoutHeader = styled(Header)`
@@ -42,7 +43,8 @@ export const AppHeader = () => (
             <Col className="logo" flex="100px">
                 <Link to="/">
                     {/*<img src={logo} alt="logo" />*/}
-                    Schedule
+                    {/*Schedule1*/}
+                    <ScheduleLogo/>
                     {/*<ScheduleOutlined/>*/}
                 </Link>
             </Col>

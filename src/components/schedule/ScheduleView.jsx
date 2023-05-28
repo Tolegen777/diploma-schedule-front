@@ -12,7 +12,7 @@ import {convertReverseDateTimeToTime, convertTimeToDateTime} from "../../utils/c
 import {subjectApi} from "../../api/subjectApi";
 import {teacherApi} from "../../api/teacherApi";
 import {groupApi} from "../../api/groupApi";
-import {dayParser, defaultDays, defaultDaysFull} from "../../utils/dayParser";
+import {dayParser, defaultDaysFull} from "../../utils/dayParser";
 import ScheduleCard from "./ScheduleCard";
 import {formatDateWithTime} from "../../utils/formatDateWithTime";
 import {roomApi} from "../../api/roomApi";
@@ -44,6 +44,7 @@ const StyledHeaderCell = styled(StyledCell)`
   background-color: ${Colors.Blue};
   color: #FFF;
   font-size: 16px;
+  box-shadow: 1px 1px 2px #a6ede2, -1px 1px 2px #a6ede2, -1px -1px 2px #a6ede2, 1px -1px 2px #a6ede2;
 `;
 
 const StyledTimeCell = styled(StyledCell)`
@@ -51,6 +52,7 @@ const StyledTimeCell = styled(StyledCell)`
   color: #fff;
   font-size: 16px;
   font-weight: bold;
+  box-shadow: 1px 1px 2px #a6ede2, -1px 1px 2px #a6ede2, -1px -1px 2px #a6ede2, 1px -1px 2px #a6ede2;
 `;
 
 const StyledEventCell = styled(StyledCell)`
@@ -58,50 +60,52 @@ const StyledEventCell = styled(StyledCell)`
   font-weight: bold;
   background-color: ${Colors.White}
   color: #fff;
-  min-height: 40px;
+  min-height: 200px;
   cursor: pointer;
+  position: relative;
+  width: 210px;
+  box-shadow: 1px 1px 2px #a6ede2, -1px 1px 2px #a6ede2, -1px -1px 2px #a6ede2, 1px -1px 2px #a6ede2;
 
   &:hover {
     background: ${Colors.Grey25};
   }
 `;
 
-const ScheduleView = ({filterParams}) => {
+const ScheduleView = React.memo(({filterParams}) => {
     const [selectedDate, setSelectedDate] = useState(Dayjs());
     const [open, setOpen] = useState(false)
     const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(scheduleInitialValues)
     const [editEntity, setEditEntity] = useState(null);
     const [formType, setFormType] = useState(null)
 
-    const { mutate: onCreate, isSuccess: isCreated, isLoading: createLoading } = useMutation(scheduleApi.createApi);
+    const {mutate: onCreate, isSuccess: isCreated, isLoading: createLoading} = useMutation(scheduleApi.createApi);
 
-    const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(scheduleApi.updateApi);
+    const {mutate: onUpdate, isSuccess: isUpdated} = useMutation(scheduleApi.updateApi);
 
-    const { mutate: onRemove, isSuccess: isDeleted } = useMutation(scheduleApi.removeApi);
+    const {mutate: onRemove, isSuccess: isDeleted} = useMutation(scheduleApi.removeApi);
 
     // api
-    const { isLoading, data } = useQuery(['schedule', isCreated, isUpdated, isDeleted, filterParams], () =>
+    const {isLoading, data, isSuccess} = useQuery(['schedule', isCreated, isUpdated, isDeleted, filterParams], () =>
         scheduleApi.getAlLApi(filterParams)
     );
 
-    const { data: subjects } = useQuery(['subject'], () =>
+    const {data: subjects} = useQuery(['subject'], () =>
         subjectApi.getAlLApi()
     );
 
-    const { data: teachers } = useQuery(['teacher'], () =>
+    const {data: teachers} = useQuery(['teacher'], () =>
         teacherApi.getAlLApi()
     );
 
-    const { data: groups } = useQuery(['group'], () =>
+    const {data: groups} = useQuery(['group'], () =>
         groupApi.getAlLApi()
     );
 
-    const { data: rooms } = useQuery(['rooms'], () =>
+    const {data: rooms} = useQuery(['rooms'], () =>
         roomApi.getAlLApi()
     );
 
     const searchId = filterParams.split('searchId=')[1];
-    console.log(searchId, 'FILTER_PARAMS')
 
     const onClose = useCallback(() => {
         setOpen(false)
@@ -206,12 +210,12 @@ const ScheduleView = ({filterParams}) => {
                         onClick={() => onOpenModal('create', {
                             week: weeks[i],
                             startTime: convertTimeToDateTime(constTimes[j]),
-                            endTime: convertTimeToDateTime(constTimes[j+1]),
+                            endTime: convertTimeToDateTime(constTimes[j + 1]),
                             groups: [searchId]
                         })}
-                        >
+                    >
                         {/* Render your event data here */}
-                        {data?.map((item) => {
+                        {data?.map((item, index) => {
                             if (item.week === weeks[i] && convertReverseDateTimeToTime(item.startTime) === constTimes[j]) {
                                 return <ScheduleCard
                                     teacher={item?.teacherId}
@@ -225,6 +229,7 @@ const ScheduleView = ({filterParams}) => {
                                     subjects={subjects}
                                     groups={groups}
                                     roomNumber={item.room}
+                                    itemIndex={item?.itemIndex}
                                 />;
                             }
                             return ''
@@ -261,6 +266,6 @@ const ScheduleView = ({filterParams}) => {
             {renderWeekCells()}
         </StyledCalendar>
     );
-};
+});
 
 export default ScheduleView;

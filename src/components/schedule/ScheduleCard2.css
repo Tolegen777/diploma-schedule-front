@@ -1,0 +1,62 @@
+.anim04c {
+    transition: all .4s cubic-bezier(.5, .35, .15, 1.4);
+}
+
+.outer {
+    position: relative;
+}
+
+.signboard {
+    width: 200px;
+}
+
+.front0 {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.front1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.right0 {
+    position: absolute;
+    right: 0;
+    transform: rotate(-10deg) translate(7px, 8px);
+}
+.left0 {
+    position: absolute;
+    left: 0;
+    transform: rotate(5deg) translate(-4px, 4px);
+}
+.left1 {
+    position: absolute;
+    left: 0;
+    transform: rotate(5deg) translate(-2px, 2px);
+}
+
+.outer:hover .inner {
+    transform: rotate(0) translate(0) scale(0.9);
+}
+
+.outer:hover .right0 {
+    transform: rotate(-5deg) translateX(160px) scale(0.9);
+}
+.outer:hover .left0 {
+    transform: rotate(5deg) translateX(-160px) scale(0.9);
+}
+
+.outer:hover .left1 {
+    transform: rotate(5deg) translateX(-160px) translateY(140px) scale(0.9);
+}
+
+.outer:hover .right1 {
+    transform: rotate(-5deg) translateX(160px) translateY(150px) scale(0.9);
+}
+
+.outer:hover .front1 {
+    transform: rotate(0deg) translateY(140px) scale(0.9);
+}

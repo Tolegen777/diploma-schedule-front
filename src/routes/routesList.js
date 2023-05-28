@@ -2,8 +2,7 @@ import Schedule from "../pages/Schedule";
 import Teacher from "../pages/Teacher";
 import Room from "../pages/Room";
 import Subject from "../pages/Subject";
-import Admin from "../pages/Admin";
-import {groupApi} from "../api/groupApi";
+import University from "../pages/University";
 import Group from "../pages/Group";
 import EducationalPrograms from "../pages/EducationalPrograms";
 
@@ -33,8 +32,8 @@ export const routesList = [
         element: <EducationalPrograms />,
     },
     {
-        path: '/admins',
-        element: <Admin />,
+        path: '/universities',
+        element: <University />,
     },
     {
         path: '/rooms',
@@ -42,4 +41,15 @@ export const routesList = [
     },
 
 
+];
+
+export const routesSuperAdminList = [
+    {
+        path: '/',
+        element: <University />,
+    },
+    {
+        path: '/universities',
+        element: <University />,
+    },
 ];

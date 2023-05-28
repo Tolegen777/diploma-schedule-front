@@ -9,13 +9,9 @@ import {SwitchButton} from "../../shared/SwitchButton";
 import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
-import editIcon from './../../assets/icons/editIcon.svg';
-import filterIcon from './../../assets/icons/filterIcon.svg';
-import refreshIcon from './../../assets/icons/refreshIcon.svg';
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
-import viewIcon from "../../assets/icons/viewIcon.svg";
 
-const AdminDetails = (
+const UniversityDetails = (
     {
         data,
         onChangeUserActive,
@@ -53,13 +49,6 @@ const AdminDetails = (
         {
             title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                <ActionButton
-                    image={editIcon}
-                    callBack={() => onOpenCreateUpdateModal('update', entity)}/>
-                <ActionButton
-                    image={viewIcon}
-                    callBack={() => onOpenCreateUpdateModal('view', entity)}
-                />
                 <ActionButton
                     image={deleteIcon}
                     callBack={() => onChangeUserActive(entity.id)}
@@ -118,4 +107,4 @@ const AdminDetails = (
     );
 };
 
-export default AdminDetails;
+export default UniversityDetails;
