@@ -3,7 +3,7 @@ import {selectOptionsParser} from "../../utils/selectOptionsParser";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {ParagraphText} from "../../shared/ParagraphText";
 import {FormItem} from "../../shared/FormItem";
-import {FormSearchSelect, FormSelect} from "../../shared/FormSelect";
+import {FormSearchSelect, FormSelect, FormTagSelect} from "../../shared/FormSelect";
 import {ButtonSizes, Colors, TextWeightType} from "../../const/const";
 import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
 import {CustomButton} from "../../shared/CustomButton";
@@ -38,7 +38,8 @@ const options = [
 export const ScheduleFilterForm = ({ onSubmit }) => {
     const [form] = Form.useForm();
 
-    const searchType = Form.useWatch('searchType', form)
+    const searchTypeObs = Form.useWatch('searchType', form)
+
 
     const { isLoading: teacherLoading, data: teacherData } = useQuery(['teacher'], () =>
         teacherApi.getAlLApi(1, 100)
@@ -56,23 +57,17 @@ export const ScheduleFilterForm = ({ onSubmit }) => {
         educationalProgramsApi.getAlLApi(1, 100)
     );
 
-    const { isLoading: universityLoading, data: universityData } = useQuery(['university'], () =>
-        universityApi.getAlLApi(1, 100)
-    );
-
 
     const teachers = selectOptionsParser(teacherData || [], 'email', 'id');
     const groups = selectOptionsParser(groupData || [], 'title', 'id');
     const subjects = selectOptionsParser(subjectData || [], 'title', 'id');
     const educationalPrograms = selectOptionsParser(educationalProgramData || [], 'title', 'id');
-    const universities = selectOptionsParser(universityData || [], 'name', 'id');
 
     const optionValues = {
         TEACHER: teachers,
         SUBJECT: subjects,
         GROUP: groups,
         EDUCATIONAL_PROGRAM: educationalPrograms,
-        UNIVERSITY: universities,
     }
 
     return (
@@ -88,12 +83,13 @@ export const ScheduleFilterForm = ({ onSubmit }) => {
                             <FormSearchSelect
                                 placeholder="Выберите параметр"
                                 options={options}
+                                onChange={() => form.setFieldValue('searchId')}
                             />
                         </FormItem>
                     <FormItem name="searchId">
-                        <FormSearchSelect
-                            placeholder="Выберите элемент"
-                            options={optionValues[searchType]}
+                        <FormTagSelect
+                            placeholder="Выберите элементы"
+                            options={optionValues[searchTypeObs]}
                         />
                     </FormItem>
                         <CustomButton

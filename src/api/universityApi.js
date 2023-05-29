@@ -60,7 +60,6 @@ export const universityApi = {
                         userId: meResponse?.data?.id,
                         code: data?.code
                     })
-                    console.log(createResponse, 'GGG')
                     if (createResponse.status === 201) {
                         localStorage.setItem('UNIVERSITY_CREATE', 'SUCCESS')
                     }

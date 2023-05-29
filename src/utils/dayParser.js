@@ -18,7 +18,6 @@ export const defaultDaysFull = {
     SUNDAY: 'Воскресенье',
 }
 export const dayParser = (dayEng) => {
-    // console.log(dayEng, 'ENG')
     const [day, time] = dayEng.split(' ')
         return `${defaultDays[day]} ${time}`
 

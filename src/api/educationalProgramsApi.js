@@ -13,8 +13,8 @@ export const educationalProgramsApi = {
     return response.data;
   },
 
-  updateApi: async ({ id, ...data }) => {
-    const response = await axiosInstance.put(`educational-programs/${id}`, data);
+  updateApi: async (data) => {
+    const response = await axiosInstance.put(`educational-programs/${data?.id}`, data);
     return response.data;
   },
 

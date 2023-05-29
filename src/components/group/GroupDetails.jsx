@@ -49,7 +49,7 @@ const GroupDetails = (
             dataIndex: 'title',
         },
         {
-            title: 'Электив',
+            title: 'Курс',
             dataIndex: 'course',
             render: id => (
                 <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
@@ -58,8 +58,8 @@ const GroupDetails = (
             ),
         },
         {
-            title: 'Идентификатор образовательной программы',
-            dataIndex: 'educationalProgramId',
+            title: 'Образовательная программа',
+            dataIndex: 'educationalProgramName',
         },
         {
             title: 'Действия',

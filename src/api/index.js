@@ -31,9 +31,8 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   ( response ) =>
     response, async ( error ) => {
-      console.log(error, 'RESponse')
     if (error.response) {
-      const errorMessage = error.response.data.message
+      const errorMessage = error.response.data.message ?? error?.message
       if (errorMessage === 'Not authorized') {
         localStorage.clear()
         window.location.replace('/');

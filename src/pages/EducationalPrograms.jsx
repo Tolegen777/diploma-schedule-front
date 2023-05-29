@@ -25,8 +25,6 @@ const EducationalPrograms = () => {
 
     const [editEntity, setEditEntity] = useState(null);
 
-    const [filterParams, setFilterParams] = useState('');
-
     const { mutate: onCreate, isSuccess: isCreated } = useMutation(educationalProgramsApi.createApi);
 
     const { mutate: onUpdate, isSuccess: isUpdated } = useMutation(educationalProgramsApi.updateApi);
@@ -34,8 +32,8 @@ const EducationalPrograms = () => {
     const { mutate: onRemove, isSuccess: isDeleted } = useMutation(educationalProgramsApi.removeApi);
 
     // api
-    const { isLoading, data } = useQuery(['educationalPrograms', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted, filterParams], () =>
-        educationalProgramsApi.getAlLApi(currentPage, selectedRowCount, filterParams)
+    const { isLoading, data } = useQuery(['educationalPrograms', currentPage, selectedRowCount, isCreated, isUpdated, isDeleted], () =>
+        educationalProgramsApi.getAlLApi(currentPage, selectedRowCount)
     );
 
     // Callbacks
@@ -63,12 +61,10 @@ const EducationalPrograms = () => {
     const onSubmitCreateUpdateModal = (formData, type) => {
 
         if (type === 'create') {
-            // FIXME ужно передавать айди текущего универа
             onCreate({...formData, universityId: universityId})
         }
 
         if (type === 'update') {
-            // FIXME ужно передавать айди текущего универа
             onUpdate({...formData, id: editEntity.id, universityId: universityId})
         }
         onClose()
@@ -99,7 +95,6 @@ const EducationalPrograms = () => {
                     onSubmit={onSubmitCreateUpdateModal}
                     onClose={onClose}
                     editEntity={editEntity}
-
                 />
             </DrawerContainer>
             <EducationalProgramDetails

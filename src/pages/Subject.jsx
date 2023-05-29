@@ -59,12 +59,10 @@ const Subject = () => {
     const onSubmitCreateUpdateModal = (formData, type) => {
         const universityId = userService.getUser().universityId
         if (type === 'create') {
-            // FIXME ужно передавать айди текущего универа
-            onCreate({...formData, universityId: universityId})
+            onCreate({...formData, universityId: universityId, credits: 2})
         }
 
         if (type === 'update') {
-            // FIXME ужно передавать айди текущего универа
             onUpdate({...formData, id: editEntity.id, universityId: universityId})
         }
         onClose()
@@ -73,6 +71,10 @@ const Subject = () => {
     const onSelectRow = useCallback((rowIndex: number) => {
         setSelectedRow([rowIndex])
     }, [])
+
+    const onHandleRemove = (id) => {
+        onRemove(id)
+    }
 
 
     return (
@@ -97,7 +99,7 @@ const Subject = () => {
             <SubjectDetails
                 isLoading={isLoading}
                 data={data ?? defaultResponseTableData}
-                onChangeUserActive={() => {}}
+                onChangeUserActive={onHandleRemove}
                 selectedRow={selectedRow}
                 onSelectRow={onSelectRow}
                 selectedRowCount={selectedRowCount}

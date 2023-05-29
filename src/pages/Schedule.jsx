@@ -4,17 +4,27 @@ import {ScheduleFilterForm} from "../components/schedule/ScheduleFilterForm";
 
 const Schedule = () => {
 
-    const [filterParams, setFilterParams] = useState('');
+    const [filterParams, setFilterParams] = useState([]);
 
     const onSubmitFilterModal = (formData) => {
-        Object.keys(formData).forEach(key => {
-            if (formData[key] === undefined) {
-                delete formData[key];
-            }
-        });
+        // Object.keys(formData).forEach(key => {
+        //     if (formData[key] === undefined) {
+        //         delete formData[key];
+        //     }
+        // });
 
-        setFilterParams(new URLSearchParams(formData).toString());
+        // setFilterParams(new URLSearchParams(formData).toString());
+
+        const payload = formData?.searchId.map(item => {
+            return {
+                searchId: item ?? '',
+                searchType: formData?.searchType ?? ''
+            }
+        })
+
+        setFilterParams(payload)
     };
+
 
     return (
         <>

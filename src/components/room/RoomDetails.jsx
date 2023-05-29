@@ -50,13 +50,13 @@ const RoomDetails = (
         {
             title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                <ActionButton
-                    image={editIcon}
-                    callBack={() => onOpenCreateUpdateModal('update', entity)}/>
-                <ActionButton
-                    image={viewIcon}
-                    callBack={() => onOpenCreateUpdateModal('view', entity)}
-                />
+                {/*<ActionButton*/}
+                {/*    image={editIcon}*/}
+                {/*    callBack={() => onOpenCreateUpdateModal('update', entity)}/>*/}
+                {/*<ActionButton*/}
+                {/*    image={viewIcon}*/}
+                {/*    callBack={() => onOpenCreateUpdateModal('view', entity)}*/}
+                {/*/>*/}
                 <ActionButton
                     image={deleteIcon}
                     callBack={() => onChangeUserActive(entity.id)}

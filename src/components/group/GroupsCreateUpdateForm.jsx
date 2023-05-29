@@ -57,8 +57,6 @@ export const GroupsCreateUpdateForm = (
             element: <FormSelect
                 placeholder="Выберите образовательную программу"
                 options={options}
-                // loading={isSelectLoading}
-                // onPopupScroll={onScrollEnd}
                 showSearch
                 allowClear
                 style={{ textAlign: 'left' }}
@@ -98,28 +96,6 @@ export const GroupsCreateUpdateForm = (
                         ) }
                     </SpaceContainer>
                 </Form>
-
-                {/*{formType === 'update' && editEntity && (*/}
-                {/*    <>*/}
-                {/*        <FormInfoDescription title="Информация о создании">*/}
-                {/*            <FormInfoDescriptionItem label="Создал (ФИО)">*/}
-                {/*                <Link to="/">{editEntity && editEntity.created_by}</Link>*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*            <FormInfoDescriptionItem label="Дата создания">*/}
-                {/*                {editEntity && formatDateWithTime(editEntity.created_date)}*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*        </FormInfoDescription>*/}
-
-                {/*        <FormInfoDescription title="Информация о редактировании">*/}
-                {/*            <FormInfoDescriptionItem label="Редактировал (ФИО)">*/}
-                {/*                <Link to="/">{editEntity && editEntity.updated_by}</Link>*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*            <FormInfoDescriptionItem label="Дата редактирования">*/}
-                {/*                {editEntity && formatDateWithTime(editEntity.updated_date)}*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*        </FormInfoDescription>*/}
-                {/*    </>*/}
-                {/*)}*/}
             </SpaceContainer>
 
             <FormButtonWrapper>
@@ -135,7 +111,6 @@ export const GroupsCreateUpdateForm = (
                     onClick={form.submit}
                     color={Colors.Blue}
                     position_from="unset"
-                    // disabled={formType === 'create' ? !state.permissions.isCreate : !state.permissions.isUpdate}
                 >
                     {formType === 'create' ? 'Создать' : 'Применить'}
                 </CustomButton>

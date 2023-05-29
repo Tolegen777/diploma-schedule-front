@@ -21,7 +21,6 @@ export const SubjectsCreateUpdateForm = (
         initialFields,
         onSubmit,
         onClose,
-        editEntity
     }) => {
     const [ form ] = Form.useForm();
 
@@ -53,16 +52,6 @@ export const SubjectsCreateUpdateForm = (
             }],
             label: 'Описание'
         },
-        {
-            name: 'credits',
-            element: <FormInputNumber placeholder="Введите кредит" />,
-            rules: [{
-                required: true,
-                message: 'Обязательное поле!',
-            }],
-            label: 'Кредит'
-        },
-
     ]
 
     return (
@@ -91,27 +80,6 @@ export const SubjectsCreateUpdateForm = (
                     </SpaceContainer>
                 </Form>
 
-                {/*{formType === 'view' && editEntity && (*/}
-                {/*    <>*/}
-                {/*        <FormInfoDescription title="Информация о создании">*/}
-                {/*            <FormInfoDescriptionItem label="Создал (ФИО)">*/}
-                {/*                <Link to="/">{editEntity && editEntity.created_by}</Link>*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*            <FormInfoDescriptionItem label="Дата создания">*/}
-                {/*                {editEntity && formatDateWithTime(editEntity.created_date)}*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*        </FormInfoDescription>*/}
-
-                {/*        <FormInfoDescription title="Информация о редактировании">*/}
-                {/*            <FormInfoDescriptionItem label="Редактировал (ФИО)">*/}
-                {/*                <Link to="/">{editEntity && editEntity.updated_by}</Link>*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*            <FormInfoDescriptionItem label="Дата редактирования">*/}
-                {/*                {editEntity && formatDateWithTime(editEntity.updated_date)}*/}
-                {/*            </FormInfoDescriptionItem>*/}
-                {/*        </FormInfoDescription>*/}
-                {/*    </>*/}
-                {/*)}*/}
             </SpaceContainer>
 
             <FormButtonWrapper>
@@ -127,7 +95,6 @@ export const SubjectsCreateUpdateForm = (
                     onClick={form.submit}
                     color={Colors.Blue}
                     position_from="unset"
-                    // disabled={formType === 'create' ? !state.permissions.isCreate : !state.permissions.isUpdate}
                 >
                     {formType === 'create' ? 'Создать' : 'Применить'}
                 </CustomButton>

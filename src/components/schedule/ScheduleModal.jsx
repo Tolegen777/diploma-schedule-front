@@ -6,6 +6,21 @@ import {FormItem} from "../../shared/FormItem";
 import {FormSelect} from "../../shared/FormSelect";
 import {selectOptionsParser} from "../../utils/selectOptionsParser";
 
+const lessonFormats = [
+    {
+        label: "Лекция",
+        value: "LECTURE"
+    },
+    {
+        label: "Лабороторная работа",
+        value: "LABORATORY_WORK"
+    },
+    {
+        label: "Практика",
+        value: "PRACTICE"
+    },
+]
+
 const ScheduleModal = React.memo(({
                                       open,
                                       onSubmit,
@@ -26,7 +41,6 @@ const ScheduleModal = React.memo(({
         form.submit()
         onClose()
     };
-    console.log(editEntity, 'EDIT')
 
     const handleCancel = () => {
         onClose();
@@ -84,7 +98,13 @@ const ScheduleModal = React.memo(({
         },
         {
             name: 'sessionType',
-            element: <FormInput placeholder="Введите формат урока"/>,
+            element: <FormSelect
+                placeholder="Выберите формат урока"
+                options={lessonFormats}
+                showSearch
+                allowClear
+                style={{textAlign: 'left'}}
+            />,
             rules: [
                 {
                     required: true,
@@ -101,7 +121,7 @@ const ScheduleModal = React.memo(({
         {
             name: 'groups',
             element: <FormSelect
-                placeholder="Выберите преподавателя"
+                placeholder="Выберите группу"
                 options={selectOptionsParser(groups, 'title', 'id')}
                 showSearch
                 allowClear

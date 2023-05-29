@@ -25,11 +25,6 @@ const EducationalProgramDetails = (
     }
 ) => {
 
-    // "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    //     "title": "string",
-    //     "elective": true,
-    //     "universityId": "3fa85f64-5717-4562-b3fc-2c963f66afa6
-
     const columns = [
         {
             title: 'Идентификатор',
@@ -49,16 +44,21 @@ const EducationalProgramDetails = (
             dataIndex: 'title',
         },
         {
-            title: 'Идентификатор университета',
-            dataIndex: 'universityId',
-        },
-        {
             title: 'Электив',
             dataIndex: 'elective',
             render: id => (
                 <ParagraphText color={Colors.Blue} weight={TextWeightType.bold}>
                     {id ? 'Да' : 'Нет'}
                 </ParagraphText>
+            ),
+        },
+        {
+            title: 'Группы',
+            dataIndex: 'groups',
+            render: groups => (
+                <div>
+                    {groups?.map(item => `${item.title}, `)}
+                </div>
             ),
         },
         {
@@ -87,24 +87,9 @@ const EducationalProgramDetails = (
                 <PageMenuColumn>
                     <CategoryTitle>Управление образовательными группами</CategoryTitle>
                 </PageMenuColumn>
-                {/*<PageMenuColumn>*/}
-                {/*    <CustomButtonWithIcon*/}
-                {/*        position_from="center"*/}
-                {/*        icon={refreshIcon}*/}
-                {/*        callBack={() =>  onRefreshList()}*/}
-                {/*    >*/}
-                {/*        Обновить базу*/}
-                {/*    </CustomButtonWithIcon>*/}
-                {/*</PageMenuColumn>*/}
 
                 <PageMenuColumn to_right="auto">
-                    {/*<CustomButtonWithIcon*/}
-                    {/*    position_from="center"*/}
-                    {/*    icon={filterIcon}*/}
-                    {/*    callBack={onOpenRolesSettingsModal}*/}
-                    {/*>*/}
-                    {/*    Настройка ролей*/}
-                    {/*</CustomButtonWithIcon>*/}
+
                     <CustomButton
                         position_from="center"
                         color={Colors.Blue}

@@ -16,6 +16,7 @@ import {dayParser, defaultDaysFull} from "../../utils/dayParser";
 import ScheduleCard from "./ScheduleCard";
 import {formatDateWithTime} from "../../utils/formatDateWithTime";
 import {roomApi} from "../../api/roomApi";
+import {Loader} from "../../shared/Loader";
 
 
 const StyledCalendar = styled.div`
@@ -68,6 +69,16 @@ const StyledEventCell = styled(StyledCell)`
 
   &:hover {
     background: ${Colors.Grey25};
+    z-index: 120102;
+  }
+  &:hover .front1 {
+    transform: rotate(-5deg) translateX(180px) scale(0.9);
+    z-index: 10000;
+  }
+
+  &:hover .front2 {
+    transform: rotate(5deg) translateX(-180px) scale(0.9);
+    z-index: 200000;
   }
 `;
 
@@ -105,7 +116,7 @@ const ScheduleView = React.memo(({filterParams}) => {
         roomApi.getAlLApi()
     );
 
-    const searchId = filterParams.split('searchId=')[1];
+    const searchGroupArray = filterParams?.length === 1 ? filterParams[0].searchId : []
 
     const onClose = useCallback(() => {
         setOpen(false)
@@ -114,8 +125,6 @@ const ScheduleView = React.memo(({filterParams}) => {
     }, [])
 
     const onOpenModal = (formType, value?) => {
-        console.log(value, 'VALUE')
-        // debugger
         if ((formType === 'update' || formType === 'view' || 'create') && value) {
             setCreateUpdateFormInitialFields(changeFormFieldsData(scheduleInitialValues, {
                 ...value,
@@ -211,25 +220,23 @@ const ScheduleView = React.memo(({filterParams}) => {
                             week: weeks[i],
                             startTime: convertTimeToDateTime(constTimes[j]),
                             endTime: convertTimeToDateTime(constTimes[j + 1]),
-                            groups: [searchId]
+                            groups: searchGroupArray
                         })}
                     >
                         {/* Render your event data here */}
                         {data?.map((item, index) => {
                             if (item.week === weeks[i] && convertReverseDateTimeToTime(item.startTime) === constTimes[j]) {
                                 return <ScheduleCard
-                                    teacher={item?.teacherId}
+                                    teacher={`${item?.teacher?.lastName} ${item?.teacher?.firstName?.slice(0, 1)}. ${item.teacher?.middleName?.slice(0, 1)}.` ?? ''}
                                     startTime={item?.startTime}
                                     endTime={item?.endTime}
-                                    subject={item?.subjectId}
-                                    sessionType={item?.sessionType}
-                                    group={item?.groups.join('')}
+                                    subject={item?.subject?.title ?? ''}
+                                    sessionType={item?.sessionType ?? ''}
+                                    group={item?.groups[0]?.title}
                                     onClick={() => onOpenModal('update', item)}
-                                    teachers={teachers}
-                                    subjects={subjects}
-                                    groups={groups}
-                                    roomNumber={item.room}
+                                    roomNumber={item?.room?.name ?? ''}
                                     itemIndex={item?.itemIndex}
+                                    educationalProgram={item.groups[0]?.educationalProgramName}
                                 />;
                             }
                             return ''
@@ -242,7 +249,7 @@ const ScheduleView = React.memo(({filterParams}) => {
         return weekCells;
     };
 
-    // if (isLoading) return <CustomLoader />
+    if (isLoading) return <Loader />
 
     // return <CustomLoader />
 

@@ -13,8 +13,8 @@ export const groupApi = {
     return response.data;
   },
 
-  updateApi: async ({ id, ...data }) => {
-    const response = await axiosInstance.put(`groups/${id}`, data);
+  updateApi: async (data) => {
+    const response = await axiosInstance.put(`groups/${data?.id}`, data);
     return response.data;
   },
 

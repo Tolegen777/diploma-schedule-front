@@ -13,8 +13,8 @@ export const subjectApi = {
     return response.data;
   },
 
-  updateApi: async ({ id, ...data }) => {
-    const response = await axiosInstance.put(`subjects/${id}`, data);
+  updateApi: async (data) => {
+    const response = await axiosInstance.put(`subjects/${data?.id}`, data);
     return response.data;
   },
 
