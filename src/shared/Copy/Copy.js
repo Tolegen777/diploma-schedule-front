@@ -15,7 +15,7 @@ const Copy = () => {
 
     const [isHovered, setIsHovered] = useState(false);
 
-    const str = `https://schedule-app-three.vercel.app/university:${userService.getUser()?.universityCode ?? ''}:${userService.getUser()?.universityId ?? ''}`
+    const str = `https://schedule-app-three.vercel.app/university_${userService.getUser()?.universityCode ?? ''}_${userService.getUser()?.universityId ?? ''}`
 
     const handleMouseEnter = () => {
         setIsHovered(true);

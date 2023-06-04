@@ -21,16 +21,6 @@ function App() {
         }
     }, [data?.email])
 
-    // useEffect(() => {
-    //     // Get the URL from window.location.href
-    //     const url = window.location.href;
-    //
-    //     // Extract the parameter value from the URL
-    //     const parameter = url.substring(url.lastIndexOf(':') + 1);
-    //
-    //     userService.updateLocal(parameter)
-    // }, []);
-
     return (
         <ConfigProvider
             theme={{

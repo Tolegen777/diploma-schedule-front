@@ -78,7 +78,6 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
     const [createUpdateFormInitialFields, setCreateUpdateFormInitialFields] = useState(scheduleInitialValues)
     const [editEntity, setEditEntity] = useState(null);
     const [formType, setFormType] = useState(null)
-    const [currentSchedules, setCurrentSchedules] = useState([])
 
     const [detailSchedules, setDetailSchedules] = useState([])
 
@@ -224,10 +223,6 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
                             //     endTime: convertTimeToDateTime(constTimes[j + 1]),
                             //     groups: searchGroupArray
                             // })
-
-                            if (`${weeks[i]}_${constTimes[j]}_${constTimes[j + 1]}` in arr) {
-                                setCurrentSchedules(arr[`${weeks[i]}_${constTimes[j]}_${constTimes[j + 1]}`])
-                            }
 
                         }}
                     >
