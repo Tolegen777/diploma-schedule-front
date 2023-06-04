@@ -37,16 +37,16 @@ const ScheduleDetailCard = React.memo(({
         },
     ];
 
-    if (isLoading) return <Loader />
+    if (isLoading) return <Loader/>
 
 
-        return (
+    return (
         <div>
             {scheduleOne.map((schedule) => (
                 <div id="day1">
                     <div className="card__caption1">
                         <div className="card__name1">{schedule.name}</div>
-                        <h3 className="card__type1">{schedule.group}</h3>
+                        {schedule?.group?.length === 1 && <h3 className="card__type1">{schedule.group[0]?.title}</h3>}
                         <div className="card__stats1">
                             {Object.entries(schedule.stats).map(([statName, statValue]) => (
                                 <div key={statName}
@@ -79,6 +79,22 @@ const ScheduleDetailCard = React.memo(({
                     </div>
                 </div>
             ))}
+
+            {group?.length > 1 && <div style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                marginTop: "8px",
+                marginBottom: "4px",
+                flexWrap: "wrap",
+                width: "200px",
+                justifyContent: "center"
+            }}>
+                {group?.map((item) => {
+                    return <div className={`items1`}>{item?.title}</div>
+                })}
+            </div>}
+
             <div style={{
                 display: "flex",
                 alignItems: "center",
@@ -100,7 +116,7 @@ const ScheduleDetailCard = React.memo(({
 
         </div>
 
-        );
-        });
+    );
+});
 
-        export default ScheduleDetailCard;
+export default ScheduleDetailCard;

@@ -130,7 +130,55 @@ export const FormTagSelect = styled(Select)`
   }
 `;
 
+export const FormTagSelect2 = styled(Select)`
+  
+    .ant-select-selector {
+    height: 64px !important;
+    min-width: 300px;
+    color: #4FC1E9;
+    border-radius: 16px !important;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    
+    background-color: ${props => props.background || 'unset'};
+    
+   .ant-select-selection-placeholder {
+      font-size: 14px;
+     //color: #4FC1E9;
+     opacity: 0.8;
+     
+   }
+    :hover {
+      border: 1px solid #4FC1E9 !important;
+    }
+    :active {
+      border: 1px solid #4FC1E9 !important;
+    }
+  }
+  
+  .ant-select-selection-item {
+    border-radius: 16px;
+    color: ${Colors.White};
+    background-color: ${Colors.Blue};
+    height: 30px;
+  }
+  
+  .ant-select-arrow {
+    color: ${props => props.selector_color ? props.selector_color : 'rgba(0, 0, 0, 0.25)'};
+  }
+  
+  &.ant-select-lg .ant-select-selector .ant-select-selection-search-input {
+    height: 100% !important;
+  }
+`;
+
 FormTagSelect.defaultProps = {
+    mode: 'tags',
+    placeholder: 'Введите значение',
+}
+
+FormTagSelect2.defaultProps = {
     mode: 'tags',
     placeholder: 'Введите значение',
 }

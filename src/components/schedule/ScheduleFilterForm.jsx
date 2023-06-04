@@ -23,10 +23,6 @@ const options = [
         value: 'SUBJECT'
     },
     {
-        label: 'Образовательная программа',
-        value: 'EDUCATIONAL_PROGRAM'
-    },
-    {
         label: 'Группа',
         value: 'GROUP'
     },

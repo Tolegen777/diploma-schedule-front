@@ -57,7 +57,7 @@ const ViewModal = ({
                             endTime={item?.endTime}
                             subject={item?.subject?.title ?? ''}
                             sessionType={item?.sessionType ?? ''}
-                            group={item?.groups[0]?.title}
+                            group={item?.groups}
                             // onClick={() => onOpenModal('update', item)}
                             roomNumber={item?.room?.name ?? ''}
                             itemIndex={item?.itemIndex}

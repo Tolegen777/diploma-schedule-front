@@ -146,16 +146,15 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
 
         let newGroup = []
 
-        if (Array.isArray(payload.groups)) {
-            newGroup = payload.groups
-        } else {
-            newGroup = [payload.groups]
-        }
+        // if (Array.isArray(payload.groups)) {
+        //     newGroup = payload.groups
+        // } else {
+        //     newGroup = [payload.groups]
+        // }
 
         if (type === 'create') {
             onCreate({
                 ...payload,
-                groups: newGroup
             })
         }
 
@@ -216,15 +215,6 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
                         row={j + 2}
                         column={column}
                         isCurrentTime={isCurrentTime}
-                        onClick={() => {
-                            // onOpenModal('create', {
-                            //     week: weeks[i],
-                            //     startTime: convertTimeToDateTime(constTimes[j]),
-                            //     endTime: convertTimeToDateTime(constTimes[j + 1]),
-                            //     groups: searchGroupArray
-                            // })
-
-                        }}
                     >
                         {/* Render your event data here */}
                         {!isRoom && data?.map((item, index) => {
@@ -243,7 +233,7 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
                                     endTime={item?.endTime}
                                     subject={item?.subject?.title ?? ''}
                                     sessionType={item?.sessionType ?? ''}
-                                    group={item?.groups[0]?.title}
+                                    group={item?.groups}
                                     onClick={() => onOpenModal('update', item)}
                                     roomNumber={item?.room?.name ?? ''}
                                     itemIndex={item?.itemIndex}
@@ -285,7 +275,6 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
 
                         {
                             isRoom && roomsData?.timeIntervals?.map(room => {
-                                console.log(room?.week, weeks[i], convertTime(room?.timeInterval?.startTime ?? ''), constTimes[j], 'NICE')
                                 if (room.week === weeks[i] && convertTime(room?.timeInterval?.startTime ?? '') === constTimes[j]) {
                                     return <div style={{
                                         width: "160px",

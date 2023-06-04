@@ -39,7 +39,10 @@ const ScheduleCard = React.memo(({
                     <div id="day">
                         <div className="card__caption">
                             <div className="card__name">{schedule.name}</div>
-                            <h3 className="card__type">{schedule.group}</h3>
+                            {schedule?.group?.map((item, ind) => {
+                                return <h3 className={`card__type${ind}`}>{item?.title}</h3>
+                            })}
+
                             <div className="card__stats">
                                 {Object.entries(schedule.stats).map(([statName, statValue]) => (
                                     <div key={statName}
@@ -66,7 +69,7 @@ const ScheduleCard = React.memo(({
                             }}>
                                 <div>{schedule?.teacher}</div>
                                 <div
-                                    className="card__type2">{formatDateWithTime(startTime)} - {formatDateWithTime(endTime)}</div>
+                                    className="card__type20">{formatDateWithTime(startTime)} - {formatDateWithTime(endTime)}</div>
                                 {schedule.index}
                             </div>
                         </div>

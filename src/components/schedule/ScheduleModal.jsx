@@ -3,7 +3,7 @@ import {Form, Modal} from "antd";
 import {FormInput} from "../../shared/FormInput";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {FormItem} from "../../shared/FormItem";
-import {FormSelect} from "../../shared/FormSelect";
+import {FormSelect, FormTagSelect, FormTagSelect2} from "../../shared/FormSelect";
 import {selectOptionsParser} from "../../utils/selectOptionsParser";
 
 const lessonFormats = [
@@ -25,8 +25,6 @@ const ScheduleModal = React.memo(({
                                       open,
                                       onSubmit,
                                       initialFields,
-                                      formType,
-                                      editEntity,
                                       onClose,
                                       subjects,
                                       teachers,
@@ -113,19 +111,11 @@ const ScheduleModal = React.memo(({
             ],
             label: 'Формат урока'
         },
-        // {
-        //     name: 'week',
-        //     element: <FormInput />,
-        //     label: 'День недели'
-        // },
         {
             name: 'groups',
-            element: <FormSelect
-                placeholder="Выберите группу"
+            element: <FormTagSelect2
+                placeholder="Выберите элементы"
                 options={selectOptionsParser(groups, 'title', 'id')}
-                showSearch
-                allowClear
-                style={{textAlign: 'left'}}
             />,
             label: 'Группа'
         },
