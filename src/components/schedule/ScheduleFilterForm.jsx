@@ -1,23 +1,17 @@
-import {Button, Form, Tabs} from 'antd';
+import {Button, Form} from 'antd';
 import {selectOptionsParser} from "../../utils/selectOptionsParser";
 import {SpaceContainer} from "../../shared/SpaceContainer";
-import {ParagraphText} from "../../shared/ParagraphText";
 import {FormItem} from "../../shared/FormItem";
-import {FormSearchSelect, FormSelect, FormTagSelect} from "../../shared/FormSelect";
-import {ButtonSizes, Colors, TextWeightType} from "../../const/const";
-import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
+import {FormSearchSelect, FormTagSelect} from "../../shared/FormSelect";
+import {Colors} from "../../const/const";
 import {CustomButton} from "../../shared/CustomButton";
-import {FormInput} from "../../shared/FormInput";
 import {useQuery} from "react-query";
 import {teacherApi} from "../../api/teacherApi";
-import React, {useState} from "react";
+import React from "react";
 import {groupApi} from "../../api/groupApi";
 import {subjectApi} from "../../api/subjectApi";
 import {educationalProgramsApi} from "../../api/educationalProgramsApi";
-import {universityApi} from "../../api/universityApi";
-import {useWatch} from "antd/es/form/Form";
 import {roomApi} from "../../api/roomApi";
-import {AndroidOutlined, AppleOutlined, InsertRowLeftOutlined, ScheduleOutlined} from "@ant-design/icons";
 
 const options = [
     {
@@ -56,7 +50,7 @@ export const ScheduleFilterForm = ({onSubmit, isRoom, setIsRoom}) => {
         subjectApi.getAlLApi(1, 100)
     );
 
-    const {isLoading: educationalProgramLoading, data: educationalProgramData} = useQuery(['educationalProgram'], () =>
+    const {data: educationalProgramData} = useQuery(['educationalProgram'], () =>
         educationalProgramsApi.getAlLApi(1, 100)
     );
 

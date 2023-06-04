@@ -1,30 +1,8 @@
 import React, {useEffect} from 'react';
 import {Form, Modal} from "antd";
-import {FormInput} from "../../shared/FormInput";
-import {SpaceContainer} from "../../shared/SpaceContainer";
-import {FormItem} from "../../shared/FormItem";
-import {FormSelect} from "../../shared/FormSelect";
-import {selectOptionsParser} from "../../utils/selectOptionsParser";
 import ScheduleDetailCard from "./ScheduleDetailCard";
-
-const lessonFormats = [
-    {
-        label: "Лекция",
-        value: "LECTURE"
-    },
-    {
-        label: "Лабороторная работа",
-        value: "LABORATORY_WORK"
-    },
-    {
-        label: "Практика",
-        value: "PRACTICE"
-    },
-]
-
 const ViewModal = ({
                        open,
-                       initialFields,
                        onClose,
                        items,
                        onRemove,
@@ -43,109 +21,6 @@ const ViewModal = ({
         onClose();
     };
 
-    // const formFields = [
-    //     {
-    //         name: 'subjectId',
-    //         element: <FormSelect
-    //             placeholder="Выберите предмет"
-    //             options={selectOptionsParser(subjects, 'title', 'id')}
-    //             showSearch
-    //             allowClear
-    //             style={{textAlign: 'left'}}
-    //         />,
-    //         label: 'Предмет',
-    //         rules: [
-    //             {
-    //                 required: true,
-    //                 message: 'Обязальное поле!'
-    //             }],
-    //     },
-    //     {
-    //         name: 'teacherId',
-    //         element: <FormSelect
-    //             placeholder="Выберите преподавателя"
-    //             options={selectOptionsParser(teachers, 'email', 'id')}
-    //             showSearch
-    //             allowClear
-    //             style={{textAlign: 'left'}}
-    //         />,
-    //         label: 'Преподаватель',
-    //         rules: [
-    //             {
-    //                 required: true,
-    //                 message: 'Обязальное поле!'
-    //             }],
-    //     },
-    //     {
-    //         name: 'roomId',
-    //         element: <FormSelect
-    //             placeholder="Выберите кабинет"
-    //             options={selectOptionsParser(rooms, 'name', 'id')}
-    //             showSearch
-    //             allowClear
-    //             style={{textAlign: 'left'}}
-    //         />,
-    //         rules: [
-    //             {
-    //                 required: true,
-    //                 message: 'Обязальное поле!'
-    //             },
-    //         ],
-    //         label: 'Кабинет'
-    //     },
-    //     {
-    //         name: 'sessionType',
-    //         element: <FormSelect
-    //             placeholder="Выберите формат урока"
-    //             options={lessonFormats}
-    //             showSearch
-    //             allowClear
-    //             style={{textAlign: 'left'}}
-    //         />,
-    //         rules: [
-    //             {
-    //                 required: true,
-    //                 message: 'Обязальное поле!'
-    //             },
-    //         ],
-    //         label: 'Формат урока'
-    //     },
-    //     // {
-    //     //     name: 'week',
-    //     //     element: <FormInput />,
-    //     //     label: 'День недели'
-    //     // },
-    //     {
-    //         name: 'groups',
-    //         element: <FormSelect
-    //             placeholder="Выберите группу"
-    //             options={selectOptionsParser(groups, 'title', 'id')}
-    //             showSearch
-    //             allowClear
-    //             style={{textAlign: 'left'}}
-    //         />,
-    //         label: 'Группа'
-    //     },
-    //     {
-    //         name: 'startTime2',
-    //         element: <FormInput disabled/>,
-    //         rules: [{
-    //             // required: formType === 'create',
-    //             message: 'Обязательное поле!'
-    //         }],
-    //         label: 'Время начала урока'
-    //     },
-    //     {
-    //         name: 'endTime2',
-    //         element: <FormInput disabled/>,
-    //         rules: [{
-    //             // required: formType === 'create',
-    //             message: 'Обязательное поле!'
-    //         }],
-    //         label: 'Время конца урока'
-    //     },
-    // ]
-
     useEffect(() => {
         if (items?.length === 0) {
             onClose()
@@ -157,8 +32,6 @@ const ViewModal = ({
             <Modal
                 title="Создание расписания"
                 open={open}
-                // onOk={handleOk}
-                // confirmLoading={confirmLoading}
                 onCancel={handleCancel}
                 okText={"asxa"}
                 cancelText={"Отмена"}

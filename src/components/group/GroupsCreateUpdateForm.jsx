@@ -15,7 +15,6 @@ export const GroupsCreateUpdateForm = (
         initialFields,
         onSubmit,
         onClose,
-        editEntity,
         data,
         setSelectListPage
     }) => {
@@ -85,7 +84,6 @@ export const GroupsCreateUpdateForm = (
 
                         { formFields.map(field =>
                             <FormItem
-                                // label={field.label}
                                 rules={field.rules}
                                 key={field.name}
                                 name={field.name}

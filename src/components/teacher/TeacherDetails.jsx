@@ -5,13 +5,11 @@ import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
 import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
-import {SwitchButton} from "../../shared/SwitchButton";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
 import editIcon from './../../assets/icons/editIcon.svg';
 import viewIcon from './../../assets/icons/viewIcon.svg';
 import deleteIcon from './../../assets/icons/deleteIcon.svg';
-import {formatDateWithTime} from '../../utils/formatDateWithTime'
 
 
 const TeacherDetails = (
@@ -96,24 +94,8 @@ const TeacherDetails = (
                 <PageMenuColumn>
                     <CategoryTitle>Управление преподавателями</CategoryTitle>
                 </PageMenuColumn>
-                {/*<PageMenuColumn>*/}
-                {/*    <CustomButtonWithIcon*/}
-                {/*        position_from="center"*/}
-                {/*        icon={refreshIcon}*/}
-                {/*        callBack={() =>  onRefreshList()}*/}
-                {/*    >*/}
-                {/*        Обновить базу*/}
-                {/*    </CustomButtonWithIcon>*/}
-                {/*</PageMenuColumn>*/}
 
                 <PageMenuColumn to_right="auto">
-                    {/*<CustomButtonWithIcon*/}
-                    {/*    position_from="center"*/}
-                    {/*    icon={filterIcon}*/}
-                    {/*    callBack={onOpenRolesSettingsModal}*/}
-                    {/*>*/}
-                    {/*    Настройка ролей*/}
-                    {/*</CustomButtonWithIcon>*/}
                     <CustomButton
                         position_from="center"
                         color={Colors.Blue}

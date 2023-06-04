@@ -5,8 +5,6 @@ import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
 import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
@@ -65,24 +63,8 @@ const UniversityDetails = (
                 <PageMenuColumn>
                     <CategoryTitle>Управление университетами</CategoryTitle>
                 </PageMenuColumn>
-                {/*<PageMenuColumn>*/}
-                {/*    <CustomButtonWithIcon*/}
-                {/*        position_from="center"*/}
-                {/*        icon={refreshIcon}*/}
-                {/*        callBack={() =>  onRefreshList()}*/}
-                {/*    >*/}
-                {/*        Обновить базу*/}
-                {/*    </CustomButtonWithIcon>*/}
-                {/*</PageMenuColumn>*/}
 
                 <PageMenuColumn to_right="auto">
-                    {/*<CustomButtonWithIcon*/}
-                    {/*    position_from="center"*/}
-                    {/*    icon={filterIcon}*/}
-                    {/*    callBack={onOpenRolesSettingsModal}*/}
-                    {/*>*/}
-                    {/*    Настройка ролей*/}
-                    {/*</CustomButtonWithIcon>*/}
                     <CustomButton
                         position_from="center"
                         color={Colors.Blue}

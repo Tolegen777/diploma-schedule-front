@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import UniversityDetails from "../components/university/UniversityDetails";
-import {adminDetails, adminInitialValues} from "../mockedData/admins";
+import {adminInitialValues} from "../mockedData/admins";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
 import {UniversitiessCreateUpdateForm} from "../components/university/UniversitiessCreateUpdateForm";

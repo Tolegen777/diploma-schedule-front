@@ -1,55 +1,12 @@
-import {Button, Col, Layout, Row} from 'antd';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import {Colors} from "../../const/const";
-import {AccountMenu} from "./AccountMenu";
-import {ScheduleOutlined, UserOutlined} from "@ant-design/icons";
+import {UserOutlined} from "@ant-design/icons";
 import ScheduleLogo from "../../shared/ScheduleLogo/ScheduleLogo";
 import {useRef, useState} from "react";
 import {useOnClickOutside} from "../../hooks/useOnScrollEnd";
 import {userService} from "../../services/userService";
 import Copy from "../../shared/Copy/Copy";
 
-const {Header} = Layout;
-
-const LayoutHeader = styled(Header)`
-  //position: fixed;
-  //top: 0;
-  //left: 0;
-  width: 100vw;
-
-  .ant-row {
-    line-height: 0;
-  }
-
-  .logo {
-    width: 72px;
-    height: auto;
-    display: flex;
-    align-items: center;
-
-    img {
-      width: auto;
-      height: auto;
-      object-fit: cover;
-    }
-  }
-
-  .ant-menu-overflow {
-    justify-content: flex-end;
-    border: none;
-
-    .ant-menu-item {
-    }
-  }
-`;
-
-// Header can change styles only inline
-const headerInlineStyles = {
-    background: Colors.White,
-    height: 'auto',
-    padding: '32px 40px',
-}
 
 export const HeaderWrapper = styled.div`
   position: relative;

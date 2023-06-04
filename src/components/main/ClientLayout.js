@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Layout from 'antd/es/layout/layout';
 import styled from 'styled-components';
-import {BodyContainer, AsideContainer, ContentLayout} from './style';
-import { SideBar } from './SideBar';
+import {AsideContainer, BodyContainer, ContentLayout} from './style';
+import {SideBar} from './SideBar';
 import {Colors} from "../../const/const";
-import {initialMenuItems, initialSuperAdminMenuItems} from "./menuItems";
+import {initialMenuItems} from "./menuItems";
 import {AppHeader} from "./AppHeader";
-import {userService} from "../../services/userService";
 import {useStateContext} from "../../contexts";
 
 const ClientLayoutWrapper = styled(Layout)`

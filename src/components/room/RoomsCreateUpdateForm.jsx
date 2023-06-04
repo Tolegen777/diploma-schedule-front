@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form} from 'antd';
-import {FormInput, FormInputNumber} from "../../shared/FormInput";
+import {FormInput} from "../../shared/FormInput";
 import {FormButtonWrapper, FormContainer} from "../../shared/FormContainer";
 import {SpaceContainer} from "../../shared/SpaceContainer";
 import {CustomButton} from "../../shared/CustomButton";

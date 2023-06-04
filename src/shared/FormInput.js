@@ -35,14 +35,6 @@ export const FormInputPassword = styled(Input.Password)`
   }
 `;
 
-export const FormInputMasked = styled(MaskedInput)`
-  height: 64px;
-  color: ${props => props.color || Colors.Grey90};
-  border-color: #d8dbe3;
-  border-radius: 16px;
-  font-size: 14px;
-`;
-
 
 FormInput.defaultProps = {
     color: Colors.Grey90,

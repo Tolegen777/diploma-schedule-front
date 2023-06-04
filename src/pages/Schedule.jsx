@@ -11,7 +11,6 @@ const Schedule = () => {
     const [filterRoomsParams, setFilterRoomsParams] = useState([]);
 
     const onSubmitFilterModal = (formData) => {
-        debugger
 
         if (isRoom) {
             setFilterRoomsParams(formData?.roomId ?? '');
@@ -27,7 +26,6 @@ const Schedule = () => {
 
     };
 
-    console.log(filterRoomsParams, 'sdcsd')
 
 
     return (

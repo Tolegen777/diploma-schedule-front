@@ -1,14 +1,8 @@
 import React, {useCallback, useState} from 'react';
-import GroupDetails from "../components/group/GroupDetails";
-import {groupInitialValues} from "../mockedData/group";
 import {changeFormFieldsData} from "../utils/changeFormFieldsData";
 import {DrawerContainer} from "../shared/DrawerContainer";
-import {GroupsCreateUpdateForm} from "../components/group/GroupsCreateUpdateForm";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {defaultResponseTableData} from "../const/defaultResponseData";
-import {groupApi} from "../api/groupApi";
-import {educationalProgramsApi} from "../api/educationalProgramsApi";
-import {GroupsFilterForm} from "../components/group/GroupsFilterForm";
 import {roomInitialValues} from "../mockedData/rooms";
 import {roomApi} from "../api/roomApi";
 import {RoomsCreateUpdateForm} from "../components/room/RoomsCreateUpdateForm";

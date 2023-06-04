@@ -1,5 +1,12 @@
 import React from 'react';
-import {ScheduleOutlined, SmileOutlined, CalendarOutlined, BookOutlined} from "@ant-design/icons";
+import {
+    AccountBookOutlined,
+    BookOutlined, DownSquareOutlined,
+    GroupOutlined,
+    ScheduleOutlined,
+    SmileOutlined,
+    UserOutlined
+} from "@ant-design/icons";
 
 export const initialMenuItems = [
     {
@@ -15,7 +22,7 @@ export const initialMenuItems = [
             {
                 label: 'Преподаватель',
                 key: '2',
-                icon: <SmileOutlined />,
+                icon: <UserOutlined />,
                 link: '/teachers',
             },
             {
@@ -27,35 +34,20 @@ export const initialMenuItems = [
             {
                 label: 'Группы',
                 key: '5',
-                icon: <BookOutlined />,
+                icon: <GroupOutlined />,
                 link: '/groups',
             },
             {
                 label: 'Образовательные программы',
                 key: '6',
-                icon: <BookOutlined />,
+                icon: <AccountBookOutlined />,
                 link: '/educational-programs',
             },
             {
                 label: 'Кабинеты',
                 key: '7',
-                icon: <BookOutlined />,
+                icon: <DownSquareOutlined />,
                 link: '/rooms',
-            },
-        ],
-    },
-];
-
-export const initialSuperAdminMenuItems = [
-    {
-        key: 'superadmin',
-        label: 'Управление',
-        children: [
-            {
-                label: 'Университеты',
-                key: '1',
-                icon: <SmileOutlined />,
-                link: '/universities',
             },
         ],
     },

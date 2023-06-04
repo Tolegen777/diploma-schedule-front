@@ -3,17 +3,11 @@ import {CustomTable} from "../../shared/Table/CustomTable";
 import {PageMenu, PageMenuColumn} from "../../shared/PageMenu";
 import {CategoryTitle} from "../../shared/CategoryTitle";
 import {ParagraphText} from "../../shared/ParagraphText";
-import {ButtonSizes, Colors, TextWeightType} from "../../const/const";
+import {Colors, TextWeightType} from "../../const/const";
 import {TableActionsWrapper} from "../../shared/TableActionsWrapper";
-import {SwitchButton} from "../../shared/SwitchButton";
-import {CustomButtonWithIcon} from "../../shared/CustomButtonWithIcon.tsx";
 import {ActionButton} from "../../shared/ActionButton";
 import {CustomButton} from "../../shared/CustomButton";
-import editIcon from './../../assets/icons/editIcon.svg';
-import filterIcon from './../../assets/icons/filterIcon.svg';
-import refreshIcon from './../../assets/icons/refreshIcon.svg';
 import deleteIcon from "../../assets/icons/deleteIcon.svg";
-import viewIcon from "../../assets/icons/viewIcon.svg";
 
 const RoomDetails = (
     {
@@ -50,13 +44,6 @@ const RoomDetails = (
         {
             title: 'Действия',
             render: (entity) => <TableActionsWrapper>
-                {/*<ActionButton*/}
-                {/*    image={editIcon}*/}
-                {/*    callBack={() => onOpenCreateUpdateModal('update', entity)}/>*/}
-                {/*<ActionButton*/}
-                {/*    image={viewIcon}*/}
-                {/*    callBack={() => onOpenCreateUpdateModal('view', entity)}*/}
-                {/*/>*/}
                 <ActionButton
                     image={deleteIcon}
                     callBack={() => onChangeUserActive(entity.id)}

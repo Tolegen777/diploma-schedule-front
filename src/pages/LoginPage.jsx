@@ -4,18 +4,15 @@ import {useMutation} from 'react-query';
 import {authApi} from '../api/authApi';
 import previewPromo from '../assets/images/previewPromo.jpg';
 import {useStateContext} from '../contexts';
-import {emailRules} from '../utils/regExpRules';
 import {ButtonSizes, Colors} from "../const/const";
 import {PublicLayout} from "../shared/PublicLayout";
 import {PreviewCard} from "../shared/PreviewCard";
 import {FormContainer} from "../shared/FormContainer";
-import {SpaceContainer} from "../shared/SpaceContainer";
 import {Title} from "../shared/Title";
 import {FormItem} from "../shared/FormItem";
 import {FormInput, FormInputPassword} from "../shared/FormInput";
 import {CustomButton} from "../shared/CustomButton";
 import {tokenService} from "../services/tokenService";
-import {customNotification} from "../utils/customNotification";
 import {userService} from "../services/userService";
 import {Loader} from "../shared/Loader";
 

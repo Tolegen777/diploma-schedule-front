@@ -2,9 +2,6 @@ import {useState} from 'react';
 import "./Copy.css"
 import {CopyOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Colors} from "../../const/const";
-import {CustomButtonWithIcon} from "../CustomButtonWithIcon.tsx";
-import logoutIcon from "./../../assets/icons/icons8-logout-24.png"
-import {CustomButton} from "../CustomButton";
 import {Button, message} from "antd";
 import {resetService} from "../../services/resetService";
 import {userService} from "../../services/userService";

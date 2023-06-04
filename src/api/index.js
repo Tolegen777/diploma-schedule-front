@@ -32,13 +32,11 @@ axiosInstance.interceptors.response.use(
   ( response ) =>
     response, async ( error ) => {
     if (error?.response) {
-      // debugger
       const errorMessage = error.response.data.message
       if (errorMessage === 'Not authorized') {
         localStorage.clear()
         window.location.replace('/');
       } else {
-        debugger
         customNotification({
           type: 'error',
           message: errorMessage.length ? errorMessage : 'Ошибка сервера'
