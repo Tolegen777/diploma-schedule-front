@@ -22,3 +22,8 @@ export function convertReverseDateTimeToTime(dateTimeStr) {
     return timeStr;
 }
 
+
+export function convertTime(time) {
+    const [hours, minutes, seconds] = time.split(':');
+    return `${Number(hours)}:${Number(minutes)}`;
+}

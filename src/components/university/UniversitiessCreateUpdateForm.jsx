@@ -21,7 +21,7 @@ export const UniversitiessCreateUpdateForm = (
         formType === 'create' ? {
             name: 'email',
             element: <FormInput
-                placeholder="Введите код для входа"
+                placeholder="Введите имя для входа"
                 autoComplete="new-email"
             />,
             rules: [
@@ -30,7 +30,7 @@ export const UniversitiessCreateUpdateForm = (
                     message: 'Обязальное поле!'
                 },
             ],
-            label: 'Код для входа'
+            label: 'Имя для входа'
         } : null,
         {
             name: 'name',

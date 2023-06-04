@@ -43,15 +43,6 @@ export const SubjectsCreateUpdateForm = (
             }],
             label: 'Код'
         },
-        {
-            name: 'description',
-            element: <FormInput placeholder="Введите описание" />,
-            rules: [{
-                required: true,
-                message: 'Обязательное поле!',
-            }],
-            label: 'Описание'
-        },
     ]
 
     return (

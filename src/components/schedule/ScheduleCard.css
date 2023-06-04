@@ -198,41 +198,31 @@
 .front1 {
     position: absolute;
     right: 0;
-    transform: rotate(-10deg) translate(7px, 8px);
+    transform: translateY(4px);
 }
 
 .front2 {
     position: absolute;
     left: 0;
-    transform: rotate(5deg) translate(-4px, 4px);
+    transform: translateY(12px);
 }
 
 .front3 {
     position: absolute;
     left: 0;
-    transform: rotate(5deg) translate(-2px, 2px);
+    transform: translateY(20px);
 }
 
-.outer:hover .inner {
-    transform: rotate(0) translate(0) scale(0.9);
+.front3 {
+    position: absolute;
+    left: 0;
+    transform: translateY(28px);
 }
 
-.outer:hover .front1 {
-    transform: rotate(-5deg) translateX(160px) scale(0.9);
+.front3 {
+    position: absolute;
+    left: 0;
+    transform: translateY(36px);
 }
 
-.outer:hover .front2 {
-    transform: rotate(5deg) translateX(-160px) scale(0.9);
-}
 
-.outer:hover .front3 {
-    transform: rotate(5deg) translateX(-160px) translateY(140px) scale(0.9);
-}
-
-.outer:hover .front4 {
-    transform: rotate(-5deg) translateX(160px) translateY(150px) scale(0.9);
-}
-
-.outer:hover .front5 {
-    transform: rotate(0deg) translateY(140px) scale(0.9);
-}

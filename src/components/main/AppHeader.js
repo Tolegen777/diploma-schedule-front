@@ -8,6 +8,7 @@ import ScheduleLogo from "../../shared/ScheduleLogo/ScheduleLogo";
 import {useRef, useState} from "react";
 import {useOnClickOutside} from "../../hooks/useOnScrollEnd";
 import {userService} from "../../services/userService";
+import Copy from "../../shared/Copy/Copy";
 
 const {Header} = Layout;
 
@@ -147,7 +148,7 @@ export const AppHeader = () => {
     return (
         <header>
             <HeaderWrapper>
-                <div className={"logo"}>
+                <div className={"logo"} style={{marginLeft: "20px"}}>
                     <Link to="/">
                         <ScheduleLogo/>
                     </Link>
@@ -164,9 +165,8 @@ export const AppHeader = () => {
             <span className="username item" style={{textTransform: "uppercase"}}>
               {user?.email ?? ''}
             </span>
-
-                        <span className="item">
-
+            <span className="item">
+               <Copy />
             </span>
                     </div>
                 )}
@@ -174,25 +174,3 @@ export const AppHeader = () => {
         </header>
     );
 }
-
-
-// <div style={{
-//     width: "100vw",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//     padding: "10px 40px"
-// }}>
-//
-//     <div><Link to="/">
-//
-//         <ScheduleLogo/>
-//
-//     </Link></div>
-//
-//     <div style={{position: "fixed", top: "10px", right: "10px"}}>
-//         sdcsdc
-//         <AccountMenu/>
-//     </div>
-//
-// </div>

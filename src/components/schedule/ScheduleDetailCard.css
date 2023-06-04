@@ -1,0 +1,118 @@
+#day1 {
+    text-align: center;
+    box-sizing: border-box;
+    max-width: 200px;
+    border-radius: 10%;
+    border: 10px solid #4FC1E9;
+    box-shadow: 2px 2px 2px #324376, -2px 2px 2px #324376, -2px -2px 2px #324376, 2px -2px 2px #324376;
+    margin-top: 5%;
+    background: #ddf8e8;
+    font-size: 14px;
+    font-weight: 900;
+    overflow-wrap: break-word
+
+}
+
+.card__caption1 {
+    padding: 5px;
+    position: relative;
+    border-radius: 0 0 3px 3px;
+    width: 100%;
+    overflow-wrap: break-word
+}
+
+.card__image-container1 {
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 1em 1em 0;
+    border-radius: 3px 3px 0 0;
+    overflow-wrap: break-word
+}
+
+.card__image-container21 {
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    border-radius: 3px 3px 0 0;
+    width: 170px;
+}
+
+.card__type1 {
+    position: absolute;
+    top: -35px;
+    right: 1em;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 2px 5px;
+    background: #bbb;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.card__type21 {
+    color: #fff;
+    padding: 2px 5px;
+    background: #bbb;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.card__label1 {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.card__name1 {
+    /*font-family: "Open Sans Condensed", "Open Sans", helvetica, sans-serif;*/
+    text-align: center;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+}
+
+.card__stats1 {
+    margin: 5px;
+    width: auto;
+}
+
+.card__stats1 div {
+    font-weight: 300;
+}
+
+.card__abilities1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__ability1 {
+    margin-top: 1em;
+    flex: 1 0;
+}
+
+
+
+/*//////////////*/
+
+.anim04c1 {
+    transition: all .4s cubic-bezier(.5, .35, .15, 1.4);
+}
+
+.outer1 {
+    /*position: relative;*/
+    width: 100%;
+    height: 100%;
+}
+
+.inner1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.signboard1 {
+    width: 100%;
+    height: 100%;
+}

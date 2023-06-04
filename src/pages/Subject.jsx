@@ -59,11 +59,11 @@ const Subject = () => {
     const onSubmitCreateUpdateModal = (formData, type) => {
         const universityId = userService.getUser().universityId
         if (type === 'create') {
-            onCreate({...formData, universityId: universityId, credits: 2})
+            onCreate({...formData, universityId: universityId, credits: 2, description: ""})
         }
 
         if (type === 'update') {
-            onUpdate({...formData, id: editEntity.id, universityId: universityId})
+            onUpdate({...formData, id: editEntity.id, universityId: universityId, description: ""})
         }
         onClose()
     }

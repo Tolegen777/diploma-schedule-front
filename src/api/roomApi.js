@@ -24,7 +24,7 @@ export const roomApi = {
   },
 
   getByIdApi: async (id) => {
-    const response = await axiosInstance.get(`rooms/${id}`);
+    const response = await axiosInstance.get(`rooms/${id}/timeIntervals`);
     return response.data;
   },
 };

@@ -1,28 +1,73 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import "./Copy.css"
-import {CopyOutlined} from "@ant-design/icons";
+import {CopyOutlined, LogoutOutlined} from "@ant-design/icons";
+import {Colors} from "../../const/const";
+import {CustomButtonWithIcon} from "../CustomButtonWithIcon.tsx";
+import logoutIcon from "./../../assets/icons/icons8-logout-24.png"
+import {CustomButton} from "../CustomButton";
+import {Button, message} from "antd";
+import {resetService} from "../../services/resetService";
+import {userService} from "../../services/userService";
 
 const Copy = () => {
-    const [isActive, setIsActive] = useState(false);
+
+    const user = userService.getUser()
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const str = `https://schedule-app-three.vercel.app/university:${userService.getUser()?.universityCode ?? ''}:${userService.getUser()?.universityId ?? ''}`
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     const handleCopyClick = () => {
-        const input = document.querySelector('.text');
-        input.select();
-        document.execCommand('copy');
-        setIsActive(true);
-        window.getSelection().removeAllRanges();
-        setTimeout(() => {
-            setIsActive(false);
-        }, 2500);
+        navigator.clipboard.writeText(str)
+            .then(() => {
+                // console.log('String copied to clipboard');
+                message.info('Ссылка скопирована в буфер обмена');
+            })
+            .catch((error) => {
+                console.error('Failed to copy string:', error);
+            });
+
+    };
+
+    const containerStyle = {
+        padding: "8px",
+        borderRadius: "5px",
+        color: '#ffffff',
+        background: isHovered ? "rgba(97,153,173,0.99)" : Colors.Blue,
+        cursor: "pointer"
     };
 
     return (
-        <div className="container">
-            <div className="label">E-mail address</div>
-            <div className={`copy-text ${isActive ? 'active' : ''}`}>
-                <input type="text" className="text" value={"dscsdcsdcsdcsdc"} />
-
-                <CopyOutlined onClick={handleCopyClick}/>
+        <div>
+            {user?.email !== 'superadmin@gmail.com' && <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5px"}}>
+                <div style={{padding: "10px", border: "1px solid grey", borderRadius: "5px", marginTop: "5px"}}>
+                    {str}
+                </div>
+                <div
+                    style={containerStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={handleCopyClick}
+                >
+                    <CopyOutlined style={{fontSize: "20px"}}/>
+                </div>
+            </div>}
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px"}}>
+                <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5px"}}>
+                    <Button
+                        icon={<LogoutOutlined />}
+                    onClick={() => resetService()}>
+                        Выйти
+                    </Button>
+                </div>
             </div>
         </div>
     );

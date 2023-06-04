@@ -51,10 +51,6 @@ const SubjectDetails = (
             dataIndex: 'code',
         },
         {
-            title: 'Описание',
-            dataIndex: 'description',
-        },
-        {
             title: 'Действия',
             render: (entity) => <TableActionsWrapper>
                 <ActionButton
