@@ -216,6 +216,7 @@ const ScheduleView = React.memo(({filterParams, isRoom, filterRoomsParams}) => {
                         column={column}
                         isCurrentTime={isCurrentTime}
                     >
+
                         {/* Render your event data here */}
                         {!isRoom && data?.map((item, index) => {
                             if (item.week === weeks[i] && convertReverseDateTimeToTime(item.startTime) === constTimes[j]) {
