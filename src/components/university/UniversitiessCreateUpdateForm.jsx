@@ -6,6 +6,7 @@ import {SpaceContainer} from "../../shared/SpaceContainer";
 import {CustomButton} from "../../shared/CustomButton";
 import {FormItem} from "../../shared/FormItem";
 import {Colors} from "../../const/const";
+import {emailRules} from "../../utils/regExpRules";
 
 export const UniversitiessCreateUpdateForm = (
     {
@@ -21,7 +22,7 @@ export const UniversitiessCreateUpdateForm = (
         formType === 'create' ? {
             name: 'email',
             element: <FormInput
-                placeholder="Введите имя для входа"
+                placeholder="Введите почту для входа"
                 autoComplete="new-email"
             />,
             rules: [
@@ -29,8 +30,12 @@ export const UniversitiessCreateUpdateForm = (
                     required: true,
                     message: 'Обязальное поле!'
                 },
+                {
+                    message: 'Введите правильный формат почты!',
+                    pattern: emailRules,
+                },
             ],
-            label: 'Имя для входа'
+            label: 'Почта для входа'
         } : null,
         {
             name: 'name',

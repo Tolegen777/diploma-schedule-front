@@ -17,7 +17,7 @@ export const scheduleInitialValues = [
     },
     {
         name: 'sessionType',
-        value: ''
+        value: null
     },
     {
         name: 'week',

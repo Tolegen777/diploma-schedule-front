@@ -15,6 +15,7 @@ import {CustomButton} from "../shared/CustomButton";
 import {tokenService} from "../services/tokenService";
 import {userService} from "../services/userService";
 import {Loader} from "../shared/Loader";
+import {emailRules} from "../utils/regExpRules";
 
 export const LoginPage = () => {
     const [form] = Form.useForm();
@@ -65,7 +66,7 @@ export const LoginPage = () => {
                                 message: 'Обязательное поле!',
                             },
                             // {
-                            //     message: 'Неверный адрес!',
+                            //     message: 'Введите правильный формат почты!',
                             //     pattern: emailRules,
                             // },
                         ]}
